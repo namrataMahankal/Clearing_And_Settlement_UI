@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ClearingMemberComponent } from './Components/ClearingMember/clearingmember.component';
+import { ClearingHouseComponent } from './Components/ClearingHouse/clearinghouse.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatToolbarModule} from '@angular/material/toolbar';
@@ -11,7 +12,8 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 @NgModule({
   declarations: [
     AppComponent,
-    ClearingMemberComponent
+    ClearingMemberComponent,
+    ClearingHouseComponent
   ],
   imports: [
     BrowserModule,
