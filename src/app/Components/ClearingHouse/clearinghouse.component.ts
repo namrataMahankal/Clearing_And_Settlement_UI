@@ -15,6 +15,9 @@ export class ClearingHouseComponent {
   displayedColumnsCorpActions: string[] = ['Securities','Actions','Initial fund balance','Initial share balance','Current fund balance','Current share balance'];
   dataSource = Trade_list;
   displayedColumns: string[] = ['BuyerCM', 'SellerCM', 'ES', 'Qty','Price','TradeValue'];
+  
+  costOfSettlementValueList=CostOfSettlementValueList;
+  displayedColumnCost=['CM','Cost'];
 }
 
 
@@ -54,3 +57,17 @@ const CorpActions_list: CorpActionsList[] = [
     {Securities: "Google", Action: 'Rights', Initial_fund_bal: 10000 ,Initial_share_bal: 1987,Current_fund_bal: 180000,Current_share_bal:2890},
     {Securities: "Amazon", Action: 'Stock Split', Initial_fund_bal: 10000 ,Initial_share_bal: 1987,Current_fund_bal: 180000,Current_share_bal:2890},
 ];
+
+export interface CostOfSettlementValue {
+    CM: string;
+    Cost:number;
+  }
+
+const CostOfSettlementValueList:CostOfSettlementValue[] =[{CM:"Citi",Cost:500},
+{CM:"JP Morgan Chase",Cost:500},
+{CM:"Credit Suisse",Cost:500},
+{CM:"The Bank of New York Mellon Corporation",Cost:500}
+
+
+
+]
