@@ -7,6 +7,9 @@ import { ClearingMemberComponent } from './Components/ClearingMember/clearingmem
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import { MatTableModule } from '@angular/material/table';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import {MatListModule} from '@angular/material/list';
 
 @NgModule({
   declarations: [
@@ -18,7 +21,10 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     AppRoutingModule,
     BrowserAnimationsModule,
     MatTabsModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatTableModule,
+    MatSlideToggleModule,
+    MatListModule
   ],
   providers: [],
   bootstrap: [AppComponent]
