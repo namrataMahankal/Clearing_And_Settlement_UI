@@ -10,7 +10,7 @@ export class ClearingMemberComponent {
   shortage:Boolean=true;
   title = 'Clearing-And-Settlement-UI';
   displayedColumns: string[] = ['BuyerCM', 'SellerCM', 'ES', 'Qty','Price','TradeValue'];
-  displayedColumns1: string[] = ['Securities', 'Shares'];
+  displayedColumns1: string[] = ['Securities', 'Shares','Status'];
   displayedColumnsCorpActions: string[] = ['Securities','Actions','Initial fund balance','Initial share balance','Current fund balance','Current share balance'];
   dataSource = Trade_list;
   dataSource1= security_share_list;
@@ -37,6 +37,7 @@ export interface CorpActionsList {
 export interface SecuritySharesListElement {
   Securities: string;
   Shares:number;
+  Status:string;
 }
 
 
@@ -53,8 +54,8 @@ const CorpActions_list: CorpActionsList[] = [
 ];
 
 const security_share_list: SecuritySharesListElement[]=[
- {Securities:'Apple',Shares:100},
- {Securities:'Amazon',Shares:100},
+ {Securities:'Apple',Shares:100,Status:'To be received'},
+ {Securities:'Amazon',Shares:300,Status:'To be sent'},
 
 ];
 
