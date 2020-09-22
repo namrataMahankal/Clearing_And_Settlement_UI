@@ -56,6 +56,8 @@ const CorpActions_list: CorpActionsList[] = [
 const security_share_list: SecuritySharesListElement[]=[
  {Securities:'Apple',Shares:100,Status:'To be received'},
  {Securities:'Amazon',Shares:300,Status:'To be sent'},
+ {Securities:'Google',Shares:100,Status:'To be received'},
+ {Securities:'Amazon',Shares:300,Status:'To be sent'},
 
 ];
 
