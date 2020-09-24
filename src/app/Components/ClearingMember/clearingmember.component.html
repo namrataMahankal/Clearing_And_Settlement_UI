@@ -136,6 +136,9 @@
 
 
     <mat-tab label="Obligation Report"> 
+      <ng-template matTabLabel>
+        <span matBadge={{obCnt}} matBadgeOverlap="false" [matBadgeHidden]="hiddenValue">Obligation Report</span>
+    </ng-template>
       <mat-list class="list1" role="list" >
         <mat-list-item role="listitem"><h2>Funds :  $45678</h2></mat-list-item>
         <mat-list-item role="listitem"><h3>You have to send/receive $45678</h3></mat-list-item>

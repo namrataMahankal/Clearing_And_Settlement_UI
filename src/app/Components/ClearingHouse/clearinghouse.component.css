@@ -3,7 +3,7 @@ table {
     align-content: center;
     padding-left: 150px;
     }
-    
+
 .toggle {
     float: right;
     padding-right: 200px;
@@ -17,3 +17,7 @@ padding-left: 160px;
     flex-basis: 0;
 }
 
+.example-button-row {
+    display: table-cell;
+    width: 490px;
+}

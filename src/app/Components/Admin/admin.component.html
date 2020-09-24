@@ -1,31 +1,122 @@
 <mat-toolbar [class.mat-elevation-z6]=true color="primary">
     
-    <span>Citi!!</span>
+    <span>Citi</span>
     <!-- <span class="example-spacer"></span> -->
     <!-- <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
       <mat-icon>favorite</mat-icon>
     </button> -->
-</mat-toolbar>
+  </mat-toolbar>
+  <br>
 
-<style>
-  table {
-  width: 100%;
-  align-content: center;
-  padding-left: 150px;
-  }
 
-  .toggle {
-  float: right;
-  padding-right: 200px;
-  }
+  <style>
+    table {
+   width: 100%;
+   align-content: center;
+   padding-left: 150px;
+ }
+ 
+ .toggle {
+    float: right;
+    padding-right: 200px;
+ }
+ .list1{
+   padding-left: 160px;
+ }
 
-  .list1{
-  padding-left: 160px;
-  }
-</style>
+ button {
+  width: 25%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+button hover {
+  background-color: #45a042;
+}
+div {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 2px;
+  
+}
+input[type=text], select {
+  width: 20%;
+  padding: 12px 20px;
+  margin: 2px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+  </style>
+ 
+ 
+ <h2 align="center">Add new trade</h2>
+ <div align="center" style="border:2px solid black;">
+    
+    <br><br>
+<form [formGroup]="profileForm" (ngSubmit)="onSubmit()" >
+
+   <label>
+     Buyer CM:
+     <input type="text" formControlName="buyerCM">
+   </label>
+   <br><br>
+   <label>
+     Seller CM:
+     <input type="text" formControlName="sellerCM">
+   </label>
+ <br><br>
+ <label>
+   Equity   :
+   <input type="text" formControlName="ES" >
+ </label>
+
+<br><br>
+ <label>
+   Quatity:
+   <input type="text" formControlName="Qty">
+ </label>
+ <br><br>
+ <label>
+   Price:
+   <input type="text" formControlName="Price">
+ </label>
+ 
+</form>
+
+ <br><br>
+
+
+<button (click)="addTrade()">Add Trade</button>
+<br><br>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<br><br><br><br>
 
 <mat-tab-group mat-align-tabs="center">
-
     <mat-tab label="Trades"> 
         <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
             <ng-container matColumnDef="BuyerCM">
@@ -64,14 +155,7 @@
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
           </table> 
-
-          <br>
-          <div style="margin-right:5px">
-            <button mat-raised-button color="accent" style="margin-left: 50px;">Generate reports</button>
-          </div>
-          
     </mat-tab>
-
     <mat-tab label="Corporate Actions"> 
         <table mat-table [dataSource]="dataSourceCorpActions" class="mat-elevation-z8">
             <ng-container matColumnDef="Securities">
@@ -112,37 +196,30 @@
           </table>
      
     </mat-tab>
-
+    
+           
 
     <mat-tab label="Obligation Report"> 
-    <!-- Expansion Panel for Obligation Report -->
-      <mat-accordion>
-        <mat-expansion-panel *ngFor="let CMElement of obligationPanelData" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              {{CMElement.CM}}
-            </mat-panel-title>
-            <mat-panel-description>
-              <!-- {{panelOpenState ? 'Hide' : 'Show'}} Report -->
-              Click to toggle report view
-            </mat-panel-description>
-          </mat-expansion-panel-header>
-          <table mat-table [dataSource]="CMElement.Report" class="mat-elevation-z8">
-            <ng-container matColumnDef="Security">
-              <th mat-header-cell *matHeaderCellDef> Security </th>
-              <td mat-cell *matCellDef="let element"> {{element.Security}} </td>
-            </ng-container>
-            <ng-container matColumnDef="Balance">
-              <th mat-header-cell *matHeaderCellDef> Balance </th>
-              <td mat-cell *matCellDef="let element"> {{element.Balance}} </td>
-            </ng-container>
-            <tr mat-header-row *matHeaderRowDef="obPanelColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: obPanelColumns;"></tr>
-          </table>
-        </mat-expansion-panel>
-      </mat-accordion>
-    </mat-tab> 
-    <!-- Ob Report tab end -->
+      <table mat-table [dataSource]="cm_list" class="mat-elevation-z8">
+        <ng-container matColumnDef="CM">
+          <th mat-header-cell *matHeaderCellDef> Clearing Member</th>
+          <td mat-cell *matCellDef="let element"> {{element.CM}} </td>
+        </ng-container>
+      
+        <!-- Name Column -->
+        <ng-container matColumnDef="Cost">
+          <th mat-header-cell *matHeaderCellDef> Obligation Funds</th>
+          <td mat-cell *matCellDef="let element"> {{element.Obliged_funds}} </td>
+        </ng-container>
+
+>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumnCost"></tr>
+        <tr mat-row *matRowDef="let row; columns:displayedColumnCost;"></tr>        
+    
+    </table>
+
+    </mat-tab>
 
 
 
@@ -160,7 +237,9 @@
             </ng-container>
             <tr mat-header-row *matHeaderRowDef="displayedColumnCost"></tr>
             <tr mat-row *matRowDef="let row; columns:displayedColumnCost;"></tr>        
+        
         </table>
+    
     </mat-tab>
-
 </mat-tab-group>
+

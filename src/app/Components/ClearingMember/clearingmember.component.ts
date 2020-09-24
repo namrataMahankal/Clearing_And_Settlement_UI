@@ -1,13 +1,17 @@
 import { Component } from '@angular/core';
 
 
+
 @Component({
   selector: 'clearing-member',
   templateUrl: './clearingmember.component.html',
  // styleUrls: ['./clearingmember.component.css']
 })
 export class ClearingMemberComponent {
+  
+  hiddenValue:Boolean=false;
   shortage:Boolean=true;
+  obCnt=5;
   title = 'Clearing-And-Settlement-UI';
   displayedColumns: string[] = ['BuyerCM', 'SellerCM', 'ES', 'Qty','Price','TradeValue'];
   displayedColumns1: string[] = ['Securities', 'Shares','Status'];

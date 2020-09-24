@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 
-
 @Component({
   selector: 'clearing-house',
   templateUrl: './clearinghouse.component.html',
@@ -10,6 +9,8 @@ import { Component } from '@angular/core';
   // styleUrls: './clearinghouse.component.css'
 })
 export class ClearingHouseComponent {
+
+   
   title = 'Clearing-And-Settlement-UI';
   dataSourceCorpActions=CorpActions_list;
   displayedColumnsCorpActions: string[] = ['Securities','Actions','Initial fund balance','Initial share balance','Current fund balance','Current share balance'];
