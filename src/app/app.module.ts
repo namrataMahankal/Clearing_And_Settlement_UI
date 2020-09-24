@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { ClearingMemberComponent } from './Components/ClearingMember/clearingmember.component';
 import { ClearingHouseComponent } from './Components/ClearingHouse/clearinghouse.component';
 import {AdminComponent}   from './Components/Admin/admin.component';
+import {LoginComponent}   from './Components/Login/login.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatToolbarModule} from '@angular/material/toolbar';
@@ -22,7 +23,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     AppComponent,
     ClearingMemberComponent,
     ClearingHouseComponent,
-    AdminComponent
+    AdminComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
