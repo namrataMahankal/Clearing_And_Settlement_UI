@@ -1,0 +1,223 @@
+<mat-toolbar [class.mat-elevation-z6]=true color="primary">
+    
+    <span>Citi!!</span>
+    <!-- <span class="example-spacer"></span> -->
+    <!-- <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+      <mat-icon>favorite</mat-icon>
+    </button> -->
+</mat-toolbar>
+
+<style>
+  table {
+  width: 100%;
+  align-content: center;
+  padding-left: 150px;
+  }
+
+  .toggle {
+  float: right;
+  padding-right: 200px;
+  }
+
+  .list1{
+  padding-left: 160px;
+  }
+</style>
+ 
+<mat-tab-group mat-align-tabs="center">
+
+    <mat-tab label="Trades"> 
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+            <ng-container matColumnDef="BuyerCM">
+              <th mat-header-cell *matHeaderCellDef> Buyer CM </th>
+              <td mat-cell *matCellDef="let element"> {{element.BuyerCM}} </td>
+            </ng-container>
+          
+            <!-- Name Column -->
+            <ng-container matColumnDef="SellerCM">
+              <th mat-header-cell *matHeaderCellDef> Seller CM </th>
+              <td mat-cell *matCellDef="let element"> {{element.SellerCM}} </td>
+            </ng-container>
+          
+            <!-- Weight Column -->
+            <ng-container matColumnDef="ES">
+              <th mat-header-cell *matHeaderCellDef> ES </th>
+              <td mat-cell *matCellDef="let element"> {{element.ES}} </td>
+            </ng-container>
+          
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="Qty">
+              <th mat-header-cell *matHeaderCellDef> Quantity </th>
+              <td mat-cell *matCellDef="let element"> {{element.Qty}} </td>
+            </ng-container>
+      
+            <ng-container matColumnDef="Price">
+              <th mat-header-cell *matHeaderCellDef> Price </th>
+              <td mat-cell *matCellDef="let element"> {{element.Price}} </td>
+            </ng-container>
+      
+            <ng-container matColumnDef="TradeValue">
+              <th mat-header-cell *matHeaderCellDef> Trade Value </th>
+              <td mat-cell *matCellDef="let element"> {{element.TradeValue}} </td>
+            </ng-container>
+          
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table> 
+    </mat-tab>
+
+    <mat-tab label="Corporate Actions"> 
+        <table mat-table [dataSource]="dataSourceCorpActions" class="mat-elevation-z8">
+            <ng-container matColumnDef="Securities">
+              <th mat-header-cell *matHeaderCellDef> Securities</th>
+              <td mat-cell *matCellDef="let element"> {{element.Securities}} </td>
+            </ng-container>
+          
+            <!-- Name Column -->
+            <ng-container matColumnDef="Actions">
+              <th mat-header-cell *matHeaderCellDef> Actions </th>
+              <td mat-cell *matCellDef="let element"> {{element.Action}} </td>
+            </ng-container>
+          
+            <!-- Weight Column -->
+            <ng-container matColumnDef="Initial fund balance">
+              <th mat-header-cell *matHeaderCellDef> Initial Fund balance </th>
+              <td mat-cell *matCellDef="let element"> {{element.Initial_fund_bal}} </td>
+            </ng-container>
+          
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="Initial share balance">
+              <th mat-header-cell *matHeaderCellDef> Initial share balance </th>
+              <td mat-cell *matCellDef="let element"> {{element.Initial_share_bal}} </td>
+            </ng-container>
+      
+            <ng-container matColumnDef="Current fund balance">
+              <th mat-header-cell *matHeaderCellDef> Current fund balance </th>
+              <td mat-cell *matCellDef="let element"> {{element.Current_fund_bal}} </td>
+            </ng-container>
+      
+            <ng-container matColumnDef="Current share balance">
+              <th mat-header-cell *matHeaderCellDef> Current share balance </th>
+              <td mat-cell *matCellDef="let element"> {{element.Current_share_bal}} </td>
+            </ng-container>
+          
+            <tr mat-header-row *matHeaderRowDef="displayedColumnsCorpActions"></tr>
+            <tr mat-row *matRowDef="let row; columns:displayedColumnsCorpActions;"></tr>
+          </table>
+     
+    </mat-tab>
+
+
+    <mat-tab label="Obligation Report"> 
+    <!-- Expansion Panel for Obligation Report -->
+      <mat-accordion>
+        <!-- <span>Click on CM for complete report</span> -->
+        <!-- <mat-expansion-panel hideToggle>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Obligation Report
+            </mat-panel-title>
+            <mat-panel-description>
+              This is a summary of the content
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <p>This is the primary content of the panel.</p>
+        </mat-expansion-panel> -->
+
+        <!-- for( tempCM in {{obligationPanelData}})
+          <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                CMElement.CM
+              </mat-panel-title>
+              <mat-panel-description>
+                {{panelOpenState ? 'Hide' : 'Show'}} Report
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+            <table mat-table [dataSource]="CMElement.Report" class="mat-elevation-z8">
+              <ng-container matColumnDef="Security">
+                <th mat-header-cell *matHeaderCellDef> Security </th>
+                <td mat-cell *matCellDef="let element"> {{element.Security}} </td>
+              </ng-container>
+              <ng-container matColumnDef="Balance">
+                <th mat-header-cell *matHeaderCellDef> Balance </th>
+                <td mat-cell *matCellDef="let element"> {{element.Balance}} </td>
+              </ng-container>
+              <tr mat-header-row *matHeaderRowDef="obPanelColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: obPanelColumns;"></tr>
+            </table>
+          </mat-expansion-panel> -->
+        
+
+        <!-- CM 0 -->
+        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              {{obligationPanelData[0].CM}}
+            </mat-panel-title>
+            <mat-panel-description>
+              {{panelOpenState ? 'Hide' : 'Show'}} Report
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <table mat-table [dataSource]="obligationPanelData[0].Report" class="mat-elevation-z8">
+            <ng-container matColumnDef="Security">
+              <th mat-header-cell *matHeaderCellDef> Security </th>
+              <td mat-cell *matCellDef="let element"> {{element.Security}} </td>
+            </ng-container>
+            <ng-container matColumnDef="Balance">
+              <th mat-header-cell *matHeaderCellDef> Balance </th>
+              <td mat-cell *matCellDef="let element"> {{element.Balance}} </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="obPanelColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: obPanelColumns;"></tr>
+          </table>
+        </mat-expansion-panel>
+     
+        <!-- Cm 1 -->
+        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              {{obligationPanelData[1].CM}}
+            </mat-panel-title>
+            <mat-panel-description>
+              {{panelOpenState ? 'Hide' : 'Show'}} Report
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <table mat-table [dataSource]="obligationPanelData[1].Report" class="mat-elevation-z8">
+            <ng-container matColumnDef="Security">
+              <th mat-header-cell *matHeaderCellDef> Security </th>
+              <td mat-cell *matCellDef="let element"> {{element.Security}} </td>
+            </ng-container>
+            <ng-container matColumnDef="Balance">
+              <th mat-header-cell *matHeaderCellDef> Balance </th>
+              <td mat-cell *matCellDef="let element"> {{element.Balance}} </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="obPanelColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: obPanelColumns;"></tr>
+          </table>
+        </mat-expansion-panel>
+
+      </mat-accordion>
+
+    </mat-tab>
+
+
+
+    <mat-tab label="Cost of Settlement"> 
+        <table mat-table [dataSource]="costOfSettlementValueList" class="mat-elevation-z8">
+            <ng-container matColumnDef="CM">
+              <th mat-header-cell *matHeaderCellDef> Clearing Member</th>
+              <td mat-cell *matCellDef="let element"> {{element.CM}} </td>
+            </ng-container>
+          
+            <!-- Name Column -->
+            <ng-container matColumnDef="Cost">
+              <th mat-header-cell *matHeaderCellDef> Cost </th>
+              <td mat-cell *matCellDef="let element"> {{element.Cost}} </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumnCost"></tr>
+            <tr mat-row *matRowDef="let row; columns:displayedColumnCost;"></tr>        
+        </table>
+    </mat-tab>
+
+</mat-tab-group>
