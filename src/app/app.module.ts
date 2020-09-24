@@ -16,6 +16,8 @@ import {MatListModule} from '@angular/material/list';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatInputModule} from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
+import {MatBadgeModule} from '@angular/material/badge';
+import {MatButtonModule} from '@angular/material/button';
 
 
 @NgModule({
@@ -39,7 +41,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatInputModule,
    // FormBuilder,
    ReactiveFormsModule
- 
+    MatBadgeModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

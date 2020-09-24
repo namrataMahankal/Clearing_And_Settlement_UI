@@ -1,4 +1,19 @@
-  
 table {
     width: 100%;
-  }
+    align-content: center;
+    padding-left: 150px;
+    }
+    
+    .toggle {
+        float: right;
+        padding-right: 200px;
+    }
+    
+    .list1{
+    padding-left: 160px;
+    }
+
+    .example-button-row {
+        display: table-cell;
+        width: 490px;
+      }
