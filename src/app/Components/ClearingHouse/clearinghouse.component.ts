@@ -82,9 +82,10 @@ export interface Obligation {
 export interface ObligationReport {
   CM: string;
   Report: Obligation[];
+  NetBalance: Number;
 }
 
 const ObligationPanelData:ObligationReport[] = [
-  { CM: "Citi", Report: [ {Security:"Apple", Balance:100},  {Security:"Amazon", Balance:- 200}] },
-  { CM: "JPMC", Report: [ {Security:"Apple", Balance:100},  {Security:"Amazon", Balance:- 200}] }
+  { CM: "Citi", Report: [{ Security: "Apple", Balance: 100 }, { Security: "Amazon", Balance: -200 }], NetBalance:-100 },
+  { CM: "JPMC", Report: [{ Security: "Apple", Balance: -150 }, { Security: "Amazon", Balance: 300 }], NetBalance: 150 }
 ]

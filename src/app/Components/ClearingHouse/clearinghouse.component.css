@@ -3,17 +3,21 @@ table {
     align-content: center;
     padding-left: 150px;
     }
-    
-    .toggle {
-        float: right;
-        padding-right: 200px;
-    }
-    
-    .list1{
-    padding-left: 160px;
-    }
 
-    .example-button-row {
-        display: table-cell;
-        width: 490px;
-      }
+.toggle {
+    float: right;
+    padding-right: 200px;
+}
+
+.list1{
+padding-left: 160px;
+}
+
+.mat-expansion-panel-header-title, .mat-expansion-panel-header-description {
+    flex-basis: 0;
+}
+
+.example-button-row {
+    display: table-cell;
+    width: 490px;
+}
