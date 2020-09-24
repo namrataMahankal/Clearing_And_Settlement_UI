@@ -12,6 +12,8 @@ import { MatTableModule } from '@angular/material/table';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import {MatListModule} from '@angular/material/list';
 import {MatExpansionModule} from '@angular/material/expansion';
+import {MatBadgeModule} from '@angular/material/badge';
+import {MatButtonModule} from '@angular/material/button';
 
 
 
@@ -30,7 +32,9 @@ import {MatExpansionModule} from '@angular/material/expansion';
     MatTableModule,
     MatSlideToggleModule,
     MatListModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatBadgeModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

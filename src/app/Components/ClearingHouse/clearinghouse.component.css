@@ -12,3 +12,8 @@ table {
     .list1{
     padding-left: 160px;
     }
+
+    .example-button-row {
+        display: table-cell;
+        width: 490px;
+      }

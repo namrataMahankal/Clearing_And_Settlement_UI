@@ -23,7 +23,7 @@
   padding-left: 160px;
   }
 </style>
- 
+
 <mat-tab-group mat-align-tabs="center">
 
     <mat-tab label="Trades"> 
@@ -64,6 +64,12 @@
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
           </table> 
+
+          <br>
+          <div style="margin-right:5px">
+            <button mat-raised-button color="accent" style="margin-left: 50px;">Generate reports</button>
+          </div>
+          
     </mat-tab>
 
     <mat-tab label="Corporate Actions"> 
