@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'clearing-member',
   templateUrl: './clearingmember.component.html',
- // styleUrls: ['./clearingmember.component.css']
+  styleUrls: ['./clearingmember.component.css']
 })
 export class ClearingMemberComponent {
   
@@ -17,10 +17,12 @@ export class ClearingMemberComponent {
   displayedColumns1: string[] = ['Securities', 'Shares','Status'];
   displayedColumnsProfile: string[] = ['Securities', 'Shares'];
   displayedColumnsCorpActions: string[] = ['Securities','Actions','Initial fund balance','Initial share balance','Current fund balance','Current share balance'];
+  displayedColumnsSettlement: string[] = ['Securities', 'Shares', 'Rate', 'Cost'];
   dataSource = Trade_list;
   dataSource1= security_share_list;
   dataSourceCorpActions=CorpActions_list;
   dataSourceProfile=Profile_list;
+  dataSettlement = SettlementList;
 }
 
 export interface TradeListElement {
@@ -52,6 +54,13 @@ export interface ProfileElement {
   
 }
 
+export interface SettlementElement {
+  Securities: string;
+  Shares: number;
+  Rate: number;
+  Cost: number;
+}
+
 
 const Trade_list: TradeListElement[] = [
   {BuyerCM: "Citi", SellerCM: 'GS', ES: 'Apple', Qty: 100,Price: 12,TradeValue:100 },
@@ -78,6 +87,13 @@ const security_share_list: SecuritySharesListElement[]=[
 const Profile_list: ProfileElement[] = [
   {Securities:'Apple',Shares:100},
   {Securities:'Amazon',Shares:300},
+];
+
+const SettlementList: SettlementElement[] = [
+  { Securities: 'Apple', Shares: 100, Rate: 1.23, Cost: 1234 },
+  { Securities: 'Amazon', Shares: 100, Rate: 1.23, Cost: 1234 },
+  { Securities: 'Google', Shares: 100, Rate: 1.23, Cost: 1234 },
+  { Securities: 'Amazon', Shares: 100, Rate: 1.23, Cost: 1234 },
 ];
 
 export class SlideToggleOverviewExample {}
