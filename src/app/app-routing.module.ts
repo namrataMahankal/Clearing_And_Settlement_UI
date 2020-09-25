@@ -2,12 +2,16 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ClearingMemberComponent } from './Components/ClearingMember/clearingmember.component';
 import { ClearingHouseComponent } from './Components/ClearingHouse/clearinghouse.component';
+import { LoginComponent } from './Components/Login/login.component';
+import { AdminComponent } from './Components/Admin/admin.component';
 
 
 const routes: Routes = [
   {path: 'clearing-member',component: ClearingMemberComponent},
+  {path: 'login',component: LoginComponent},
+  {path: 'admin',component: AdminComponent},
   {path: 'clearing-house',component: ClearingHouseComponent},
-  {path:'',redirectTo:'/clearing-member',pathMatch: 'full'}
+  {path:'',redirectTo:'/login',pathMatch: 'full'}
 ];
 
 @NgModule({
