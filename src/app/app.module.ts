@@ -18,7 +18,11 @@ import {MatInputModule} from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatButtonModule} from '@angular/material/button';
+<<<<<<< HEAD
 
+=======
+import {MatGridListModule} from '@angular/material/grid-list';
+>>>>>>> c0a435764926b33776f7dd2599a8962fcc04c515
 
 @NgModule({
   declarations: [
@@ -40,9 +44,14 @@ import {MatButtonModule} from '@angular/material/button';
     MatExpansionModule,
     MatInputModule,
    // FormBuilder,
+<<<<<<< HEAD
    ReactiveFormsModule
+=======
+   ReactiveFormsModule,
+>>>>>>> c0a435764926b33776f7dd2599a8962fcc04c515
     MatBadgeModule,
-    MatButtonModule
+    MatButtonModule,
+    MatGridListModule
   ],
   providers: [],
   bootstrap: [AppComponent]
