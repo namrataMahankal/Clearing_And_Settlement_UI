@@ -39,8 +39,8 @@ import {MatButtonModule} from '@angular/material/button';
     MatListModule,
     MatExpansionModule,
     MatInputModule,
-   // FormBuilder,
-   ReactiveFormsModule
+    // FormBuilder,
+    ReactiveFormsModule,
     MatBadgeModule,
     MatButtonModule
   ],
