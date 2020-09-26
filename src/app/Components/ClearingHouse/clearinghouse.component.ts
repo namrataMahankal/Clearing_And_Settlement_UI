@@ -13,7 +13,7 @@ export class ClearingHouseComponent {
    
   title = 'Clearing-And-Settlement-UI';
   dataSourceCorpActions=CorpActions_list;
-  displayedColumnsCorpActions: string[] = ['Securities','Actions','Initial fund balance','Initial share balance','Current fund balance','Current share balance'];
+  displayedColumnsCorpActions: string[] = ['CM','Initial_shares','Current_shares'];
   dataSource = Trade_list;
   displayedColumns: string[] = ['BuyerCM', 'SellerCM', 'ES', 'Qty','Price','TradeValue'];
   
@@ -24,6 +24,7 @@ export class ClearingHouseComponent {
   obligationPanelData = ObligationPanelData;
   obPanelColumns: string[] = ['Security', 'Balance']
   panelOpenState = false; 
+
 
 }
 
@@ -49,19 +50,20 @@ const Trade_list: TradeListElement[] = [
 export interface CorpActionsList {
     Securities: string;
     Action: string;
-    Initial_fund_bal: number;
-    Initial_share_bal: number;
-    Current_fund_bal: number;
-    Current_share_bal:number;
+    Ratio: string;
+    CM_List: CM_List[];
+  }
+  export interface CM_List {
+    CM:string;
+    Initial_shares: number;
+    Current_shares:number;
   }
 
 
-
 const CorpActions_list: CorpActionsList[] = [
-    {Securities: "Amazon", Action: 'Stock Split', Initial_fund_bal: 10000 ,Initial_share_bal: 1987,Current_fund_bal: 180000,Current_share_bal:2890},
-    {Securities: "Apple", Action: 'Stock Dividend', Initial_fund_bal: 10000 ,Initial_share_bal: 1987,Current_fund_bal: 180000,Current_share_bal:2890},
-    {Securities: "Google", Action: 'Rights', Initial_fund_bal: 10000 ,Initial_share_bal: 1987,Current_fund_bal: 180000,Current_share_bal:2890},
-    {Securities: "Amazon", Action: 'Stock Split', Initial_fund_bal: 10000 ,Initial_share_bal: 1987,Current_fund_bal: 180000,Current_share_bal:2890},
+    {Securities: "Amazon", Action: 'Stock Split',Ratio: '1:3', CM_List:[{CM:'GS',Initial_shares: 1987,Current_shares:2890}] },
+    {Securities: "Apple", Action: 'Stock Dividend',  Ratio: '1:3', CM_List:[{CM:'Citi',Initial_shares: 1987,Current_shares:2890}]},
+    
 ];
 
 export interface CostOfSettlementValue {
