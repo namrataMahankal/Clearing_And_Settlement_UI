@@ -13,7 +13,7 @@ import { FloatLabelType } from '@angular/material/form-field';
     
     
     dataSourceCorpActions=CorpActions_list;              //1.For Corp Actions Table
-    displayedColumnsCorpActions: string[] = ['Securities','Actions','Initial fund balance','Initial share balance','Current fund balance','Current share balance'];
+    displayedColumnsCorpActions: string[] = ['CM','Initial_shares','Current_shares'];
                                                 
     dataSource = Trade_list;                            //2.For trade Table
     displayedColumns: string[] = ['BuyerCM', 'SellerCM', 'ES', 'Qty','Price','TradeValue'];
@@ -104,20 +104,23 @@ const Obligation_list_example=[
     {CM:'UBS',Obliged_funds:45678,Obliged_securties:security_share_list},
 
 ];
+
 export interface CorpActionsList {
-    Securities: string;
-    Action: string;
-    Initial_fund_bal: number;
-    Initial_share_bal: number;
-    Current_fund_bal: number;
-    Current_share_bal:number;
-  }
+  Securities: string;
+  Action: string;
+  Ratio: string;
+  CM_List: CM_List[];
+}
+export interface CM_List {
+  CM:string;
+  Initial_shares: number;
+  Current_shares:number;
+}
 
 const CorpActions_list: CorpActionsList[] = [
-    {Securities: "Amazon", Action: 'Stock Split', Initial_fund_bal: 10000 ,Initial_share_bal: 1987,Current_fund_bal: 180000,Current_share_bal:2890},
-    {Securities: "Apple", Action: 'Stock Dividend', Initial_fund_bal: 10000 ,Initial_share_bal: 1987,Current_fund_bal: 180000,Current_share_bal:2890},
-    {Securities: "Google", Action: 'Rights', Initial_fund_bal: 10000 ,Initial_share_bal: 1987,Current_fund_bal: 180000,Current_share_bal:2890},
-    {Securities: "Amazon", Action: 'Stock Split', Initial_fund_bal: 10000 ,Initial_share_bal: 1987,Current_fund_bal: 180000,Current_share_bal:2890},
+  {Securities: "Amazon", Action: 'Stock Split',Ratio: '1:3', CM_List:[{CM:'GS',Initial_shares: 1987,Current_shares:2890}] },
+  {Securities: "Apple", Action: 'Stock Dividend',  Ratio: '1:3', CM_List:[{CM:'Citi',Initial_shares: 1987,Current_shares:2890}]},
+  
 ];
 
 
