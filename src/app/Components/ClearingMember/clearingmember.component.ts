@@ -14,7 +14,7 @@ export class ClearingMemberComponent {
   obCnt=5;
   title = 'Clearing-And-Settlement-UI';
   displayedColumns: string[] = ['BuyerCM', 'SellerCM', 'ES', 'Qty','Price','TradeValue'];
-  displayedColumns1: string[] = ['Securities', 'Shares','Status'];
+  displayedColumns1: string[] = ['Securities','Initial_Quantity','Initial_Amt','Buy_Sell_Quantity','Buy_Sell_Amt','net_Quantity','net_Amt','borrow_rate_per_share']
   displayedColumnsProfile: string[] = ['Securities', 'Shares'];
   displayedColumnsCorpActions: string[] = ['Securities','Actions','Initial fund balance','Initial share balance','Current fund balance','Current share balance'];
   displayedColumnsSettlement: string[] = ['Securities', 'Shares', 'Rate', 'Cost'];
@@ -44,8 +44,14 @@ export interface CorpActionsList {
   
 export interface SecuritySharesListElement {
   Securities: string;
-  Shares:number;
-  Status:string;
+  Initial_Quantity: number;
+  Initial_Amt : number;
+  Buy_Sell_Quantity: number;
+  Buy_Sell_Amt: number;
+  net_Quantity: number;
+  net_Amt : number;
+  borrow_rate_per_share: number;
+
 }
 
 export interface ProfileElement {
@@ -77,12 +83,16 @@ const CorpActions_list: CorpActionsList[] = [
 ];
 
 const security_share_list: SecuritySharesListElement[]=[
- {Securities:'Apple',Shares:100,Status:'To be received'},
- {Securities:'Amazon',Shares:300,Status:'To be sent'},
- {Securities:'Google',Shares:100,Status:'To be received'},
- {Securities:'Amazon',Shares:300,Status:'To be sent'},
-
+  {Securities:  'Apple', Initial_Quantity: 100,Initial_Amt :2000 , Buy_Sell_Quantity: -10,
+  Buy_Sell_Amt: -200,net_Quantity: 90, net_Amt :1800 ,borrow_rate_per_share:1.5},
+  {Securities:  'Amazon', Initial_Quantity: 150,Initial_Amt :3000 , Buy_Sell_Quantity: 15,
+  Buy_Sell_Amt: 300,net_Quantity: 165, net_Amt :3300,borrow_rate_per_share:1.5 },
+  {Securities:  'Google', Initial_Quantity: 100,Initial_Amt :2000 , Buy_Sell_Quantity: -10,
+  Buy_Sell_Amt: -200,net_Quantity: 90, net_Amt :1800,borrow_rate_per_share:1.5 },
+  {Securities:  'Intercontinental Exchange', Initial_Quantity: 10,Initial_Amt :2000 , Buy_Sell_Quantity: -15,
+  Buy_Sell_Amt: -3000,net_Quantity: -5, net_Amt :-1000,borrow_rate_per_share:1.5 }  
 ];
+
 
 const Profile_list: ProfileElement[] = [
   {Securities:'Apple',Shares:100},

@@ -142,12 +142,12 @@
         <span matBadge={{obCnt}} matBadgeOverlap="false" [matBadgeHidden]="hiddenValue">Obligation Report</span>
     </ng-template>
       <mat-list class="list1" role="list" >
-        <mat-list-item role="listitem"><h2>Funds :  $45678</h2></mat-list-item>
+        <mat-list-item role="listitem"><h2>Funds </h2></mat-list-item>
         <mat-list-item role="listitem"><h3>You have to send/receive $45678</h3></mat-list-item>
        </mat-list>
       <br>
       <mat-list class="list1" role="list" >
-        <mat-list-item role="listitem"><h2>Shares:</h2></mat-list-item>
+        <mat-list-item role="listitem"><h2>Shares</h2></mat-list-item>
       </mat-list>
       <mat-slide-toggle class="toggle">Only Shortages</mat-slide-toggle>
       <table mat-table [dataSource]="dataSource1" class="mat-elevation-z8">
@@ -155,24 +155,48 @@
             <th mat-header-cell *matHeaderCellDef> Securities </th>
             <td mat-cell *matCellDef="let element"> {{element.Securities}} </td>
           </ng-container>
+                    <!-- Name Column -->
+          <ng-container matColumnDef="Initial_Quantity">
+             <th mat-header-cell *matHeaderCellDef> Opening Quantity </th>
+             <td mat-cell *matCellDef="let element"> {{element.Initial_Quantity}} </td>
+          </ng-container>
+          <ng-container matColumnDef="Initial_Amt">
+            <th mat-header-cell *matHeaderCellDef> Opening Amt </th>
+            <td mat-cell *matCellDef="let element"> {{element.Initial_Amt}} </td>
+          </ng-container>
         
-          <!-- Name Column -->
-          <ng-container matColumnDef="Shares">
-            <th mat-header-cell *matHeaderCellDef> Shares </th>
-            <td mat-cell *matCellDef="let element"> {{element.Shares}} </td>
+          <ng-container matColumnDef="Buy_Sell_Quantity">
+            <th mat-header-cell *matHeaderCellDef> Buy_Sell_Quantity </th>
+            <td mat-cell *matCellDef="let element"> {{element.Buy_Sell_Quantity}} </td>
+          </ng-container>
+        
+          <ng-container matColumnDef="Buy_Sell_Amt">
+            <th mat-header-cell *matHeaderCellDef> Buy_Sell_Amt</th>
+            <td mat-cell *matCellDef="let element"> {{element.Buy_Sell_Amt}} </td>
+          </ng-container>
+          <ng-container matColumnDef="net_Quantity">
+            <th mat-header-cell *matHeaderCellDef> Net Quantity </th>
+            <td mat-cell *matCellDef="let element"> {{element.net_Quantity}} </td>
+          </ng-container>        
+          <ng-container matColumnDef="net_Amt">
+            <th mat-header-cell *matHeaderCellDef> Net Amt </th>
+            <td mat-cell *matCellDef="let element"> {{element.net_Amt}} </td>
+          </ng-container>
+          <ng-container matColumnDef="borrow_rate_per_share">
+            <th mat-header-cell *matHeaderCellDef> Borrow Rate </th>
+            <td mat-cell *matCellDef="let element"> {{element.borrow_rate_per_share}} </td>
           </ng-container>
 
-          <ng-container matColumnDef="Status">
-            <th mat-header-cell *matHeaderCellDef> Status </th>
-            <td mat-cell *matCellDef="let element"> {{element.Status}} </td>
-          </ng-container>
+        
 
           <tr mat-header-row *matHeaderRowDef="displayedColumns1"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns1;"></tr>
       </table>
-      
+      <br><br>
+      <h3 align="center">Net Amount you have to Pay: ____________</h3>
+      <h5 >*Borrow rate is on per day basis</h5>
     </mat-tab>
-
+ 
     
     <mat-tab label="Cost of Settlement"> 
       <mat-list class="list1" role="list">
