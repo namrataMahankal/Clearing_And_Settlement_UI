@@ -19,6 +19,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {MatBadgeModule} from '@angular/material/badge';
 import {MatButtonModule} from '@angular/material/button';
 import {MatGridListModule} from '@angular/material/grid-list';
+import { HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import {MatGridListModule} from '@angular/material/grid-list';
     ReactiveFormsModule,
     MatBadgeModule,
     MatButtonModule,
-    MatGridListModule
+    MatGridListModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
