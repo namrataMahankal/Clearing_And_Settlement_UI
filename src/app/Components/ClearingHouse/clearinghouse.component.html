@@ -142,7 +142,7 @@
             </mat-panel-description>
           </mat-expansion-panel-header>
           <table mat-table [dataSource]="obligationMatrixEsData" class="mat-elevation-z8">
-            <ng-container matColumnDef="temp" *ngFor="let temp of obligationMatrixEsColumns">
+            <ng-container *ngFor="let temp of obligationMatrixEsColumns ; let colIndex = index" matColumnDef="{{temp}}">
               <th mat-header-cell *matHeaderCellDef> {{temp}} </th>
               <td mat-cell *matCellDef="let element"> {{element[temp]}} </td>
             </ng-container>
