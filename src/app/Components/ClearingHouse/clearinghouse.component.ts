@@ -20,11 +20,14 @@ export class ClearingHouseComponent {
   costOfSettlementValueList=CostOfSettlementValueList;
   displayedColumnCost=['CM','Cost'];
 
+  panelOpenState = false;
   // obligation report panel
   obligationPanelData = ObligationPanelData;
-  obPanelColumns: string[] = ['Security', 'Balance']
-  panelOpenState = false; 
+  obPanelColumns: string[] = ['Security', 'Balance'];
 
+  // obligation matrix ES
+  obligationMatrixEsData: ObligationMatrixEs[] = ObligationMatrixEsData;
+  obligationMatrixEsColumns: string[] = [ 'CM', 'ES1', 'ES2', 'ES3' ];
 
 }
 
@@ -90,4 +93,17 @@ export interface ObligationReport {
 const ObligationPanelData: ObligationReport[] = [
   { CM: 'Citi', Report: [{ Security: 'Apple', Balance: 100 }, { Security: 'Amazon', Balance: -200 }], NetBalance: -100 },
   { CM: 'JPMC', Report: [{ Security: 'Apple', Balance: -150 }, { Security: 'Amazon', Balance: 300 }], NetBalance: 150 }
+];
+
+export interface ObligationMatrixEs {
+  CM: string;
+  ES1: number;
+  ES2: number;
+  ES3: number;
+}
+
+const ObligationMatrixEsData: ObligationMatrixEs[] = [
+  { CM: 'GS', ES1: 1700, ES2: -2500, ES3: 100 },
+  { CM: 'JPMC', ES1: 12000, ES2: 750, ES3: -1560 },
+  { CM: 'DB', ES1: -1500, ES2: 630, ES3: -930 }
 ];
