@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {DataServiceService} from 'src/app/Service/trades-data.service'
+import {TradesDataService} from 'src/app/Service/trades-data.service'
 @Component({
   selector: 'clearing-house',
   templateUrl: './clearinghouse.component.html',
@@ -10,14 +10,14 @@ import {DataServiceService} from 'src/app/Service/trades-data.service'
 })
 export class ClearingHouseComponent {
 
-   constructor(private serv:DataServiceService){
+   constructor(private serv:TradesDataService){
        console.log("In constr.......");
     this.serv.getAllTrades().subscribe(
         data=>{
             this.sampleData=data;
             console.log(this.sampleData);
         }
-    );   
+    ); 
    }
   title = 'Clearing-And-Settlement-UI';
   dataSourceCorpActions=CorpActions_list;
@@ -77,6 +77,7 @@ export class Trade{
     qty:number;
     transactionAmt:number
 }
+
 const Trade_list: TradeListElement[] = [
   {BuyerCM: "UBS", SellerCM: 'Wells Fargo', ES: 'Apple', Qty: 100,Price: 12,TradeValue:100 },
   {BuyerCM: "Citi", SellerCM: 'GS', ES: 'Apple', Qty: 100,Price: 12,TradeValue:100 },

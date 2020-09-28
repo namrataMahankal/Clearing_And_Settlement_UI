@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-
+import {TradesDataService} from 'src/app/Service/trades-data.service';
 
 
 @Component({
@@ -9,6 +9,18 @@ import { Component } from '@angular/core';
 })
 export class ClearingMemberComponent {
   
+  constructor(private serv:TradesDataService){
+    console.log("In constr of *.......");
+ this.serv.getTradesBySellerCM().subscribe(
+     data=>{
+         this.buyTrades=data;
+         console.log(this.buyTrades);
+     }
+ ); 
+}
+
+buyTrades:CMTrades[];
+
   hiddenValue:Boolean=false;
   shortage:Boolean=true;
   obCnt=5;
@@ -34,6 +46,14 @@ export class ClearingMemberComponent {
   getTotalCost() {
     return this.dataSettlement.map(t => t.Cost).reduce((acc, value) => acc + value, 0);
   }
+}
+
+
+export class CMTrades{
+  es:string;
+  price:number;
+  qty:number;
+  transactionAmt:number
 }
 
 export interface TradeListElement {
