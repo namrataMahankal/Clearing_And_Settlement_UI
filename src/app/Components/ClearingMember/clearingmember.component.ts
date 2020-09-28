@@ -35,6 +35,7 @@ export class ClearingMemberComponent {
     return this.dataSettlement.map(t => t.Cost).reduce((acc, value) => acc + value, 0);
   }
 }
+
 export interface TradeListElement {
   ES: string;
   Qty: number;
@@ -52,18 +53,8 @@ export interface CorpActionsList {
   
 export interface SecuritySharesListElement {
   Securities: string;
-  Opening_Balance:number;
-  Closing_Balance:number;
-  Shares_Obliged: number;
-  Status: String;
-
-}
-
-export interface FundsElement{
-  Securities: String;
-  Shares :number;
-  Price:number;
-  Amount:number;
+  Shares:number;
+  Status:string;
 }
 
 export interface ProfileElement {
@@ -73,13 +64,18 @@ export interface ProfileElement {
 }
 
 export interface SettlementElement {
-  Securities: String;
+  Securities: string;
   Shares: number;
   Rate: number;
   Cost: number;
 }
 
-
+export interface FundsElement {
+  Securities: String;
+  Shares: number;
+  Price: number;
+  Amount: number;
+}
 
 const Trade_list: TradeListElement[] = [
   { ES: 'Apple', Qty: 100,Price: 12,TradeValue:100 },
@@ -96,26 +92,22 @@ const CorpActions_list: CorpActionsList[] = [
 ];
 
 const security_share_list: SecuritySharesListElement[]=[
-
-  {Securities:'Apple',Opening_Balance:10000,Closing_Balance:10000, Shares_Obliged: -6000,Status:"No Shortage"},
-  {Securities:'Amazon',Opening_Balance:200,Closing_Balance:500, Shares_Obliged: -1000,Status:"Shortage"},
-
+ {Securities:'Apple',Shares:100,Status:'To be received'},
+ {Securities:'Amazon',Shares:300,Status:'To be sent'},
+ {Securities:'Google',Shares:100,Status:'To be received'},
+ {Securities:'Amazon',Shares:300,Status:'To be sent'},
 
 ];
-
 
 const Profile_list: ProfileElement[] = [
   {Securities:'Apple',Shares:100},
   {Securities:'Amazon',Shares:300},
 ];
 
-
-
-const DayFundsChange:FundsElement[]=[  
-  {Securities: 'Amazon',Shares :200,Price:10, Amount:-2000},
-  {Securities: 'Google',Shares :200,Price:10, Amount:-2000},
-  {Securities: 'Apple',Shares :200,Price:10, Amount:-2000}
-
+const DayFundsChange: FundsElement[] = [
+  { Securities: 'Amazon', Shares: 200, Price: 10, Amount: -2000 },
+  { Securities: 'Google', Shares: 200, Price: 10, Amount: -2000 },
+  { Securities: 'Apple', Shares: 200, Price: 10, Amount: -2000 }
 ];
 
 

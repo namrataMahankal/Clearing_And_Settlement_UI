@@ -22,10 +22,17 @@ export class ClearingHouseComponent {
   costOfSettlementValueList=CostOfSettlementValueList;
   displayedColumnCost=['CM','Cost'];
 
+  panelOpenState = false;
   // obligation report panel
   obligationPanelData = ObligationPanelData;
-  obPanelColumns: string[] = ['Security', 'Balance']
-  panelOpenState = false; 
+  obPanelColumns: string[] = ['Security', 'Balance'];
+
+  // obligation matrix
+  obligationMatrixEsData: ObligationMatrixEs[] = ObligationMatrixEsData;
+  obligationMatrixEsColumns: string[] = [ 'ES', 'CM1', 'CM2', 'CM3' ];
+  obligationMatrixFundsData: ObligationMatrixFunds[] = ObligationMatrixFundsData;
+  obligationMatrixFundsColumns: string[] = ['CM', 'Net Fund'];
+
   sampleData:Array<any>;
    test(){
        console.log("in test");
@@ -38,14 +45,13 @@ export class ClearingHouseComponent {
                this.sampleData=data;
                console.log(data);
            }
-       );
-
-       
+       );   
    }
 
    printStm(response){
     console.log(response);
    }
+   
 }
 
 export interface TradeListElement {
@@ -111,3 +117,28 @@ const ObligationPanelData: ObligationReport[] = [
   { CM: 'Citi', Report: [{ Security: 'Apple', Balance: 100 }, { Security: 'Amazon', Balance: -200 }], NetBalance: -100 },
   { CM: 'JPMC', Report: [{ Security: 'Apple', Balance: -150 }, { Security: 'Amazon', Balance: 300 }], NetBalance: 150 }
 ];
+
+export interface ObligationMatrixEs {
+  ES: string;
+  CM1: number;
+  CM2: number;
+  CM3: number;
+}
+
+const ObligationMatrixEsData: ObligationMatrixEs[] = [
+  { ES: 'ES1', CM1: 1700, CM2: -2500, CM3: 100 },
+  { ES: 'ES2', CM1: 12000, CM2: 750, CM3: -1560 },
+  { ES: 'ES3', CM1: -1500, CM2: 630, CM3: -930 }
+];
+
+export interface ObligationMatrixFunds {
+  CM: string;
+  'Net Fund': number;
+}
+
+const ObligationMatrixFundsData: ObligationMatrixFunds[] = [
+  { CM: 'CM1', 'Net Fund': 15000 },
+  { CM: 'CM2', 'Net Fund': -965000 },
+  { CM: 'CM3', 'Net Fund': 258000 }
+];
+
