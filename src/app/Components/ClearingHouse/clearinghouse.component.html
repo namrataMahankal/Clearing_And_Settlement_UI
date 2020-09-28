@@ -130,8 +130,29 @@
     <mat-tab label="Obligation Matrix">
       <!-- Expansion Panel for Obligation Matrix -->
       <mat-accordion>
+
         <mat-expansion-panel (opened)="panelOpenState = true"
           (closed)="panelOpenState = false">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Obligation Matrix for Funds
+            </mat-panel-title>
+            <mat-panel-description>
+              <!-- {{panelOpenState ? 'Hide' : 'Show'}} Report -->
+              Click to toggle view
+            </mat-panel-description>
+          </mat-expansion-panel-header>
+          <table mat-table [dataSource]="obligationMatrixFundsData" class="mat-elevation-z8">
+            <ng-container *ngFor="let temp of obligationMatrixFundsColumns" matColumnDef={{temp}}>
+              <th mat-header-cell *matHeaderCellDef> {{temp}} </th>
+              <td mat-cell *matCellDef="let element"> {{element[temp]}} </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="obligationMatrixFundsColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: obligationMatrixFundsColumns;"></tr>
+          </table>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
           <mat-expansion-panel-header>
             <mat-panel-title>
               Obligation Matrix for ES
@@ -142,7 +163,7 @@
             </mat-panel-description>
           </mat-expansion-panel-header>
           <table mat-table [dataSource]="obligationMatrixEsData" class="mat-elevation-z8">
-            <ng-container *ngFor="let temp of obligationMatrixEsColumns ; let colIndex = index" matColumnDef="{{temp}}">
+            <ng-container *ngFor="let temp of obligationMatrixEsColumns" matColumnDef={{temp}}>
               <th mat-header-cell *matHeaderCellDef> {{temp}} </th>
               <td mat-cell *matCellDef="let element"> {{element[temp]}} </td>
             </ng-container>
@@ -150,6 +171,7 @@
             <tr mat-row *matRowDef="let row; columns: obligationMatrixEsColumns;"></tr>
           </table>
         </mat-expansion-panel>
+
       </mat-accordion>
     </mat-tab>
     <!-- Ob Matrix tab end -->

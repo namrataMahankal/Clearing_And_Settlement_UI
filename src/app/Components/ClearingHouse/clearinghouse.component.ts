@@ -25,9 +25,11 @@ export class ClearingHouseComponent {
   obligationPanelData = ObligationPanelData;
   obPanelColumns: string[] = ['Security', 'Balance'];
 
-  // obligation matrix ES
+  // obligation matrix
   obligationMatrixEsData: ObligationMatrixEs[] = ObligationMatrixEsData;
-  obligationMatrixEsColumns: string[] = [ 'CM', 'ES1', 'ES2', 'ES3' ];
+  obligationMatrixEsColumns: string[] = [ 'ES', 'CM1', 'CM2', 'CM3' ];
+  obligationMatrixFundsData: ObligationMatrixFunds[] = ObligationMatrixFundsData;
+  obligationMatrixFundsColumns: string[] = ['CM', 'Net Fund'];
 
 }
 
@@ -96,14 +98,26 @@ const ObligationPanelData: ObligationReport[] = [
 ];
 
 export interface ObligationMatrixEs {
-  CM: string;
-  ES1: number;
-  ES2: number;
-  ES3: number;
+  ES: string;
+  CM1: number;
+  CM2: number;
+  CM3: number;
 }
 
 const ObligationMatrixEsData: ObligationMatrixEs[] = [
-  { CM: 'GS', ES1: 1700, ES2: -2500, ES3: 100 },
-  { CM: 'JPMC', ES1: 12000, ES2: 750, ES3: -1560 },
-  { CM: 'DB', ES1: -1500, ES2: 630, ES3: -930 }
+  { ES: 'ES1', CM1: 1700, CM2: -2500, CM3: 100 },
+  { ES: 'ES2', CM1: 12000, CM2: 750, CM3: -1560 },
+  { ES: 'ES3', CM1: -1500, CM2: 630, CM3: -930 }
 ];
+
+export interface ObligationMatrixFunds {
+  CM: string;
+  'Net Fund': number;
+}
+
+const ObligationMatrixFundsData: ObligationMatrixFunds[] = [
+  { CM: 'CM1', 'Net Fund': 15000 },
+  { CM: 'CM2', 'Net Fund': -965000 },
+  { CM: 'CM3', 'Net Fund': 258000 }
+];
+
