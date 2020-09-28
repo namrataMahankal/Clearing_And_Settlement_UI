@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {DataServiceService, Order} from 'src/app/Components/Service/data-service.service'
+import {DataServiceService} from 'src/app/Service/trades-data.service'
 @Component({
   selector: 'clearing-house',
   templateUrl: './clearinghouse.component.html',
@@ -11,7 +11,13 @@ import {DataServiceService, Order} from 'src/app/Components/Service/data-service
 export class ClearingHouseComponent {
 
    constructor(private serv:DataServiceService){
-
+       console.log("In constr.......");
+    this.serv.getAllTrades().subscribe(
+        data=>{
+            this.sampleData=data;
+            console.log(this.sampleData);
+        }
+    );   
    }
   title = 'Clearing-And-Settlement-UI';
   dataSourceCorpActions=CorpActions_list;
@@ -33,24 +39,25 @@ export class ClearingHouseComponent {
   obligationMatrixFundsData: ObligationMatrixFunds[] = ObligationMatrixFundsData;
   obligationMatrixFundsColumns: string[] = ['CM', 'Net Fund'];
 
-  sampleData:Array<any>;
-   test(){
-       console.log("in test");
-    //    this.serv.getStr().subscribe(
-    //        response=>this.printStm(response)
-    //    );
-    //   console.log("done");
-       this.serv.getData().subscribe(
-           data=>{
-               this.sampleData=data;
-               console.log(data);
-           }
-       );   
-   }
+  sampleData:Trade[];
+  test(){}
+//    test(){
+//        console.log("in test");
+//     //    this.serv.getStr().subscribe(
+//     //        response=>this.printStm(response)
+//     //    );
+//     //   console.log("done");
+//        this.serv.getData().subscribe(
+//            data=>{
+//                this.sampleData=data;
+//                console.log(this.sampleData);
+//            }
+//        );   
+//    }
 
-   printStm(response){
-    console.log(response);
-   }
+//    printStm(response){
+//     console.log(response);
+//    }
    
 }
 
@@ -63,7 +70,13 @@ export interface TradeListElement {
     TradeValue:number;
   }
 
-
+export class Trade{
+    buyerCM:string;
+    es:string;
+    price:number;
+    qty:number;
+    transactionAmt:number
+}
 const Trade_list: TradeListElement[] = [
   {BuyerCM: "UBS", SellerCM: 'Wells Fargo', ES: 'Apple', Qty: 100,Price: 12,TradeValue:100 },
   {BuyerCM: "Citi", SellerCM: 'GS', ES: 'Apple', Qty: 100,Price: 12,TradeValue:100 },
