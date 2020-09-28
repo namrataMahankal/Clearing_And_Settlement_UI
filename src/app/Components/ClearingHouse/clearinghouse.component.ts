@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-
+import {DataServiceService, Order} from 'src/app/Components/Service/data-service.service'
 @Component({
   selector: 'clearing-house',
   templateUrl: './clearinghouse.component.html',
@@ -10,13 +10,15 @@ import { Component } from '@angular/core';
 })
 export class ClearingHouseComponent {
 
-   
+   constructor(private serv:DataServiceService){
+
+   }
   title = 'Clearing-And-Settlement-UI';
   dataSourceCorpActions=CorpActions_list;
   displayedColumnsCorpActions: string[] = ['CM','Initial_shares','Current_shares'];
   dataSource = Trade_list;
   displayedColumns: string[] = ['BuyerCM', 'SellerCM', 'ES', 'Qty','Price','TradeValue'];
-  
+  str;
   costOfSettlementValueList=CostOfSettlementValueList;
   displayedColumnCost=['CM','Cost'];
 
@@ -31,6 +33,25 @@ export class ClearingHouseComponent {
   obligationMatrixFundsData: ObligationMatrixFunds[] = ObligationMatrixFundsData;
   obligationMatrixFundsColumns: string[] = ['CM', 'Net Fund'];
 
+  sampleData:Array<any>;
+   test(){
+       console.log("in test");
+    //    this.serv.getStr().subscribe(
+    //        response=>this.printStm(response)
+    //    );
+    //   console.log("done");
+       this.serv.getData().subscribe(
+           data=>{
+               this.sampleData=data;
+               console.log(data);
+           }
+       );   
+   }
+
+   printStm(response){
+    console.log(response);
+   }
+   
 }
 
 export interface TradeListElement {

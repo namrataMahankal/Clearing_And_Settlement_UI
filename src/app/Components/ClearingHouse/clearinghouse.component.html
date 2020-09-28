@@ -52,7 +52,11 @@
 
           <br>
           <div style="margin-right:5px">
-            <button mat-raised-button color="accent" style="margin-left: 50px;">Generate reports</button>
+            <button mat-raised-button color="accent" style="margin-left: 50px;" (click)="test()">Generate reports</button>
+          </div>
+          string... {{str}}
+          <div *ngFor="let car of sampleData">
+            {{car.id}} {{car.title}} {{car.quantity}}
           </div>
           
     </mat-tab>
