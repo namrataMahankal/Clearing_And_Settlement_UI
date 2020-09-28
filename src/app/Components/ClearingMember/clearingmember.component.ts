@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'clearing-member',
-  templateUrl: './clearingmember.component.html',
+  templateUrl:  './clearingmember.component.html',
   styleUrls: ['./clearingmember.component.css']
 })
 export class ClearingMemberComponent {
@@ -14,12 +14,14 @@ export class ClearingMemberComponent {
   obCnt=5;
   title = 'Clearing-And-Settlement-UI';
   displayedColumns: string[] = ['ES', 'Qty','Price','TradeValue'];
-  displayedColumns1: string[] = ['Securities', 'Shares','Status'];
+  displayedColumns1: string[] = ['Securities','Opening_Balance','Closing_Balance','Shares_Obliged','Status'];
+  displayedColumns2: string[]=['Securities','Shares','Price', 'Amount'];
   displayedColumnsProfile: string[] = ['Securities', 'Shares'];
   displayedColumnsCorpActions: string[] = ['Securities','Actions','Parameter','Initial share balance','Corp Action effect','Current share balance'];
   displayedColumnsSettlement: string[] = ['Securities', 'Shares', 'Rate', 'Cost'];
   dataSource = Trade_list;
   dataSource1= security_share_list;
+  dataSourceFunds=DayFundsChange;
   dataSourceCorpActions=CorpActions_list;
   dataSourceProfile=Profile_list;
   dataSettlement : SettlementElement[] = [
