@@ -70,6 +70,12 @@ export interface SettlementElement {
   Cost: number;
 }
 
+export interface FundsElement {
+  Securities: String;
+  Shares: number;
+  Price: number;
+  Amount: number;
+}
 
 const Trade_list: TradeListElement[] = [
   { ES: 'Apple', Qty: 100,Price: 12,TradeValue:100 },
@@ -98,6 +104,11 @@ const Profile_list: ProfileElement[] = [
   {Securities:'Amazon',Shares:300},
 ];
 
+const DayFundsChange: FundsElement[] = [
+  { Securities: 'Amazon', Shares: 200, Price: 10, Amount: -2000 },
+  { Securities: 'Google', Shares: 200, Price: 10, Amount: -2000 },
+  { Securities: 'Apple', Shares: 200, Price: 10, Amount: -2000 }
+];
 
 
 export class SlideToggleOverviewExample {}
