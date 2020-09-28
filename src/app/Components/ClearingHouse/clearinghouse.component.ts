@@ -25,7 +25,8 @@ export class ClearingHouseComponent {
   panelOpenState = false;
   // obligation report panel
   obligationPanelData = ObligationPanelData;
-  obPanelColumns: string[] = ['Security', 'Balance'];
+  obPanelSharesColumns: string[] = [ 'Security', 'Opening Balance' ,'Closing Balance' ,'Net Quantity' ];
+  obPanelFundsColumns: string[] = ['Security', 'Shares', 'Price', 'Balance'];
 
   // obligation matrix
   obligationMatrixEsData: ObligationMatrixEs[] = ObligationMatrixEsData;
@@ -103,20 +104,37 @@ const CostOfSettlementValueList:CostOfSettlementValue[] =[{CM:"Citi",Cost:500},
 {CM:"The Bank of New York Mellon Corporation",Cost:500}]
 
 
-export interface Obligation {
+export interface SharesObligation {
   Security: string;
+  'Opening Balance': number;
+  'Closing Balance': number;
+  'Net Quantity': number; 
+}
+export interface FundsObligation {
+  Security: string;
+  Shares: number;
+  Price: number;
   Balance: number;
 }
 export interface ObligationReport {
   CM: string;
-  Report: Obligation[];
-  NetBalance: number;
+  Shares: SharesObligation[];
+  Funds: FundsObligation[];
 }
 
 const ObligationPanelData: ObligationReport[] = [
-  { CM: 'Citi', Report: [{ Security: 'Apple', Balance: 100 }, { Security: 'Amazon', Balance: -200 }], NetBalance: -100 },
-  { CM: 'JPMC', Report: [{ Security: 'Apple', Balance: -150 }, { Security: 'Amazon', Balance: 300 }], NetBalance: 150 }
-];
+    {CM: 'Citi', 
+    Shares: [{ Security: 'Apple', 'Opening Balance': 100, 'Closing Balance': 100, 'Net Quantity': 100 }, 
+    { Security: 'Apple', 'Opening Balance': 100, 'Closing Balance': 100, 'Net Quantity': 100 }],
+    Funds: [{ Security: 'Apple', Shares: 900, Price: 100, Balance: 100 },
+    { Security: 'Apple', Shares: 100, Price: 100, Balance: 100 }] },
+
+    {CM: 'Citi',
+    Shares: [{ Security: 'Apple', 'Opening Balance': 100, 'Closing Balance': 100, 'Net Quantity': 100 },
+    { Security: 'Apple', 'Opening Balance': 100, 'Closing Balance': 100, 'Net Quantity': 100 }],
+    Funds: [{ Security: 'Apple', 'Shares': 100, 'Price': 100, Balance: 100 },
+    { Security: 'Apple', 'Shares': 100, 'Price': 100, Balance: 100 }] }
+  ];
 
 export interface ObligationMatrixEs {
   ES: string;
