@@ -46,45 +46,28 @@ export class ClearingHouseComponent {
    costOfSettlementPanelDataConst=CostOfSettlementPanelDataConst;
 
 
-  sampleData:Array<any>;
-   test(){
-       console.log("in test");
-    //    this.serv.getStr().subscribe(
-    //        response=>this.printStm(response)
-    //    );
-    //   console.log("done");
-       this.serv.getData().subscribe(
-           data=>{
-               this.sampleData=data;
-               console.log(data);
-           }
-       );   
-   }
-
-   printStm(response){
-    console.log(response);
-   }
-  sampleData:Trade[];
-  test(){}
-//    test(){
-//        console.log("in test");
-//     //    this.serv.getStr().subscribe(
-//     //        response=>this.printStm(response)
-//     //    );
-//     //   console.log("done");
-//        this.serv.getData().subscribe(
-//            data=>{
-//                this.sampleData=data;
-//                console.log(this.sampleData);
-//            }
-//        );   
-//    }
-
-//    printStm(response){
-//     console.log(response);
-//    }
-   
-}
+   sampleData:Trade[];
+   test(){}
+ //    test(){
+ //        console.log("in test");
+ //     //    this.serv.getStr().subscribe(
+ //     //        response=>this.printStm(response)
+ //     //    );
+ //     //   console.log("done");
+ //        this.serv.getData().subscribe(
+ //            data=>{
+ //                this.sampleData=data;
+ //                console.log(this.sampleData);
+ //            }
+ //        );   
+ //    }
+ 
+ //    printStm(response){
+ //     console.log(response);
+ //    }
+    
+ }
+ 
 
 export interface TradeListElement {
     BuyerCM: string;
@@ -141,7 +124,6 @@ const CostOfSettlementValueList:CostOfSettlementValue[] =[{CM:"Citi",Cost:500},
 {CM:"Credit Suisse",Cost:500},
 {CM:"The Bank of New York Mellon Corporation",Cost:500}]
 
-export interface Obligation {
 
 export interface SharesObligation {
   Security: string;
