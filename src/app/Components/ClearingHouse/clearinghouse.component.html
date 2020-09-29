@@ -234,20 +234,48 @@
 
 
     <mat-tab label="Cost of Settlement"> 
-        <table mat-table [dataSource]="costOfSettlementValueList" class="mat-elevation-z8">
-            <ng-container matColumnDef="CM">
-              <th mat-header-cell *matHeaderCellDef> Clearing Member</th>
-              <td mat-cell *matCellDef="let element"> {{element.CM}} </td>
-            </ng-container>
-          
-            <!-- Name Column -->
-            <ng-container matColumnDef="Cost">
-              <th mat-header-cell *matHeaderCellDef> Cost </th>
-              <td mat-cell *matCellDef="let element"> {{element.Cost}} </td>
-            </ng-container>
-            <tr mat-header-row *matHeaderRowDef="displayedColumnCost"></tr>
-            <tr mat-row *matRowDef="let row; columns:displayedColumnCost;"></tr>        
-        </table>
-    </mat-tab>
+      <!-- Expansion Panel for Cost Of settlement -->
+        <mat-accordion>
+          <mat-expansion-panel *ngFor="let CM_Element of costOfSettlementPanelDataConst" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                {{CM_Element.CM}}
+              </mat-panel-title>
+              <mat-panel-description>
+                <!-- {{panelOpenState ? 'Hide' : 'Show'}} Report -->
+                Click to view Cost Report
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <table mat-table [dataSource]="CM_Element.Report" class="mat-elevation-z8">
+              <ng-container matColumnDef="Securities">
+                <th mat-header-cell *matHeaderCellDef> Securities </th>
+                <td mat-cell *matCellDef="let element"> {{element.Securities}} </td>
+                <td mat-footer-cell *matFooterCellDef>Total</td>
+              </ng-container>
+              <ng-container matColumnDef="Shares">
+                <th mat-header-cell *matHeaderCellDef> Shares </th>
+                <td mat-cell *matCellDef="let element"> {{element.Shares}} </td>
+                <td mat-footer-cell *matFooterCellDef>  </td>
+              </ng-container>
+              <ng-container matColumnDef="Rate">
+                <th mat-header-cell *matHeaderCellDef> Rate </th>
+                <td mat-cell *matCellDef="let element"> {{element.Rate}} </td>
+                <td mat-footer-cell *matFooterCellDef>  </td>
+              </ng-container>
+              <ng-container matColumnDef="Cost">
+                <th mat-header-cell *matHeaderCellDef> Cost </th>
+                <td mat-cell *matCellDef="let element"> {{element.Cost}} </td>
+               
+              </ng-container>    
+              <tr mat-header-row *matHeaderRowDef="cosPanelColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: cosPanelColumns;"></tr>
+             
+            </table>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </mat-tab> 
+
+
 
 </mat-tab-group>
