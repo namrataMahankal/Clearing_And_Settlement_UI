@@ -41,7 +41,6 @@ export class ClearingHouseComponent {
   obligationMatrixFundsData: ObligationMatrixFunds[] = ObligationMatrixFundsData;
   obligationMatrixFundsColumns: string[] = ['CM', 'Net Fund'];
 
-<<<<<<< HEAD
 
    cosPanelColumns:string[]=['Securities', 'Shares', 'Rate', 'Cost'];
    costOfSettlementPanelDataConst=CostOfSettlementPanelDataConst;
@@ -65,7 +64,6 @@ export class ClearingHouseComponent {
    printStm(response){
     console.log(response);
    }
-=======
   sampleData:Trade[];
   test(){}
 //    test(){
@@ -85,7 +83,6 @@ export class ClearingHouseComponent {
 //    printStm(response){
 //     console.log(response);
 //    }
->>>>>>> bd4ac5f53a6f91b16f261d6d1d8f8acdc54893b1
    
 }
 
@@ -144,9 +141,7 @@ const CostOfSettlementValueList:CostOfSettlementValue[] =[{CM:"Citi",Cost:500},
 {CM:"Credit Suisse",Cost:500},
 {CM:"The Bank of New York Mellon Corporation",Cost:500}]
 
-<<<<<<< HEAD
 export interface Obligation {
-=======
 
 export interface SharesObligation {
   Security: string;
@@ -155,7 +150,6 @@ export interface SharesObligation {
   'Net Quantity': number; 
 }
 export interface FundsObligation {
->>>>>>> bd4ac5f53a6f91b16f261d6d1d8f8acdc54893b1
   Security: string;
   Shares: number;
   Price: number;
