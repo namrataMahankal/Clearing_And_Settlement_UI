@@ -19,8 +19,9 @@ export class ClearingHouseComponent {
   dataSource = Trade_list;
   displayedColumns: string[] = ['BuyerCM', 'SellerCM', 'ES', 'Qty','Price','TradeValue'];
   str;
-  costOfSettlementValueList=CostOfSettlementValueList;
-  displayedColumnCost=['CM','Cost'];
+
+//costOfSettlementValueList=CostOfSettlementValueList;
+  
 
   panelOpenState = false;
   // obligation report panel
@@ -32,6 +33,11 @@ export class ClearingHouseComponent {
   obligationMatrixEsColumns: string[] = [ 'ES', 'CM1', 'CM2', 'CM3' ];
   obligationMatrixFundsData: ObligationMatrixFunds[] = ObligationMatrixFundsData;
   obligationMatrixFundsColumns: string[] = ['CM', 'Net Fund'];
+
+
+   cosPanelColumns:string[]=['Securities', 'Shares', 'Rate', 'Cost'];
+   costOfSettlementPanelDataConst=CostOfSettlementPanelDataConst;
+
 
   sampleData:Array<any>;
    test(){
@@ -102,16 +108,40 @@ const CostOfSettlementValueList:CostOfSettlementValue[] =[{CM:"Citi",Cost:500},
 {CM:"Credit Suisse",Cost:500},
 {CM:"The Bank of New York Mellon Corporation",Cost:500}]
 
-
 export interface Obligation {
   Security: string;
   Balance: number;
 }
+
 export interface ObligationReport {
   CM: string;
   Report: Obligation[];
   NetBalance: number;
 }
+
+
+
+
+export interface SettlementElement {
+  Securities: string;
+  Shares: number;
+  Rate: number;
+  Cost: number;
+}
+
+export interface CostOfSettlementReport2{
+  CM: string;
+  Report:SettlementElement[];
+}
+
+const CostOfSettlementPanelDataConst: CostOfSettlementReport2[]=[
+{CM:'Citi',Report:[{ Securities: 'Apple', Shares: 100, Rate: 1.23, Cost: 1234 },{ Securities: 'Apple', Shares: 100, Rate: 1.23, Cost: 1234 }]},
+{CM:'The Bank of New York Mellon Corporation',Report:[{ Securities: 'Amazon', Shares: 	100, Rate: 1.23, Cost: 1234 },{ Securities: 'Apple', Shares: 100, Rate: 1.23, Cost: 1234 }]}
+
+];
+
+
+
 
 const ObligationPanelData: ObligationReport[] = [
   { CM: 'Citi', Report: [{ Security: 'Apple', Balance: 100 }, { Security: 'Amazon', Balance: -200 }], NetBalance: -100 },
