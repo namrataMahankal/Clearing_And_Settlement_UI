@@ -1,10 +1,7 @@
-<mat-toolbar [class.mat-elevation-z6]=true color="primary">
+<!-- <mat-toolbar [class.mat-elevation-z6]=true color="primary">
     
     <span>Citi</span>
-    <!-- <span class="example-spacer"></span> -->
-    <!-- <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-      <mat-icon>favorite</mat-icon>
-    </button> -->
+    
   </mat-toolbar>
   <br>
 
@@ -89,4 +86,28 @@ input[type=password], select {
 <br><br>
 <button (click)="checkCredentials()">Login</button>
 <br><br>
+</div> -->
+
+
+<div class="row">
+
+  <div class="col-md-6 login-container">
+    <h2 style="margin: auto">Login </h2>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="username">UserName:</label>
+        <input type="text" class="form-control" formControlName="username" id="username" autocomplete="off">
+        <div class="error" *ngIf="loginForm.controls['username'].hasError('required') && loginForm.controls['username'].touched">Username is required</div>
+      </div>
+      <div class="form-group">
+        <label for="pwd">Password:</label>
+        <input type="password" class="form-control" formControlName="password" id="pwd" autocomplete="off">
+        <div class="error" *ngIf="loginForm.controls['password'].hasError('required') && loginForm.controls['password'].touched">Password is required</div>
+      </div>
+      <button class="btn btn-success" [disabled]="loginForm.invalid">Login</button>
+      <div *ngIf="invalidLogin" class="error">
+        <div>Invalid credentials.</div>
+      </div>
+    </form>
+  </div>
 </div>
