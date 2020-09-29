@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {DataServiceService, Order} from 'src/app/Components/Service/data-service.service'
+import {TradesDataService} from 'src/app/Service/trades-data.service'
 @Component({
   selector: 'clearing-house',
   templateUrl: './clearinghouse.component.html',
@@ -10,8 +10,14 @@ import {DataServiceService, Order} from 'src/app/Components/Service/data-service
 })
 export class ClearingHouseComponent {
 
-   constructor(private serv:DataServiceService){
-
+   constructor(private serv:TradesDataService){
+       console.log("In constr.......");
+    this.serv.getAllTrades().subscribe(
+        data=>{
+            this.sampleData=data;
+            console.log(this.sampleData);
+        }
+    ); 
    }
   title = 'Clearing-And-Settlement-UI';
   dataSourceCorpActions=CorpActions_list;
@@ -26,7 +32,8 @@ export class ClearingHouseComponent {
   panelOpenState = false;
   // obligation report panel
   obligationPanelData = ObligationPanelData;
-  obPanelColumns: string[] = ['Security', 'Balance'];
+  obPanelSharesColumns: string[] = [ 'Security', 'Opening Balance' ,'Closing Balance' ,'Net Quantity' ];
+  obPanelFundsColumns: string[] = ['Security', 'Shares', 'Price', 'Balance'];
 
   // obligation matrix
   obligationMatrixEsData: ObligationMatrixEs[] = ObligationMatrixEsData;
@@ -34,6 +41,7 @@ export class ClearingHouseComponent {
   obligationMatrixFundsData: ObligationMatrixFunds[] = ObligationMatrixFundsData;
   obligationMatrixFundsColumns: string[] = ['CM', 'Net Fund'];
 
+<<<<<<< HEAD
 
    cosPanelColumns:string[]=['Securities', 'Shares', 'Rate', 'Cost'];
    costOfSettlementPanelDataConst=CostOfSettlementPanelDataConst;
@@ -57,6 +65,27 @@ export class ClearingHouseComponent {
    printStm(response){
     console.log(response);
    }
+=======
+  sampleData:Trade[];
+  test(){}
+//    test(){
+//        console.log("in test");
+//     //    this.serv.getStr().subscribe(
+//     //        response=>this.printStm(response)
+//     //    );
+//     //   console.log("done");
+//        this.serv.getData().subscribe(
+//            data=>{
+//                this.sampleData=data;
+//                console.log(this.sampleData);
+//            }
+//        );   
+//    }
+
+//    printStm(response){
+//     console.log(response);
+//    }
+>>>>>>> bd4ac5f53a6f91b16f261d6d1d8f8acdc54893b1
    
 }
 
@@ -69,6 +98,13 @@ export interface TradeListElement {
     TradeValue:number;
   }
 
+export class Trade{
+    buyerCM:string;
+    es:string;
+    price:number;
+    qty:number;
+    transactionAmt:number
+}
 
 const Trade_list: TradeListElement[] = [
   {BuyerCM: "UBS", SellerCM: 'Wells Fargo', ES: 'Apple', Qty: 100,Price: 12,TradeValue:100 },
@@ -108,15 +144,28 @@ const CostOfSettlementValueList:CostOfSettlementValue[] =[{CM:"Citi",Cost:500},
 {CM:"Credit Suisse",Cost:500},
 {CM:"The Bank of New York Mellon Corporation",Cost:500}]
 
+<<<<<<< HEAD
 export interface Obligation {
+=======
+
+export interface SharesObligation {
   Security: string;
+  'Opening Balance': number;
+  'Closing Balance': number;
+  'Net Quantity': number; 
+}
+export interface FundsObligation {
+>>>>>>> bd4ac5f53a6f91b16f261d6d1d8f8acdc54893b1
+  Security: string;
+  Shares: number;
+  Price: number;
   Balance: number;
 }
 
 export interface ObligationReport {
   CM: string;
-  Report: Obligation[];
-  NetBalance: number;
+  Shares: SharesObligation[];
+  Funds: FundsObligation[];
 }
 
 
@@ -144,9 +193,18 @@ const CostOfSettlementPanelDataConst: CostOfSettlementReport2[]=[
 
 
 const ObligationPanelData: ObligationReport[] = [
-  { CM: 'Citi', Report: [{ Security: 'Apple', Balance: 100 }, { Security: 'Amazon', Balance: -200 }], NetBalance: -100 },
-  { CM: 'JPMC', Report: [{ Security: 'Apple', Balance: -150 }, { Security: 'Amazon', Balance: 300 }], NetBalance: 150 }
-];
+    {CM: 'Citi', 
+    Shares: [{ Security: 'Apple', 'Opening Balance': 100, 'Closing Balance': 100, 'Net Quantity': 100 }, 
+    { Security: 'Apple', 'Opening Balance': 100, 'Closing Balance': 100, 'Net Quantity': 100 }],
+    Funds: [{ Security: 'Apple', Shares: 900, Price: 100, Balance: 100 },
+    { Security: 'Apple', Shares: 100, Price: 100, Balance: 100 }] },
+
+    {CM: 'Citi',
+    Shares: [{ Security: 'Apple', 'Opening Balance': 100, 'Closing Balance': 100, 'Net Quantity': 100 },
+    { Security: 'Apple', 'Opening Balance': 100, 'Closing Balance': 100, 'Net Quantity': 100 }],
+    Funds: [{ Security: 'Apple', 'Shares': 100, 'Price': 100, Balance: 100 },
+    { Security: 'Apple', 'Shares': 100, 'Price': 100, Balance: 100 }] }
+  ];
 
 export interface ObligationMatrixEs {
   ES: string;
