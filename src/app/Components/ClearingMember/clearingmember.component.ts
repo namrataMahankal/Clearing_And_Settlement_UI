@@ -53,7 +53,9 @@ export interface CorpActionsList {
   
 export interface SecuritySharesListElement {
   Securities: string;
-  Shares:number;
+  Opening_Balance:number;
+  Closing_Balance:number;
+  Shares_Obliged:number;
   Status:string;
 }
 
@@ -92,11 +94,10 @@ const CorpActions_list: CorpActionsList[] = [
 ];
 
 const security_share_list: SecuritySharesListElement[]=[
- {Securities:'Apple',Shares:100,Status:'To be received'},
- {Securities:'Amazon',Shares:300,Status:'To be sent'},
- {Securities:'Google',Shares:100,Status:'To be received'},
- {Securities:'Amazon',Shares:300,Status:'To be sent'},
-
+ {Securities:'Apple',Opening_Balance:10000,Closing_Balance:5000,Shares_Obliged:100,Status:'To be received'},
+ {Securities:'Apple',Opening_Balance:10000,Closing_Balance:5000,Shares_Obliged:100,Status:'To be received'},
+ {Securities:'Apple',Opening_Balance:10000,Closing_Balance:5000,Shares_Obliged:100,Status:'To be received'},
+ {Securities:'Apple',Opening_Balance:10000,Closing_Balance:5000,Shares_Obliged:100,Status:'To be received'},
 ];
 
 const Profile_list: ProfileElement[] = [
