@@ -15,14 +15,22 @@ export class ClearingMemberComponent {
     this.cdr.detectChanges();
  }
   constructor(private serv:TradesDataService,private cdr: ChangeDetectorRef){
-    console.log("In constr of *.......");
+   // console.log("In constr of *.......");
     this.serv.getOpeningFundBalance().subscribe(
       data=>{
           this.openingFundBalance=data;
           //console.log(this.openingFundBalance);
       }
   ); 
-  console.log("opening share..........");
+
+  this.serv.getFundsObliged().subscribe(
+    data=>{
+        this.fundsObliged=data.fundObligation;
+        //console.log(this.openingFundBalance);
+    }
+  );
+
+  //console.log("opening share..........");
   this.serv.getOpeningShareBalance().subscribe(
     data=>{
         this.openingShares=data;
@@ -30,7 +38,12 @@ export class ClearingMemberComponent {
     }
 ); 
 
-    
+this.serv.getOBShares().subscribe(
+  data=>{
+      this.obShares=data;
+      //console.log(this.openingFundBalance);
+  }
+);
 
     this.serv.getTradesByBuyerCM().subscribe(
       data=>{
@@ -66,6 +79,9 @@ this.serv.getCorpActions().subscribe(
       console.log(this.corpActions);
   }
 ); 
+
+console.log("bbbbb");
+console.log(this.openingFundBalance+this.fundsObliged);
 }
 
   
@@ -77,7 +93,7 @@ costOfSettlementFunds:CostOfSettlement={
   costIncurred:0
 };
 
-
+fundsObliged:number=0;
 fundsToBeBorrowed:number;
 costIncurred:number=0;
 borrowingRate:number;
@@ -91,7 +107,7 @@ sampleData:Array<any>;
   obCnt=5;
   title = 'Clearing-And-Settlement-UI';
   displayedColumns: string[] = ['ES', 'Qty','Price','TradeValue'];
-  displayedColumns1: string[] = ['Securities','Opening_Balance','Closing_Balance','Shares_Obliged','Status'];
+  displayedColumns1: string[] = ['Securities','Opening_Balance','Shares_Obliged','Status'];
   displayedColumns2: string[]=['Securities','Shares','Price', 'Amount'];
   displayedColumnsProfile: string[] = ['Securities', 'Shares'];
   displayedColumnsCorpActions: string[] = ['Securities','Actions','Parameter','Initial share balance','Corp Action effect','Current share balance'];
@@ -105,6 +121,7 @@ sampleData:Array<any>;
   totalCost:number=0;
   sharesCost:number=0;
   corpActions:CorpActions[];
+  obShares:OBShares[]=[];
   // dataSettlement : SettlementElement[] = [
   //   { Securities: 'Apple', Shares: 100, Rate: 5, Cost: 500 },
   //   { Securities: 'Amazon', Shares: 100, Rate: 1.23, Cost: 1234 },
@@ -118,6 +135,14 @@ sampleData:Array<any>;
      this.totalCost=this.sharesCost+this.costOfSettlementFunds.costIncurred;
      return this.sharesCost;
   }
+
+  isLess(a:number,b:number)
+  {
+    if(a+b<0)
+    {return "Shortage";}
+    else
+    {return "No shortage";}
+  }
 }
 
 class CorpActions{
@@ -126,6 +151,12 @@ class CorpActions{
   finalShareBalance:number;
   action:string;
   parameter:string;
+}
+
+class OBShares{
+  securityName:string;
+  openingSharebalance:number;
+  securityObligation:number;
 }
 
 class CostOfSettlement{

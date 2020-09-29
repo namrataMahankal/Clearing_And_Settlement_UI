@@ -14,6 +14,13 @@ export class TradesDataService {
   CM="Citi";
   constructor(private httpClient: HttpClient) { }
 
+  getFundsObliged():Observable<any>{
+    return this.httpClient.get<any>("http://localhost:8080/clearing-and-settlement/clearing-member/fund-obligations/"+this.CM);
+  }
+
+  getOBShares():Observable<any>{
+    return this.httpClient.get<any>("http://localhost:8080/clearing-and-settlement/clearing-member/equity-obligations/"+this.CM);
+  }
   getCorpActions():Observable<any>{
     return this.httpClient.get<any>("http://localhost:8080/clearing-and-settlement/corporate-actions/cm/"+this.CM);
   }

@@ -13,7 +13,7 @@
     table {
    width: 100%;
    align-content: center;
-   padding-left: 150px;
+   padding-left: 50px;
  }
  
  .toggle {
@@ -178,7 +178,7 @@ input[type=text], select {
 
 
     
-    <mat-tab label="Corporate Actions"> 
+    <!-- <mat-tab label="Corporate Actions"> 
 
       <mat-accordion>
        <table class="corpactiontab">
@@ -215,17 +215,17 @@ input[type=text], select {
       </table>
       </mat-accordion>
      
-    </mat-tab>
+    </mat-tab> -->
 
 
-    <mat-tab label="Obligation Report"> 
+    <!-- <mat-tab label="Obligation Report"> 
       <table mat-table [dataSource]="cm_list" class="mat-elevation-z8">
         <ng-container matColumnDef="CM">
           <th mat-header-cell *matHeaderCellDef> Clearing Member</th>
           <td mat-cell *matCellDef="let element"> {{element.CM}} </td>
         </ng-container>
       
-        <!-- Name Column -->
+
         <ng-container matColumnDef="Cost">
           <th mat-header-cell *matHeaderCellDef> Obligation Funds</th>
           <td mat-cell *matCellDef="let element"> {{element.Obliged_funds}} </td>
@@ -238,18 +238,18 @@ input[type=text], select {
     
     </table>
 
-    </mat-tab>
+    </mat-tab> -->
 
 
 
-    <mat-tab label="Cost of Settlement"> 
+    <!-- <mat-tab label="Cost of Settlement"> 
         <table mat-table [dataSource]="costOfSettlementValueList" class="mat-elevation-z8">
             <ng-container matColumnDef="CM">
               <th mat-header-cell *matHeaderCellDef> Clearing Member</th>
               <td mat-cell *matCellDef="let element"> {{element.CM}} </td>
             </ng-container>
           
-            <!-- Name Column -->
+           
             <ng-container matColumnDef="Cost">
               <th mat-header-cell *matHeaderCellDef> Cost </th>
               <td mat-cell *matCellDef="let element"> {{element.Cost}} </td>
@@ -259,6 +259,6 @@ input[type=text], select {
         
         </table>
     
-    </mat-tab>
+    </mat-tab> -->
 </mat-tab-group>
 
