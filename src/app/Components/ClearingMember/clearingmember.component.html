@@ -125,39 +125,39 @@
 
     <mat-tab label="Corporate Actions"> 
 
-      <table mat-table [dataSource]="dataSourceCorpActions" class="mat-elevation-z8">
+      <table mat-table [dataSource]="corpActions" class="mat-elevation-z8">
         <ng-container matColumnDef="Securities">
           <th mat-header-cell *matHeaderCellDef> Securities</th>
-          <td mat-cell *matCellDef="let element"> {{element.Securities}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.securityName}} </td>
         </ng-container>
       
         <!-- Name Column -->
         <ng-container matColumnDef="Actions">
           <th mat-header-cell *matHeaderCellDef> Actions </th>
-          <td mat-cell *matCellDef="let element"> {{element.Action}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.action}} </td>
         </ng-container>
       
         <ng-container matColumnDef="Parameter">
           <th mat-header-cell *matHeaderCellDef> Parameter </th>
-          <td mat-cell *matCellDef="let element"> {{element.Parameter}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.parameter}} </td>
         </ng-container>
       
       
         <!-- Symbol Column -->
         <ng-container matColumnDef="Initial share balance">
           <th mat-header-cell *matHeaderCellDef> Initial share balance </th>
-          <td mat-cell *matCellDef="let element"> {{element.Initial_share_bal}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.initialShareBalance}} </td>
         </ng-container>
 
         <ng-container matColumnDef="Corp Action effect">
           <th mat-header-cell *matHeaderCellDef> Corp Action effect </th>
-          <td mat-cell *matCellDef="let element"> {{element.Initial_share_bal - element.Current_share_bal}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.initialShareBalance - element.finalShareBalance}} </td>
         </ng-container>
   
   
         <ng-container matColumnDef="Current share balance">
           <th mat-header-cell *matHeaderCellDef> Current share balance </th>
-          <td mat-cell *matCellDef="let element"> {{element.Current_share_bal}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.finalShareBalance}} </td>
         </ng-container>
       
         <tr mat-header-row *matHeaderRowDef="displayedColumnsCorpActions"></tr>

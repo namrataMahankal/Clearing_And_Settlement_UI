@@ -13,13 +13,21 @@ export class TradesDataService {
   baseUrl="http://localhost:8080/clearing-and-settlement/trade";
   CM="Citi";
   constructor(private httpClient: HttpClient) { }
-  
+
+  getCorpActions():Observable<any>{
+    return this.httpClient.get<any>("http://localhost:8080/clearing-and-settlement/corporate-actions/cm/"+this.CM);
+  }
+
+  applyCorpActions():Observable<any>{
+    return this.httpClient.get<any>("http://localhost:8080/clearing-and-settlement/corporate-actions/apply");
+  }
+
   getCostOfSettlementFunds():Observable<any>{
-    return this.httpClient.get<any>("http://localhost:8080/clearing-and-settlement/clearing-member/Citi/cost-of-settlement/funds");
+    return this.httpClient.get<any>("http://localhost:8080/clearing-and-settlement/clearing-member/"+this.CM+"/cost-of-settlement/funds");
   }
 
   getCostOfSettlementShares():Observable<any>{
-    return this.httpClient.get<any>("http://localhost:8080/clearing-and-settlement/clearing-member/Citi/cost-of-settlement/shares");
+    return this.httpClient.get<any>("http://localhost:8080/clearing-and-settlement/clearing-member/"+this.CM+"/cost-of-settlement/shares");
   }
 
   generateTradesServ():Observable<any>{

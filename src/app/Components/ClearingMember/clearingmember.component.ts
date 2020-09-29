@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import {TradesDataService} from 'src/app/Service/trades-data.service';
 import { CostOfSettlementValue } from '../ClearingHouse/clearinghouse.component';
 
@@ -10,19 +10,23 @@ import { CostOfSettlementValue } from '../ClearingHouse/clearinghouse.component'
 })
 export class ClearingMemberComponent {
   
-  constructor(private serv:TradesDataService){
+  ngAfterViewChecked(){
+    //your code to update the model
+    this.cdr.detectChanges();
+ }
+  constructor(private serv:TradesDataService,private cdr: ChangeDetectorRef){
     console.log("In constr of *.......");
     this.serv.getOpeningFundBalance().subscribe(
       data=>{
           this.openingFundBalance=data;
-          console.log(this.openingFundBalance);
+          //console.log(this.openingFundBalance);
       }
   ); 
   console.log("opening share..........");
   this.serv.getOpeningShareBalance().subscribe(
     data=>{
         this.openingShares=data;
-        console.log(this.openingShares);
+        //console.log(this.openingShares);
     }
 ); 
 
@@ -31,38 +35,51 @@ export class ClearingMemberComponent {
     this.serv.getTradesByBuyerCM().subscribe(
       data=>{
           this.buyTrades=data;
-          console.log(this.buyTrades);
+         // console.log(this.buyTrades);
       }
   ); 
     this.serv.getTradesBySellerCM().subscribe(
         data=>{
             this.sellTrades=data;
-            console.log(this.sellTrades);
+            //console.log(this.sellTrades);
         }
     ); 
 
     this.serv.getCostOfSettlementFunds().subscribe(
       data=>{
           this.costOfSettlementFunds=data;
-          console.log(this.costOfSettlementFunds);
+          //console.log("cost!!!!!!!!!!!!");
+          //console.log(this.costOfSettlementFunds);
       }
   ); 
 
   this.serv.getCostOfSettlementShares().subscribe(
     data=>{
         this.dataSettlement=data;
-        console.log(this.dataSettlement);
+       // console.log(this.dataSettlement);
     }
+); 
+
+this.serv.getCorpActions().subscribe(
+  data=>{
+      this.corpActions=data.actionList;
+      console.log(this.corpActions);
+  }
 ); 
 }
 
   
 
 
-costOfSettlementFunds:CostOfSettlement;
+costOfSettlementFunds:CostOfSettlement={
+  fundsToBeBorrowed:0,
+  borrowingRate:0,
+  costIncurred:0
+};
+
 
 fundsToBeBorrowed:number;
-costIncurred:number;
+costIncurred:number=0;
 borrowingRate:number;
 buyTrades:CMTrades[];
 sellTrades:CMTrades[];
@@ -85,8 +102,9 @@ sampleData:Array<any>;
   dataSourceCorpActions=CorpActions_list;
   dataSourceProfile=Profile_list;
   dataSettlement:SettlementElement[]=[];
-  totalCost:number;
-  sharesCost:number;
+  totalCost:number=0;
+  sharesCost:number=0;
+  corpActions:CorpActions[];
   // dataSettlement : SettlementElement[] = [
   //   { Securities: 'Apple', Shares: 100, Rate: 5, Cost: 500 },
   //   { Securities: 'Amazon', Shares: 100, Rate: 1.23, Cost: 1234 },
@@ -102,10 +120,18 @@ sampleData:Array<any>;
   }
 }
 
+class CorpActions{
+  securityName:string;
+  initialShareBalance:number;
+  finalShareBalance:number;
+  action:string;
+  parameter:string;
+}
+
 class CostOfSettlement{
-  fundsToBeBorrowed:number;
-  borrowingRate:number;
-  costIncurred:number
+  fundsToBeBorrowed:number=0;
+  borrowingRate:number=0;
+  costIncurred:number=0;
 }
 
 class OpeningShares{

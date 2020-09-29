@@ -28,6 +28,7 @@ import {TradesDataService} from 'src/app/Service/trades-data.service';
     TradesDataSource:Trade[];
     clickGenerateTrade:boolean=false;
     clickSettleUp:boolean=false;
+    clickCorpAction:boolean=false;
     generateTrades(){
       this.clickGenerateTrade=!this.clickGenerateTrade;
     this.serv.generateTradesServ().subscribe(
@@ -39,7 +40,14 @@ import {TradesDataService} from 'src/app/Service/trades-data.service';
     ); 
   }
     applyCorpActions(){
-      
+      this.clickCorpAction=!this.clickCorpAction;
+      this.serv.applyCorpActions().subscribe(
+        data=>{
+            //this.sampleData=data;
+            console.log("apply corp actions");
+            //console.log(this.TradesDataSource);
+        }
+    ); 
     }
 
     settleUp(){
