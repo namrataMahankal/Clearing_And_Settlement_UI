@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {TradesDataService} from 'src/app/Service/trades-data.service';
+import { CostOfSettlementValue } from '../ClearingHouse/clearinghouse.component';
 
 
 @Component({
@@ -11,16 +12,63 @@ export class ClearingMemberComponent {
   
   constructor(private serv:TradesDataService){
     console.log("In constr of *.......");
- this.serv.getTradesBySellerCM().subscribe(
-     data=>{
-         this.buyTrades=data;
-         console.log(this.buyTrades);
-     }
- ); 
+    this.serv.getOpeningFundBalance().subscribe(
+      data=>{
+          this.openingFundBalance=data;
+          console.log(this.openingFundBalance);
+      }
+  ); 
+  console.log("opening share..........");
+  this.serv.getOpeningShareBalance().subscribe(
+    data=>{
+        this.openingShares=data;
+        console.log(this.openingShares);
+    }
+); 
+
+    
+
+    this.serv.getTradesByBuyerCM().subscribe(
+      data=>{
+          this.buyTrades=data;
+          console.log(this.buyTrades);
+      }
+  ); 
+    this.serv.getTradesBySellerCM().subscribe(
+        data=>{
+            this.sellTrades=data;
+            console.log(this.sellTrades);
+        }
+    ); 
+
+    this.serv.getCostOfSettlementFunds().subscribe(
+      data=>{
+          this.costOfSettlementFunds=data;
+          console.log(this.costOfSettlementFunds);
+      }
+  ); 
+
+  this.serv.getCostOfSettlementShares().subscribe(
+    data=>{
+        this.dataSettlement=data;
+        console.log(this.dataSettlement);
+    }
+); 
 }
 
-buyTrades:CMTrades[];
+  
 
+
+costOfSettlementFunds:CostOfSettlement;
+
+fundsToBeBorrowed:number;
+costIncurred:number;
+borrowingRate:number;
+buyTrades:CMTrades[];
+sellTrades:CMTrades[];
+openingShares:OpeningShares[];
+openingFundBalance:number;
+sampleData:Array<any>;
   hiddenValue:Boolean=false;
   shortage:Boolean=true;
   obCnt=5;
@@ -36,18 +84,34 @@ buyTrades:CMTrades[];
   dataSourceFunds=DayFundsChange;
   dataSourceCorpActions=CorpActions_list;
   dataSourceProfile=Profile_list;
-  dataSettlement : SettlementElement[] = [
-    { Securities: 'Apple', Shares: 100, Rate: 1.23, Cost: 1234 },
-    { Securities: 'Amazon', Shares: 100, Rate: 1.23, Cost: 1234 },
-    { Securities: 'Google', Shares: 100, Rate: 1.23, Cost: 1234 },
-    { Securities: 'Amazon', Shares: 100, Rate: 1.23, Cost: 1234 },
-  ];
+  dataSettlement:SettlementElement[]=[];
+  totalCost:number;
+  sharesCost:number;
+  // dataSettlement : SettlementElement[] = [
+  //   { Securities: 'Apple', Shares: 100, Rate: 5, Cost: 500 },
+  //   { Securities: 'Amazon', Shares: 100, Rate: 1.23, Cost: 1234 },
+  //   { Securities: 'Google', Shares: 100, Rate: 1.23, Cost: 1234 },
+  //   { Securities: 'Amazon', Shares: 100, Rate: 1.23, Cost: 1234 },
+  // ];
 
   getTotalCost() {
-    return this.dataSettlement.map(t => t.Cost).reduce((acc, value) => acc + value, 0);
+    //return this.dataSettlement.length;
+     this.sharesCost=this.dataSettlement.map(t => t.cost).reduce((acc, value) => acc + value, 0);
+     this.totalCost=this.sharesCost+this.costOfSettlementFunds.costIncurred;
+     return this.sharesCost;
   }
 }
 
+class CostOfSettlement{
+  fundsToBeBorrowed:number;
+  borrowingRate:number;
+  costIncurred:number
+}
+
+class OpeningShares{
+  es:string;
+  sharesBalance:number;
+}
 
 export class CMTrades{
   es:string;
@@ -83,11 +147,11 @@ export interface ProfileElement {
   
 }
 
-export interface SettlementElement {
-  Securities: string;
-  Shares: number;
-  Rate: number;
-  Cost: number;
+export class SettlementElement {
+  securities: string;
+  shares: number;
+  pricePerShare: number;
+  cost: number;
 }
 
 export interface FundsElement {

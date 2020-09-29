@@ -2,6 +2,10 @@ import { Component} from '@angular/core';
 import {  FormGroup,FormControl } from '@angular/forms';
 import { FloatLabelType } from '@angular/material/form-field';
 //import { TradeService } from '../trade.service';
+import {Trade} from 'src/app/Components/ClearingHouse/clearinghouse.component';
+import {TradesDataService} from 'src/app/Service/trades-data.service';
+
+
 @Component({
     selector: 'admin',
     templateUrl: './admin.component.html',
@@ -9,8 +13,45 @@ import { FloatLabelType } from '@angular/material/form-field';
   })
 
   export class AdminComponent {
+
+    constructor(private serv:TradesDataService){
+      console.log("In constr of admincomponent");
+   this.serv.getAllTrades().subscribe(
+       data=>{
+           this.TradesDataSource=data;
+           console.log(this.TradesDataSource);
+       }
+   ); 
+  }
+
     title = 'Clearing-And-Settlement-UI';
-    
+    TradesDataSource:Trade[];
+    clickGenerateTrade:boolean=false;
+    clickSettleUp:boolean=false;
+    generateTrades(){
+      this.clickGenerateTrade=!this.clickGenerateTrade;
+    this.serv.generateTradesServ().subscribe(
+        data=>{
+            this.TradesDataSource=data;
+            console.log("trades generated");
+            console.log(this.TradesDataSource);
+        }
+    ); 
+  }
+    applyCorpActions(){
+      
+    }
+
+    settleUp(){
+        this.clickSettleUp=!this.clickSettleUp;
+        this.serv.settleUpService().subscribe(
+          data=>{
+              console.log("settle up stuff");
+              console.log(data);
+          }
+      ); 
+      
+    }
     
     dataSourceCorpActions=CorpActions_list;              //1.For Corp Actions Table
     displayedColumnsCorpActions: string[] = ['CM','Initial_shares','Current_shares'];

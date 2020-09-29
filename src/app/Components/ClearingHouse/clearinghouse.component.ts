@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {TradesDataService} from 'src/app/Service/trades-data.service'
+import {TradesDataService} from 'src/app/Service/trades-data.service';
 @Component({
   selector: 'clearing-house',
   templateUrl: './clearinghouse.component.html',
@@ -14,12 +14,13 @@ export class ClearingHouseComponent {
        console.log("In constr.......");
     this.serv.getAllTrades().subscribe(
         data=>{
-            this.sampleData=data;
-            console.log(this.sampleData);
+            this.TradesDataSource=data;
+            console.log(this.TradesDataSource);
         }
     ); 
    }
   title = 'Clearing-And-Settlement-UI';
+  click:boolean=false;
   dataSourceCorpActions=CorpActions_list;
   displayedColumnsCorpActions: string[] = ['CM','Initial_shares','Current_shares'];
   dataSource = Trade_list;
@@ -40,8 +41,10 @@ export class ClearingHouseComponent {
   obligationMatrixFundsData: ObligationMatrixFunds[] = ObligationMatrixFundsData;
   obligationMatrixFundsColumns: string[] = ['CM', 'Net Fund'];
 
-  sampleData:Trade[];
-  test(){}
+  TradesDataSource:Trade[];
+ 
+
+  
 //    test(){
 //        console.log("in test");
 //     //    this.serv.getStr().subscribe(
@@ -50,8 +53,8 @@ export class ClearingHouseComponent {
 //     //   console.log("done");
 //        this.serv.getData().subscribe(
 //            data=>{
-//                this.sampleData=data;
-//                console.log(this.sampleData);
+//                this.TradesDataSource=data;
+//                console.log(this.TradesDataSource);
 //            }
 //        );   
 //    }
