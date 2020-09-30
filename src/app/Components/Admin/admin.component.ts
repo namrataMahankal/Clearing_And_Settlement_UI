@@ -49,19 +49,7 @@ import {TradesDataService} from 'src/app/Service/trades-data.service';
         }
     ); 
 
-    this.newtradeservice.returnCmListservice().subscribe(
-      data=>{
-          this.CMDataSource=data;
-          console.log("-------");
-          console.log(this.CMDataSource);
-      }
-  );
-
-  this.newtradeservice.returnSecuritiesListservice().subscribe(
-    data=>{
-        this.SecuritiesDataSource=data;
-    }
-);
+ 
   }
     applyCorpActions(){
       this.clickCorpAction=!this.clickCorpAction;
@@ -105,6 +93,18 @@ import {TradesDataService} from 'src/app/Service/trades-data.service';
   submitted = false;
   ngOnInit() {
     this.submitted=false;
+    this.newtradeservice.returnCmListservice().subscribe(
+      data=>{
+          this.CMDataSource=data;
+          console.log("-------");
+          console.log(this.CMDataSource);
+      }
+  );
+  this.newtradeservice.returnSecuritiesListservice().subscribe(
+    data=>{
+        this.SecuritiesDataSource=data;
+    }
+);
   }
     // newTradeToDB= new newTrade();
 
