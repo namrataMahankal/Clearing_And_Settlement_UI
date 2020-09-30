@@ -17,7 +17,6 @@ profileForm = new FormGroup({
 
 
 onSubmit() {
-    // TODO: Use EventEmitter with form value
     console.warn(this.profileForm.value);
      this.profileForm.reset();
 }
@@ -31,4 +30,3 @@ class Credentials {
     username: String;
     password: number;
 }
-

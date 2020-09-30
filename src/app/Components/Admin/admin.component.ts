@@ -1,6 +1,8 @@
-import { Component} from '@angular/core';
+import { Component, OnInit, ViewChild} from '@angular/core';
 import {  FormGroup,FormControl } from '@angular/forms';
 import { FloatLabelType } from '@angular/material/form-field';
+import { NewTradeService } from 'src/app/Service/newtrade.service';
+import {Newtrade} from 'src/app/newtrade';
 //import { TradeService } from '../trade.service';
 import {Trade} from 'src/app/Components/ClearingHouse/clearinghouse.component';
 import {TradesDataService} from 'src/app/Service/trades-data.service';
@@ -12,20 +14,28 @@ import {TradesDataService} from 'src/app/Service/trades-data.service';
    // styleUrls: ['./admin.component.css']
   })
 
-  export class AdminComponent {
+  export class AdminComponent  implements OnInit{
+  // export class AdminComponent {
+    // constructor(private newtradeservice:NewTradeService) { }
 
-    constructor(private serv:TradesDataService){
+    // private newtradeservice:NewTradeService
+    
+    constructor(private serv:TradesDataService,private newtradeservice:NewTradeService){
       console.log("In constr of admincomponent");
    this.serv.getAllTrades().subscribe(
        data=>{
            this.TradesDataSource=data;
-           console.log(this.TradesDataSource);
+          //  console.log(this.TradesDataSource);
        }
-   ); 
+   );
+   
   }
 
     title = 'Clearing-And-Settlement-UI';
+    CMDataSource: string[];
+    SecuritiesDataSource: string[];
     TradesDataSource:Trade[];
+    // TradesDataSource=new MatTableDataSource<Trade[]>(ELEMENT_DATA);
     clickGenerateTrade:boolean=false;
     clickSettleUp:boolean=false;
     clickCorpAction:boolean=false;
@@ -38,6 +48,8 @@ import {TradesDataService} from 'src/app/Service/trades-data.service';
             console.log(this.TradesDataSource);
         }
     ); 
+
+ 
   }
     applyCorpActions(){
       this.clickCorpAction=!this.clickCorpAction;
@@ -72,43 +84,80 @@ import {TradesDataService} from 'src/app/Service/trades-data.service';
 
     cm_list=Obligation_list_example;                     //4. For Obligation Report
     displayedColumnsObligReport=["CM","Funds ", "Securities"];
+    // buyerCmList=CMList;
 
-    newTradeToDB= new newTrade();
+    // constructor(private newtradeservice:NewTradeService) { }
+
+  // newtrade : Newtrade=new Newtrade();
+  newtrade:Newtrade;
+  submitted = false;
+  ngOnInit() {
+    this.submitted=false;
+    this.newtradeservice.returnCmListservice().subscribe(
+      data=>{
+          this.CMDataSource=data;
+          console.log("-------");
+          console.log(this.CMDataSource);
+      }
+  );
+  this.newtradeservice.returnSecuritiesListservice().subscribe(
+    data=>{
+        this.SecuritiesDataSource=data;
+    }
+);
+  }
+    // newTradeToDB= new newTrade();
 
     profileForm = new FormGroup({
-        buyerCM: new FormControl(''),
-        sellerCM: new FormControl(''),
+        BuyerCM: new FormControl(''),
+        SellerCM: new FormControl(''),
         ES: new FormControl(''),
         Qty: new FormControl(''),
         Price: new FormControl(''),
     
       });
-    onSubmit() {
-        // TODO: Use EventEmitter with form value
-        console.warn(this.profileForm.value);
-        
-        this.profileForm.reset();
-    }
-      addTrade(){
-        this.newTradeToDB.BuyerCM=this.profileForm.get('buyerCM').value;
-        this.newTradeToDB.SellerCM=this.profileForm.get('sellerCM').value;
-        this.newTradeToDB.ES=this.profileForm.get('ES').value;
-        this.newTradeToDB.Qty=this.profileForm.get('Qty').value;
-        this.newTradeToDB.Price=this.profileForm.get('Price').value;
-        this.newTradeToDB.TradeValue=0;
-        this.profileForm.reset();
-        
+
+      savetrade(savetrade){
+        this.newtrade=new Newtrade();   
+        this.newtrade.buyerCM=this.profileForm.get('BuyerCM').value;
+        this.newtrade.sellerCM=this.profileForm.get('SellerCM').value;
+        this.newtrade.eS=this.profileForm.get('ES').value;
+        this.newtrade.qty=this.profileForm.get('Qty').value;
+        this.newtrade.price=this.profileForm.get('Price').value;
+        this.newtrade.transactionAmt=null;
+        this.submitted = true;
+        this.save();
+        this.addTradeForm();
+        //create toast
       }
 
+      save() {
+        this.newtradeservice.createTrade(this.newtrade)
+          .subscribe();
+        // this.newtrade = new Newtrade();
+      }
 
+      returnCmList(){  
+      this.newtradeservice.returnCmListservice().subscribe(
+          data=>{
+              this.CMDataSource=data;
+              console.log("-------");
+              console.log(this.CMDataSource);
+          }
+      ); 
+    }
+      addTradeForm(){
+        this.submitted=false;
+        this.profileForm.reset();
+      }
+  //     @ViewChild(MatPaginator) paginator: MatPaginator;
 
+  // ngAfterViewInit() {
+  //   this.TradesDataSource.paginator = this.paginator;
+  // }
+  // }
 
-
-
-  }
-
-
-  
+}
 export interface TradeListElement {
     BuyerCM: string;
     SellerCM: string;
@@ -117,14 +166,6 @@ export interface TradeListElement {
     Price: number;
     TradeValue:number;
   }
-class newTrade implements TradeListElement{
-    BuyerCM: string;
-    SellerCM: string;
-    ES: string;
-    Qty: number;
-    Price: number;
-    TradeValue:number;
-}
 
 const Trade_list: TradeListElement[] = [
     {BuyerCM: "UBS", SellerCM: 'Wells Fargo', ES: 'Apple', Qty: 100,Price: 12,TradeValue:100 },

@@ -6,6 +6,7 @@ import { LoginComponent } from './Components/Login/login.component';
 import { AdminComponent } from './Components/Admin/admin.component';
 
 
+
 const routes: Routes = [
   {path: 'clearing-member',component: ClearingMemberComponent},
   {path: 'login',component: LoginComponent},
