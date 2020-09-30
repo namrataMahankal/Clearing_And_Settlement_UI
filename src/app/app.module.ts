@@ -23,6 +23,7 @@ import { HttpClientModule} from '@angular/common/http';
 import { AuthGaurdService } from './Service/auth-guard.service';
 import { AuthenticationService } from './Service/authentication.service';
 import { FormsModule } from '@angular/forms';
+import { AuthGaurdServiceCM,AuthGaurdServiceCH,AuthGaurdServiceAdmin } from  './Service/auth-guard.service';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,7 @@ import { FormsModule } from '@angular/forms';
     HttpClientModule,
     FormsModule
   ],
-  providers: [AuthGaurdService,AuthenticationService],
+  providers: [AuthGaurdService,AuthenticationService,AuthGaurdServiceCM ,AuthGaurdServiceCH,AuthGaurdServiceAdmin],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
