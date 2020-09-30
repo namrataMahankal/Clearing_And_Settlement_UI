@@ -18,7 +18,30 @@ export class ClearingHouseComponent {
             console.log(this.sampleData);
         }
     ); 
+    this.serv.getCorpActionsSummary().subscribe(
+        data=>{
+            this.corpActionsSummary=data;
+            console.log(this.corpActionsSummary);
+        }
+    ); 
+
+    this.serv.getOBReport().subscribe(
+        data=>{
+            this.OBReport=data;
+            console.log(this.OBReport);
+        }
+    ); 
+
+    this.serv.getOBMatrixFunds().subscribe(
+        data=>{
+            this.obligationMatrixFundsData=data;
+            console.log(this.obligationMatrixFundsData);
+        }
+    ); 
+
    }
+
+   
   title = 'Clearing-And-Settlement-UI';
   dataSourceCorpActions=CorpActions_list;
   displayedColumnsCorpActions: string[] = ['CM','Initial_shares','Current_shares'];
@@ -26,20 +49,51 @@ export class ClearingHouseComponent {
   displayedColumns: string[] = ['BuyerCM', 'SellerCM', 'ES', 'Qty','Price','TradeValue'];
   str;
 
-//costOfSettlementValueList=CostOfSettlementValueList;
+
   
 
   panelOpenState = false;
   // obligation report panel
+  OBReport:ObligationReport[];
   obligationPanelData = ObligationPanelData;
-  obPanelSharesColumns: string[] = [ 'Security', 'Opening Balance' ,'Closing Balance' ,'Net Quantity' ];
+  obPanelSharesColumns: string[] = [ 'Security', 'Opening Balance' ,'Security Obligation', 'Status'];
   obPanelFundsColumns: string[] = ['Security', 'Shares', 'Price', 'Balance'];
-
+  displayedColumnCost=["CM","Cost"];
   // obligation matrix
   obligationMatrixEsData: ObligationMatrixEs[] = ObligationMatrixEsData;
   obligationMatrixEsColumns: string[] = [ 'ES', 'CM1', 'CM2', 'CM3' ];
-  obligationMatrixFundsData: ObligationMatrixFunds[] = ObligationMatrixFundsData;
+  obligationMatrixFundsData: ObligationMatrixFunds[];
   obligationMatrixFundsColumns: string[] = ['CM', 'Net Fund'];
+  corpActionsSummary:CorpActionsSummary[];
+
+  TradesDataSource:Trade[];
+  CostOfSettlementValueList:CostOfSettlementValue[] =[{CM:"Citi",Cost:500},
+{CM:"JP Morgan Chase",Cost:500},
+{CM:"Credit Suisse",Cost:500},
+{CM:"The Bank of New York Mellon Corporation",Cost:500}]
+
+ 
+
+  
+//    test(){
+//        console.log("in test");
+//     //    this.serv.getStr().subscribe(
+//     //        response=>this.printStm(response)
+//     //    );
+//     //   console.log("done");
+//        this.serv.getData().subscribe(
+//            data=>{
+//                this.TradesDataSource=data;
+//                console.log(this.TradesDataSource);
+//            }
+//        );   
+//    }
+
+//    printStm(response){
+//     console.log(response);
+//    }
+   
+
 
 
    cosPanelColumns:string[]=['Securities', 'Shares', 'Rate', 'Cost'];
@@ -47,27 +101,45 @@ export class ClearingHouseComponent {
 
 
    sampleData:Trade[];
-   test(){}
- //    test(){
- //        console.log("in test");
- //     //    this.serv.getStr().subscribe(
- //     //        response=>this.printStm(response)
- //     //    );
- //     //   console.log("done");
- //        this.serv.getData().subscribe(
- //            data=>{
- //                this.sampleData=data;
- //                console.log(this.sampleData);
- //            }
- //        );   
- //    }
+//    test(){}
+    isLess(a:number,b:number)
+    {
+        if(a+b<0)
+        {return "Shortage";}
+        else
+        {return "No shortage";}
+    }
  
  //    printStm(response){
  //     console.log(response);
  //    }
     
  }
+
+ class obligationReport{
+     cmname:string;
+     fundsObligation:number;
+     shareListObligation:OBShareList[];
+ }
+
+ class OBShareList{
+    securityName:string;
+    openingShareBalance:number;
+    securityObligation:number;
+ }
  
+class CorpActionsSummary{
+    securities:string;
+    action:string;
+    parameter:string;
+    cMList:CorpActionCM[];
+}
+
+class CorpActionCM{
+    cm:string;
+    initialShares:number;
+    currentShares:number;
+}
 
 export interface TradeListElement {
     BuyerCM: string;
@@ -119,10 +191,6 @@ export interface CostOfSettlementValue {
     Cost:number;
   }
 
-const CostOfSettlementValueList:CostOfSettlementValue[] =[{CM:"Citi",Cost:500},
-{CM:"JP Morgan Chase",Cost:500},
-{CM:"Credit Suisse",Cost:500},
-{CM:"The Bank of New York Mellon Corporation",Cost:500}]
 
 
 export interface SharesObligation {
@@ -194,15 +262,18 @@ const ObligationMatrixEsData: ObligationMatrixEs[] = [
   { ES: 'ES2', CM1: 12000, CM2: 750, CM3: -1560 },
   { ES: 'ES3', CM1: -1500, CM2: 630, CM3: -930 }
 ];
-
-export interface ObligationMatrixFunds {
-  CM: string;
-  'Net Fund': number;
+class ObligationMatrixFunds {
+  clearingMemberame: string;
+  fundObligation: number;
 }
 
-const ObligationMatrixFundsData: ObligationMatrixFunds[] = [
-  { CM: 'CM1', 'Net Fund': 15000 },
-  { CM: 'CM2', 'Net Fund': -965000 },
-  { CM: 'CM3', 'Net Fund': 258000 }
-];
+// const ObligationMatrixFundsData: ObligationMatrixFunds[] = [
+//   { CM: 'CM1', 'Net Fund': 15000 },
+//   { CM: 'CM2', 'Net Fund': -965000 },
+//   { CM: 'CM3', 'Net Fund': 258000 }
+// ];
 
+export interface CostOfSettlementValue {
+    CM: string;
+    Cost:number;
+  }

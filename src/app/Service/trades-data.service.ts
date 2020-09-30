@@ -14,6 +14,50 @@ export class TradesDataService {
   CM="Citi";
   constructor(private httpClient: HttpClient) { }
 
+  getOBMatrixFunds():Observable<any>{
+    return this.httpClient.get<any>("http://localhost:8080/clearing-and-settlement/clearing-house/fund-obligations");
+  }
+
+
+  getCorpActionsSummary():Observable<any>{
+    return this.httpClient.get<any>("http://localhost:8080/clearing-and-settlement/corporate-actions/clearing-house/summary");
+  }
+
+  getOBReport():Observable<any>{
+    return this.httpClient.get<any>("http://localhost:8080/clearing-and-settlement/clearing-house/obligation-report");
+  }
+
+  getFundsObliged():Observable<any>{
+    return this.httpClient.get<any>("http://localhost:8080/clearing-and-settlement/clearing-member/fund-obligations/"+this.CM);
+  }
+
+  getOBShares():Observable<any>{
+    return this.httpClient.get<any>("http://localhost:8080/clearing-and-settlement/clearing-member/equity-obligations/"+this.CM);
+  }
+  getCorpActions():Observable<any>{
+    return this.httpClient.get<any>("http://localhost:8080/clearing-and-settlement/corporate-actions/cm/"+this.CM);
+  }
+
+  applyCorpActions():Observable<any>{
+    return this.httpClient.get<any>("http://localhost:8080/clearing-and-settlement/corporate-actions/apply");
+  }
+
+  getCostOfSettlementFunds():Observable<any>{
+    return this.httpClient.get<any>("http://localhost:8080/clearing-and-settlement/clearing-member/"+this.CM+"/cost-of-settlement/funds");
+  }
+
+  getCostOfSettlementShares():Observable<any>{
+    return this.httpClient.get<any>("http://localhost:8080/clearing-and-settlement/clearing-member/"+this.CM+"/cost-of-settlement/shares");
+  }
+
+  generateTradesServ():Observable<any>{
+    return this.httpClient.get<Trade[]>("http://localhost:8080/clearing-and-settlement/trade/generate");
+  }
+
+  settleUpService():Observable<any>{
+    return this.httpClient.get<any>("http://localhost:8080/clearing-and-settlement/trade/settle");
+  }
+
   getAllTrades():Observable<any>{
     return this.httpClient.get<Trade[]>(`${this.baseUrl}`);
   }
