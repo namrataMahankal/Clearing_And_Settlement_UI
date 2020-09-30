@@ -32,6 +32,13 @@ export class ClearingHouseComponent {
         }
     ); 
 
+    this.serv.getOBMatrixFunds().subscribe(
+        data=>{
+            this.obligationMatrixFundsData=data;
+            console.log(this.obligationMatrixFundsData);
+        }
+    ); 
+
    }
 
    
@@ -56,7 +63,7 @@ export class ClearingHouseComponent {
   // obligation matrix
   obligationMatrixEsData: ObligationMatrixEs[] = ObligationMatrixEsData;
   obligationMatrixEsColumns: string[] = [ 'ES', 'CM1', 'CM2', 'CM3' ];
-  obligationMatrixFundsData: ObligationMatrixFunds[] = ObligationMatrixFundsData;
+  obligationMatrixFundsData: ObligationMatrixFunds[];
   obligationMatrixFundsColumns: string[] = ['CM', 'Net Fund'];
   corpActionsSummary:CorpActionsSummary[];
 
@@ -253,17 +260,16 @@ const ObligationMatrixEsData: ObligationMatrixEs[] = [
   { ES: 'ES2', CM1: 12000, CM2: 750, CM3: -1560 },
   { ES: 'ES3', CM1: -1500, CM2: 630, CM3: -930 }
 ];
-
-export interface ObligationMatrixFunds {
-  CM: string;
-  'Net Fund': number;
+class ObligationMatrixFunds {
+  clearingMemberame: string;
+  fundObligation: number;
 }
 
-const ObligationMatrixFundsData: ObligationMatrixFunds[] = [
-  { CM: 'CM1', 'Net Fund': 15000 },
-  { CM: 'CM2', 'Net Fund': -965000 },
-  { CM: 'CM3', 'Net Fund': 258000 }
-];
+// const ObligationMatrixFundsData: ObligationMatrixFunds[] = [
+//   { CM: 'CM1', 'Net Fund': 15000 },
+//   { CM: 'CM2', 'Net Fund': -965000 },
+//   { CM: 'CM3', 'Net Fund': 258000 }
+// ];
 
 export interface CostOfSettlementValue {
     CM: string;
