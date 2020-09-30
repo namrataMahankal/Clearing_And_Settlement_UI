@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {TradesDataService} from 'src/app/Service/trades-data.service'
+import {TradesDataService} from 'src/app/Service/trades-data.service';
 @Component({
   selector: 'clearing-house',
   templateUrl: './clearinghouse.component.html',
@@ -14,12 +14,13 @@ export class ClearingHouseComponent {
        console.log("In constr.......");
     this.serv.getAllTrades().subscribe(
         data=>{
-            this.sampleData=data;
-            console.log(this.sampleData);
+            this.TradesDataSource=data;
+            console.log(this.TradesDataSource);
         }
     ); 
    }
   title = 'Clearing-And-Settlement-UI';
+  click:boolean=false;
   dataSourceCorpActions=CorpActions_list;
   displayedColumnsCorpActions: string[] = ['CM','Initial_shares','Current_shares'];
   dataSource = Trade_list;
@@ -42,32 +43,42 @@ export class ClearingHouseComponent {
   obligationMatrixFundsColumns: string[] = ['CM', 'Net Fund'];
 
 
+  TradesDataSource:Trade[];
+ 
+
+  
+//    test(){
+//        console.log("in test");
+//     //    this.serv.getStr().subscribe(
+//     //        response=>this.printStm(response)
+//     //    );
+//     //   console.log("done");
+//        this.serv.getData().subscribe(
+//            data=>{
+//                this.TradesDataSource=data;
+//                console.log(this.TradesDataSource);
+//            }
+//        );   
+//    }
+
+//    printStm(response){
+//     console.log(response);
+//    }
+   
+
+
+
    cosPanelColumns:string[]=['Securities', 'Shares', 'Rate', 'Cost'];
    costOfSettlementPanelDataConst=CostOfSettlementPanelDataConst;
 
 
    sampleData:Trade[];
-   test(){}
- //    test(){
- //        console.log("in test");
- //     //    this.serv.getStr().subscribe(
- //     //        response=>this.printStm(response)
- //     //    );
- //     //   console.log("done");
- //        this.serv.getData().subscribe(
- //            data=>{
- //                this.sampleData=data;
- //                console.log(this.sampleData);
- //            }
- //        );   
- //    }
+//    test(){}
  
- //    printStm(response){
- //     console.log(response);
- //    }
     
  }
  
+
 
 export interface TradeListElement {
     BuyerCM: string;
