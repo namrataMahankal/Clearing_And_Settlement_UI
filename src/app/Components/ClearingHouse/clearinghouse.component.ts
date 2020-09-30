@@ -46,6 +46,14 @@ export class ClearingHouseComponent {
         }
     );
 
+    this.serv.getObMatrix().subscribe(
+        data=>{
+           // this.oBMatrixData=data;
+            this.obMatrixData=data;
+            console.log(this.obMatrixData);
+        }
+    );
+
    }
 
    
@@ -57,9 +65,9 @@ export class ClearingHouseComponent {
   displayedColumns: string[] = ['BuyerCM', 'SellerCM', 'ES', 'Qty','Price','TradeValue'];
   str;
 
-
-  
-
+obMatrixData:Array<any>;
+  obCols:string[]=['CM','1','2','3','4','5','6','7','8','9','10','11','12','13','14','15'];
+  oBMatrixData:ObligationMatrix[];
   panelOpenState = false;
   // obligation report panel
   OBReport:ObligationReport[];
@@ -179,7 +187,7 @@ export interface TradeListElement {
 
 export class Trade{
     buyerCM:string;
-    es:string;
+    eS:string;
     price:number;
     qty:number;
     transactionAmt:number
@@ -303,4 +311,9 @@ class ObligationMatrixFunds {
 export interface CostOfSettlementValue {
     CM: string;
     Cost:number;
+  }
+
+  class ObligationMatrix{
+    CM:string;
+    "AT&T inc":number;
   }
