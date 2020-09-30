@@ -1,99 +1,80 @@
 <mat-toolbar [class.mat-elevation-z6]=true color="primary">
     
-    <span>Citi</span>
-    
-  </mat-toolbar>
-  <br>
+  <span>Citi</span>
+  <!-- <span class="example-spacer"></span> -->
+  <!-- <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+    <mat-icon>favorite</mat-icon>
+  </button> -->
+</mat-toolbar>
+<br>
 
 
 <style>
-    table {
-   width: 100%;
-   align-content: center;
-   padding-left: 150px;
- }
- 
- .toggle {
-    float: right;
-    padding-right: 200px;
- }
- .list1{
-   padding-left: 160px;
- }
-/* label {
-  text-align-last: left;
-} */
- button {
-  width: 30%;
-  background-color: #4CAF50;
-  color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
+  table {
+ width: 100%;
+ align-content: center;
+ padding-left: 150px;
+}
+
+.toggle {
+  float: right;
+  padding-right: 200px;
+}
+.list1{
+ padding-left: 160px;
+}
+
+button {
+width: 25%;
+background-color: #4CAF50;
+color: white;
+padding: 14px 20px;
+margin: 8px 0;
+border: none;
+border-radius: 4px;
+cursor: pointer;
+
 }
 button hover {
-  background-color: #45a042;
-}
-h2{
-  padding-left: 45%;
-  /* align-content: center; */
+background-color: #45a042;
 }
 div {
-  border-radius: 5px;
-  background-color: #f2f2f2;
-  padding-left: 40%;
-  border:2px solid black;
+border-radius: 5px;
+background-color: #f2f2f2;
+padding: 2px;
+
 }
 input[type=text], select {
-  width: 30%;
-  padding: 12px 20px;
-  margin: 2px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
+width: 20%;
+padding: 12px 20px;
+margin: 2px 0;
+display: inline-block;
+border: 1px solid #ccc;
+border-radius: 4px;
+box-sizing: border-box;
+
 }
 input[type=password], select {
-  width: 30%;
-  padding: 12px 20px;
-  margin: 2px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
+width: 20%;
+padding: 12px 20px;
+margin: 2px 0;
+display: inline-block;
+border: 1px solid #ccc;
+border-radius: 4px;
+box-sizing: border-box;
 }
 
 </style>
- 
 
 
-<h2 >Login</h2>
-
-<div>
-  <br><br>
-<form [formGroup]="profileForm" (ngSubmit)="onSubmit()" >
-
-  <label for="username">
-    Username:
-  </label>
-  <br>
-  <input type="text" formControlName="username">
-
-  <br><br>
-  <label for="password">
-    Password:
-  </label>
-  <br>
-  <input type="password" formControlName="password">
-
-<br><br>
-</form>
-
-<br><br>
-<button (click)="checkCredentials()">Login</button>
-<br><br>
-</div>
-
+<div class="container" align="center">
+  <div>
+    
+    <h2 align="center">Login</h2><br><br>
+    User Name : <input type="text" name="username" [(ngModel)]="userNamePassword.userName"> <br>
+    Password : <input type="password" name="password" [(ngModel)]="userNamePassword.password">
+  </div>
+  <button (click)=authenticate() class="btn btn-success">
+    Login
+  </button>
 
