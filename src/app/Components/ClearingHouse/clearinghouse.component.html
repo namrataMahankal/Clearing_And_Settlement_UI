@@ -154,15 +154,16 @@
           </mat-expansion-panel-header>
 
           <h2> Funds Obligation Report </h2>
-          <table mat-table [dataSource]="CMElement.Funds" class="mat-elevation-z8">
+           <h3>Funds Obliged:34556</h3>
+          <!-- <table mat-table [dataSource]="CMElement.Funds" class="mat-elevation-z8">
             <ng-container *ngFor="let FundsElement of obPanelFundsColumns"  matColumnDef={{FundsElement}}>
               <th mat-header-cell *matHeaderCellDef> {{FundsElement}} </th>
-              <!-- <td mat-cell *matCellDef="let element"> {{element.Security}} </td> -->
+             
               <td mat-cell *matCellDef ="let element"> {{element[FundsElement]}} </td>
             </ng-container>
             <tr mat-header-row *matHeaderRowDef="obPanelFundsColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: obPanelFundsColumns;"></tr>
-          </table>
+          </table> -->
 
           <br><br><br>
           <h2> Shares Obligation Report </h2>
