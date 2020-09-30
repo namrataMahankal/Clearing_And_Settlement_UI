@@ -14,6 +14,7 @@ export class AuthenticationService {
     this.authenticationDataService.getAuthenticationDetails(userNameAndPassword).subscribe(data => {
       if (data != null) {
         sessionStorage.setItem('username', userNameAndPassword.userName);
+        sessionStorage.setItem('type',data.type);
         //this.loggedAccount = data;
         return data;
       }
@@ -53,6 +54,22 @@ isUserLoggedIn() {
   let user = sessionStorage.getItem('username')
   console.log(!(user === null))
   return !(user === null)
+}
+
+isUserCM(){
+  let type=sessionStorage.getItem('type')
+  console.log("CM type detected")
+  return (sessionStorage.getItem('type')=="cm")
+}
+isUserCH(){
+  let type=sessionStorage.getItem('type')
+  console.log("CH type detected")
+  return (sessionStorage.getItem('type')=="ch")
+}
+isUserAdmin(){
+  let type=sessionStorage.getItem('type')
+  console.log("Admin type detected")
+  return (sessionStorage.getItem('type')=="admin")
 }
 
 logOut() {

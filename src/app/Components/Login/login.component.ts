@@ -41,15 +41,15 @@ export class LoginComponent implements OnInit {
         return false;
       }
       else if (data.type == 'ch') {
-        //sessionStorage.setItem('username', this.userNamePassword.userName);
-        window.alert('Welcome Clearing House');
+        sessionStorage.setItem('type',data.type);
+        //window.alert('Welcome Clearing House');
         this.router.navigate(['clearing-house']);
         this.invalidLogin = false;
         return true;
       }
       else if (data.type == 'admin') {
-        //sessionStorage.setItem('username', this.userNamePassword.userName);
-        window.alert('Welcome Admin');
+        sessionStorage.setItem('type',data.type);
+        //window.alert('Welcome Admin');
         this.router.navigate(['admin']);
         this.invalidLogin = false;
         return true;
@@ -58,8 +58,8 @@ export class LoginComponent implements OnInit {
 
       else if (data.type == 'cm') {
 
-        //sessionStorage.setItem('username', this.userNamePassword.userName);
-        window.alert('Welcome Member');
+        sessionStorage.setItem('type',data.type);
+        //window.alert('Welcome Member');
         this.router.navigate(['clearing-member']);
         this.invalidLogin = false;
         return true;
@@ -78,10 +78,10 @@ export class LoginComponent implements OnInit {
 export class DBAccountReciever{
     constructor(){}
     clearingMemberId: Number;
-    clearingMemberName: String; //"CitiGroup",
-    userName: String;           //"citi",
-    password: String;            //"citilogin",
-    type: String;               //"cm"
+    clearingMemberName: string; //"CitiGroup",
+    userName: string;           //"citi",
+    password: string;            //"citilogin",
+    type: string;               //"cm"
 }
 
 export class UserNameAndPassword{

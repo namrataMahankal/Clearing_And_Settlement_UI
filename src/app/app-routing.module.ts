@@ -28,13 +28,13 @@ import { ClearingHouseComponent } from './Components/ClearingHouse/clearinghouse
 import { LoginComponent } from './Components/Login/login.component';
 import { AdminComponent } from './Components/Admin/admin.component';
 import { AuthGaurdService } from  './Service/auth-guard.service';
-
+import { AuthGaurdServiceCM,AuthGaurdServiceCH,AuthGaurdServiceAdmin  } from  './Service/auth-guard.service';
 
 const routes: Routes = [
-  {path: 'clearing-member',component: ClearingMemberComponent,canActivate:[AuthGaurdService]},
+  {path: 'clearing-member',component: ClearingMemberComponent,canActivate:[AuthGaurdServiceCM]},
   {path: 'login',component: LoginComponent},
-  {path: 'admin',component: AdminComponent,canActivate:[AuthGaurdService]},
-  {path: 'clearing-house',component: ClearingHouseComponent,canActivate:[AuthGaurdService]},
+  {path: 'admin',component: AdminComponent,canActivate:[AuthGaurdServiceAdmin]},
+  {path: 'clearing-house',component: ClearingHouseComponent,canActivate:[AuthGaurdServiceCH]},
   {path:'',redirectTo:'/login',pathMatch: 'full'}
 ];
 
