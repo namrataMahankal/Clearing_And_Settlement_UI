@@ -18,6 +18,10 @@ export class TradesDataService {
     return this.httpClient.get<any>("http://localhost:8080/clearing-and-settlement/clearing-house/fund-obligations");
   }
 
+  getCostOfSettlement():Observable<any>{
+    return this.httpClient.get<any>("http://localhost:8080/clearing-and-settlement/cost-of-settlement");
+  }
+
 
   getCorpActionsSummary():Observable<any>{
     return this.httpClient.get<any>("http://localhost:8080/clearing-and-settlement/corporate-actions/clearing-house/summary");

@@ -37,7 +37,14 @@ export class ClearingHouseComponent {
             this.obligationMatrixFundsData=data;
             console.log(this.obligationMatrixFundsData);
         }
-    ); 
+    );
+    
+    this.serv.getCostOfSettlement().subscribe(
+        data=>{
+            this.costData=data;
+            console.log(this.costData);
+        }
+    );
 
    }
 
@@ -57,6 +64,7 @@ export class ClearingHouseComponent {
   // obligation report panel
   OBReport:ObligationReport[];
   obligationPanelData = ObligationPanelData;
+  col:string[]=["Security","Shares","Price Per Share","Cost"];
   obPanelSharesColumns: string[] = [ 'Security', 'Opening Balance' ,'Security Obligation', 'Status'];
   obPanelFundsColumns: string[] = ['Security', 'Shares', 'Price', 'Balance'];
   displayedColumnCost=["CM","Cost"];
@@ -99,7 +107,7 @@ export class ClearingHouseComponent {
 
    cosPanelColumns:string[]=['Securities', 'Shares', 'Rate', 'Cost'];
    costOfSettlementPanelDataConst=CostOfSettlementPanelDataConst;
-
+   costData:CostOfSettlementData[]=[];
 
    sampleData:Trade[];
 //    test(){}
@@ -112,6 +120,27 @@ export class ClearingHouseComponent {
     }
  
     
+ }
+
+ class CostOfSettlementData{
+
+    clearingMemberName:string;
+    costFunds:CostFunds;
+    costShares:CostShares[];
+
+ }
+
+ class CostFunds{
+  fundsToBeBorrowed:number;
+  borrowingRate:number;
+  costIncurred:number;
+ }
+
+ class CostShares{
+     securities:string;
+     shares:number;
+     pricePerShare:number;
+     cost:number;
  }
 
  class obligationReport{
