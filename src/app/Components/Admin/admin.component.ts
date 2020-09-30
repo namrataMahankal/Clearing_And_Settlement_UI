@@ -11,21 +11,14 @@ import {TradesDataService} from 'src/app/Service/trades-data.service';
 @Component({
     selector: 'admin',
     templateUrl: './admin.component.html',
-   // styleUrls: ['./admin.component.css']
   })
 
   export class AdminComponent  implements OnInit{
-  // export class AdminComponent {
-    // constructor(private newtradeservice:NewTradeService) { }
-
-    // private newtradeservice:NewTradeService
-    
     constructor(private serv:TradesDataService,private newtradeservice:NewTradeService){
       console.log("In constr of admincomponent");
    this.serv.getAllTrades().subscribe(
        data=>{
            this.TradesDataSource=data;
-          //  console.log(this.TradesDataSource);
        }
    );
    
@@ -35,10 +28,11 @@ import {TradesDataService} from 'src/app/Service/trades-data.service';
     CMDataSource: string[];
     SecuritiesDataSource: string[];
     TradesDataSource:Trade[];
-    // TradesDataSource=new MatTableDataSource<Trade[]>(ELEMENT_DATA);
     clickGenerateTrade:boolean=false;
     clickSettleUp:boolean=false;
     clickCorpAction:boolean=false;
+    
+    
     generateTrades(){
       this.clickGenerateTrade=!this.clickGenerateTrade;
     this.serv.generateTradesServ().subscribe(
@@ -55,9 +49,7 @@ import {TradesDataService} from 'src/app/Service/trades-data.service';
       this.clickCorpAction=!this.clickCorpAction;
       this.serv.applyCorpActions().subscribe(
         data=>{
-            //this.sampleData=data;
             console.log("apply corp actions");
-            //console.log(this.TradesDataSource);
         }
     ); 
     }
@@ -67,10 +59,8 @@ import {TradesDataService} from 'src/app/Service/trades-data.service';
         this.serv.settleUpService().subscribe(
           data=>{
               console.log("settle up stuff");
-              console.log(data);
           }
-      ); 
-      
+      );  
     }
     
     dataSourceCorpActions=CorpActions_list;              //1.For Corp Actions Table
@@ -84,11 +74,8 @@ import {TradesDataService} from 'src/app/Service/trades-data.service';
 
     cm_list=Obligation_list_example;                     //4. For Obligation Report
     displayedColumnsObligReport=["CM","Funds ", "Securities"];
-    // buyerCmList=CMList;
 
-    // constructor(private newtradeservice:NewTradeService) { }
 
-  // newtrade : Newtrade=new Newtrade();
   newtrade:Newtrade;
   submitted = false;
   ngOnInit() {
@@ -100,13 +87,13 @@ import {TradesDataService} from 'src/app/Service/trades-data.service';
           console.log(this.CMDataSource);
       }
   );
-  this.newtradeservice.returnSecuritiesListservice().subscribe(
+   this.newtradeservice.returnSecuritiesListservice().subscribe(
     data=>{
         this.SecuritiesDataSource=data;
     }
 );
   }
-    // newTradeToDB= new newTrade();
+
 
     profileForm = new FormGroup({
         BuyerCM: new FormControl(''),
@@ -114,7 +101,7 @@ import {TradesDataService} from 'src/app/Service/trades-data.service';
         ES: new FormControl(''),
         Qty: new FormControl(''),
         Price: new FormControl(''),
-    
+
       });
 
       savetrade(savetrade){
@@ -128,44 +115,37 @@ import {TradesDataService} from 'src/app/Service/trades-data.service';
         this.submitted = true;
         this.save();
         this.addTradeForm();
+        
         //create toast
       }
 
       save() {
         this.newtradeservice.createTrade(this.newtrade)
-          .subscribe();
-        // this.newtrade = new Newtrade();
+          .subscribe(
+            data_newtrade =>{
+              this.serv.getAllTrades().subscribe(
+                data=>{
+                  this.TradesDataSource=data;
+              }
+              );
+            }
+          );
       }
 
       returnCmList(){  
       this.newtradeservice.returnCmListservice().subscribe(
           data=>{
               this.CMDataSource=data;
-              console.log("-------");
-              console.log(this.CMDataSource);
           }
       ); 
+      
     }
       addTradeForm(){
         this.submitted=false;
         this.profileForm.reset();
       }
-  //     @ViewChild(MatPaginator) paginator: MatPaginator;
-
-  // ngAfterViewInit() {
-  //   this.TradesDataSource.paginator = this.paginator;
-  // }
-  // }
-
 }
-export interface TradeListElement {
-    BuyerCM: string;
-    SellerCM: string;
-    ES: string;
-    Qty: number;
-    Price: number;
-    TradeValue:number;
-  }
+
 
 const Trade_list: TradeListElement[] = [
     {BuyerCM: "UBS", SellerCM: 'Wells Fargo', ES: 'Apple', Qty: 100,Price: 12,TradeValue:100 },
@@ -174,38 +154,20 @@ const Trade_list: TradeListElement[] = [
     {BuyerCM: "GS", SellerCM: 'Citi', ES: 'Apple', Qty: 100,Price: 12,TradeValue:100 },
   ];
 
-  export interface SecuritySharesListElement {
-    Securities: string;
-    Shares:number;
-  }
+
 const security_share_list: SecuritySharesListElement[]=[
     {Securities:'Apple',Shares:100},
     {Securities:'Amazon',Shares:100},
    
 ];
 
-   export interface Obligation_list{
-    CM :String;
-    Obliged_funds: Number;
-    Obliged_securties:SecuritySharesListElement[];
-}
+
 const Obligation_list_example=[
     {CM:"Citi",Obliged_funds:45678,Obliged_securties:security_share_list},
     {CM:'UBS',Obliged_funds:45678,Obliged_securties:security_share_list},
 
 ];
 
-export interface CorpActionsList {
-  Securities: string;
-  Action: string;
-  Ratio: string;
-  CM_List: CM_List[];
-}
-export interface CM_List {
-  CM:string;
-  Initial_shares: number;
-  Current_shares:number;
-}
 
 const CorpActions_list: CorpActionsList[] = [
   {Securities: "Amazon", Action: 'Stock Split',Ratio: '1:3', CM_List:[{CM:'GS',Initial_shares: 1987,Current_shares:2890}] },
@@ -213,18 +175,39 @@ const CorpActions_list: CorpActionsList[] = [
   
 ];
 
-
-export interface CostOfSettlementValue {
-    CM: String;
-    Cost:number;
-  }
-
 const CostOfSettlementValueList:CostOfSettlementValue[] =[{CM:"Citi",Cost:500},
 {CM:"JP Morgan Chase",Cost:500},
 {CM:"Credit Suisse",Cost:500},
 {CM:"The Bank of New York Mellon Corporation",Cost:500}
 ]
 
+
+export interface TradeListElement {
+  BuyerCM: string;
+  SellerCM: string;
+  ES: string;
+  Qty: number;
+  Price: number;
+  TradeValue:number;
+}
+
+export interface SecuritySharesListElement {
+  Securities: string;
+  Shares:number;
+}
+
+export interface CorpActionsList {
+  Securities: string;
+  Action: string;
+  Ratio: string;
+  CM_List: CM_List[];
+}
+
+export interface CM_List {
+  CM:string;
+  Initial_shares: number;
+  Current_shares:number;
+}
 
 export class Admin_trade{
     BuyerCM: String;
@@ -234,5 +217,13 @@ export class Admin_trade{
     Price: number;
 }
 
-  
-  
+export interface Obligation_list{
+  CM :String;
+  Obliged_funds: Number;
+  Obliged_securties:SecuritySharesListElement[];
+}
+
+export interface CostOfSettlementValue {
+  CM: String;
+  Cost:number;
+}
