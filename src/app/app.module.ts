@@ -24,6 +24,8 @@ import { AuthGaurdService } from './Service/auth-guard.service';
 import { AuthenticationService } from './Service/authentication.service';
 import { FormsModule } from '@angular/forms';
 import { AuthGaurdServiceCM,AuthGaurdServiceCH,AuthGaurdServiceAdmin } from  './Service/auth-guard.service';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -50,7 +52,9 @@ import { AuthGaurdServiceCM,AuthGaurdServiceCH,AuthGaurdServiceAdmin } from  './
     MatButtonModule,
     MatGridListModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    MatMenuModule,
+    MatIconModule
   ],
   providers: [AuthGaurdService,AuthenticationService,AuthGaurdServiceCM ,AuthGaurdServiceCH,AuthGaurdServiceAdmin],
   bootstrap: [AppComponent]
