@@ -37,7 +37,22 @@ export class ClearingHouseComponent {
             this.obligationMatrixFundsData=data;
             console.log(this.obligationMatrixFundsData);
         }
-    ); 
+    );
+    
+    this.serv.getCostOfSettlement().subscribe(
+        data=>{
+            this.costData=data;
+            console.log(this.costData);
+        }
+    );
+
+    this.serv.getObMatrix().subscribe(
+        data=>{
+           // this.oBMatrixData=data;
+            this.obMatrixData=data;
+            console.log(this.obMatrixData);
+        }
+    );
 
    }
 
@@ -50,13 +65,14 @@ export class ClearingHouseComponent {
   displayedColumns: string[] = ['BuyerCM', 'SellerCM', 'ES', 'Qty','Price','TradeValue'];
   str;
 
-
-  
-
+obMatrixData:Array<any>;
+  obCols:string[]=['CM','1','2','3','4','5','6','7','8','9','10','11','12','13','14','15'];
+  oBMatrixData:ObligationMatrix[];
   panelOpenState = false;
   // obligation report panel
   OBReport:ObligationReport[];
   obligationPanelData = ObligationPanelData;
+  col:string[]=["Security","Shares","Price Per Share","Cost"];
   obPanelSharesColumns: string[] = [ 'Security', 'Opening Balance' ,'Security Obligation', 'Status'];
   obPanelFundsColumns: string[] = ['Security', 'Shares', 'Price', 'Balance'];
   displayedColumnCost=["CM","Cost"];
@@ -99,7 +115,7 @@ export class ClearingHouseComponent {
 
    cosPanelColumns:string[]=['Securities', 'Shares', 'Rate', 'Cost'];
    costOfSettlementPanelDataConst=CostOfSettlementPanelDataConst;
-
+   costData:CostOfSettlementData[]=[];
 
    sampleData:Trade[];
 //    test(){}
@@ -112,6 +128,27 @@ export class ClearingHouseComponent {
     }
  
     
+ }
+
+ class CostOfSettlementData{
+
+    clearingMemberName:string;
+    costFunds:CostFunds;
+    costShares:CostShares[];
+
+ }
+
+ class CostFunds{
+  fundsToBeBorrowed:number;
+  borrowingRate:number;
+  costIncurred:number;
+ }
+
+ class CostShares{
+     securities:string;
+     shares:number;
+     pricePerShare:number;
+     cost:number;
  }
 
  class obligationReport{
@@ -150,7 +187,7 @@ export interface TradeListElement {
 
 export class Trade{
     buyerCM:string;
-    es:string;
+    eS:string;
     price:number;
     qty:number;
     transactionAmt:number
@@ -274,4 +311,9 @@ class ObligationMatrixFunds {
 export interface CostOfSettlementValue {
     CM: string;
     Cost:number;
+  }
+
+  class ObligationMatrix{
+    CM:string;
+    "AT&T inc":number;
   }
