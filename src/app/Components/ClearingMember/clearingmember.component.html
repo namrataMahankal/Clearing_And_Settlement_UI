@@ -12,7 +12,7 @@
    table {
   width: 100%;
   align-content: center;
-  padding-left: 150px;
+  padding-left: 90px;
 }
 
 .toggle {
@@ -30,22 +30,22 @@
     <mat-list class="list1" role="list" >
       <br>
       <br>
-      <mat-list-item role="listitem"><h2>Opening Fund Balance :  $45678</h2></mat-list-item>
+      <mat-list-item role="listitem"><h2>Opening Fund Balance : ${{openingFundBalance}}</h2></mat-list-item>
      </mat-list>
     <br>
     <mat-list class="list1" role="list" >
       <mat-list-item role="listitem"><h2>Shares:</h2></mat-list-item>
     </mat-list>
-    <table mat-table [dataSource]="dataSourceProfile" class="mat-elevation-z8">
+    <table mat-table [dataSource]="openingShares" class="mat-elevation-z8" style='padding-left: 150px;'>
         <ng-container matColumnDef="Securities">
           <th mat-header-cell *matHeaderCellDef> Securities </th>
-          <td mat-cell *matCellDef="let element"> {{element.Securities}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.es}} </td>
         </ng-container>
       
         <!-- Name Column -->
         <ng-container matColumnDef="Shares">
           <th mat-header-cell *matHeaderCellDef> Shares </th>
-          <td mat-cell *matCellDef="let element"> {{element.Shares}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.sharesBalance}} </td>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumnsProfile"></tr>
@@ -58,28 +58,28 @@
     <div style="float:left; width:50%"><h2 align="center">Buy Trades</h2></div>
     <div style="float:right; width:50%"><h2 align="center">Sell Trades</h2></div>
     <div style="float:left; width:50%">
-  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  <table mat-table [dataSource]="buyTrades" >
       
         <!-- Weight Column -->
         <ng-container matColumnDef="ES">
           <th mat-header-cell *matHeaderCellDef> ES </th>
-          <td mat-cell *matCellDef="let element"> {{element.ES}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.es}} </td>
         </ng-container>
       
         <!-- Symbol Column -->
         <ng-container matColumnDef="Qty">
           <th mat-header-cell *matHeaderCellDef> Quantity </th>
-          <td mat-cell *matCellDef="let element"> {{element.Qty}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.qty}} </td>
         </ng-container>
   
         <ng-container matColumnDef="Price">
           <th mat-header-cell *matHeaderCellDef> Price </th>
-          <td mat-cell *matCellDef="let element"> {{element.Price}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.price}} </td>
         </ng-container>
   
         <ng-container matColumnDef="TradeValue">
           <th mat-header-cell *matHeaderCellDef> Trade Value </th>
-          <td mat-cell *matCellDef="let element"> {{element.TradeValue}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.transactionAmt}} </td>
         </ng-container>
       
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -88,7 +88,7 @@
     </div>
     
     <div style="float:right; width:50%;">
-      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+      <table mat-table [dataSource]="sellTrades" >
        
       
      
@@ -96,23 +96,23 @@
         <!-- Weight Column -->
         <ng-container matColumnDef="ES">
           <th mat-header-cell *matHeaderCellDef> ES </th>
-          <td mat-cell *matCellDef="let element"> {{element.ES}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.es}} </td>
         </ng-container>
       
         <!-- Symbol Column -->
         <ng-container matColumnDef="Qty">
           <th mat-header-cell *matHeaderCellDef> Quantity </th>
-          <td mat-cell *matCellDef="let element"> {{element.Qty}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.qty}} </td>
         </ng-container>
   
         <ng-container matColumnDef="Price">
           <th mat-header-cell *matHeaderCellDef> Price </th>
-          <td mat-cell *matCellDef="let element"> {{element.Price}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.price}} </td>
         </ng-container>
   
         <ng-container matColumnDef="TradeValue">
           <th mat-header-cell *matHeaderCellDef> Trade Value </th>
-          <td mat-cell *matCellDef="let element"> {{element.TradeValue}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.transactionAmt}} </td>
         </ng-container>
       
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -125,39 +125,39 @@
 
     <mat-tab label="Corporate Actions"> 
 
-      <table mat-table [dataSource]="dataSourceCorpActions" class="mat-elevation-z8">
+      <table mat-table [dataSource]="corpActions" class="mat-elevation-z8">
         <ng-container matColumnDef="Securities">
           <th mat-header-cell *matHeaderCellDef> Securities</th>
-          <td mat-cell *matCellDef="let element"> {{element.Securities}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.securityName}} </td>
         </ng-container>
       
         <!-- Name Column -->
         <ng-container matColumnDef="Actions">
           <th mat-header-cell *matHeaderCellDef> Actions </th>
-          <td mat-cell *matCellDef="let element"> {{element.Action}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.action}} </td>
         </ng-container>
       
         <ng-container matColumnDef="Parameter">
           <th mat-header-cell *matHeaderCellDef> Parameter </th>
-          <td mat-cell *matCellDef="let element"> {{element.Parameter}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.parameter}} </td>
         </ng-container>
       
       
         <!-- Symbol Column -->
         <ng-container matColumnDef="Initial share balance">
           <th mat-header-cell *matHeaderCellDef> Initial share balance </th>
-          <td mat-cell *matCellDef="let element"> {{element.Initial_share_bal}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.initialShareBalance}} </td>
         </ng-container>
 
         <ng-container matColumnDef="Corp Action effect">
           <th mat-header-cell *matHeaderCellDef> Corp Action effect </th>
-          <td mat-cell *matCellDef="let element"> {{element.Initial_share_bal - element.Current_share_bal}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.initialShareBalance - element.finalShareBalance}} </td>
         </ng-container>
   
   
         <ng-container matColumnDef="Current share balance">
           <th mat-header-cell *matHeaderCellDef> Current share balance </th>
-          <td mat-cell *matCellDef="let element"> {{element.Current_share_bal}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.finalShareBalance}} </td>
         </ng-container>
       
         <tr mat-header-row *matHeaderRowDef="displayedColumnsCorpActions"></tr>
@@ -173,9 +173,11 @@
       <mat-list class="list1" role="list" >
         
          <mat-list-item role="listitem"><h2>Funds</h2></mat-list-item>
-         <mat-list-item role="listitem"><h3>Opening Balance: 45678</h3></mat-list-item>
+         <mat-list-item role="listitem"><h3>Opening Balance: ${{openingFundBalance}}</h3></mat-list-item>
+         <mat-list-item role="listitem"><h3>Funds Obliged: ${{fundsObliged}}</h3></mat-list-item>
+         
       </mat-list>                                  
-    <table mat-table [dataSource]="dataSourceFunds" class="mat-elevation-z8">
+    <!-- <table mat-table [dataSource]="dataSourceFunds" class="mat-elevation-z8">
         
         <ng-container matColumnDef="Securities">
           <th mat-header-cell *matHeaderCellDef> Securities</th>
@@ -198,11 +200,9 @@
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns2"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns2;"></tr>
-    </table>
-    <br>
-
-   <h3 align="center">You have to Pay: $$$$ </h3>
-   <h3 align="center"style="background-color:powderblue;">There is no shortage of funds</h3>
+    </table> -->
+   <!-- <h3 align="center">Funds Obliged: {{fundsObliged}} </h3> -->
+   <!-- <h3 align="center"style="background-color:powderblue;">There is no shortage of funds</h3> -->
     <br>
 
 
@@ -212,29 +212,29 @@
       </mat-list>
       <mat-slide-toggle class="toggle">Only Shortages</mat-slide-toggle>
 
-      <table mat-table [dataSource]="dataSource1" class="mat-elevation-z8">
+      <table mat-table [dataSource]="obShares" class="mat-elevation-z8" style="padding-left:150px">
         <ng-container matColumnDef="Securities">
           <th mat-header-cell *matHeaderCellDef> Securities </th>
-          <td mat-cell *matCellDef="let element"> {{element.Securities}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.securityName}} </td>
         </ng-container>
         <!-- Name Column -->
         <ng-container matColumnDef="Opening_Balance">
           <th mat-header-cell *matHeaderCellDef> Opening_Balance </th>
-          <td mat-cell *matCellDef="let element"> {{element.Opening_Balance}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.openingShareBalance}} </td>
         </ng-container>
-        <ng-container matColumnDef="Closing_Balance">
+        <!-- <ng-container matColumnDef="Closing_Balance">
           <th mat-header-cell *matHeaderCellDef> Closing_Balance </th>
           <td mat-cell *matCellDef="let element"> {{element.Closing_Balance}} </td>
-        </ng-container>
+        </ng-container> -->
       
         <ng-container matColumnDef="Shares_Obliged">
           <th mat-header-cell *matHeaderCellDef> Buy_Sell_Quantity </th>
-          <td mat-cell *matCellDef="let element"> {{element.Shares_Obliged}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.securityObligation}} </td>
         </ng-container>
       
         <ng-container matColumnDef="Status">
           <th mat-header-cell *matHeaderCellDef> Status </th>
-          <td mat-cell *matCellDef="let element"> {{element.Status}} </td>
+          <td mat-cell *matCellDef="let element">{{isLess(element.openingShareBalance,element.securityObligation)}} </td>
         </ng-container>
       
         <tr mat-header-row *matHeaderRowDef="displayedColumns1"></tr>
@@ -246,7 +246,7 @@
     <mat-tab label="Cost of Settlement"> 
       <br>
       <div style="text-align: center;">
-        <h2>Total Cost : $45678</h2>
+        <h2>Total Cost : ${{totalCost}}</h2>
       </div>
       <mat-list class="list1" role="list">
         <mat-list-item role="listitem">
@@ -258,9 +258,9 @@
 
       <table>
         <tr>
-          <td><h3>Funds to be borrowed: 1234</h3></td>
-          <td><h3>Borrowing Rate: 1.23%</h3></td>
-          <td><h3>Cost incurred: 1234</h3></td>
+          <td><h3>Funds to be borrowed: {{costOfSettlementFunds.fundsToBeBorrowed}}</h3></td>
+          <td><h3>Borrowing Rate: {{costOfSettlementFunds.borrowingRate}}%</h3></td>
+          <td><h3>Cost incurred: ${{costOfSettlementFunds.costIncurred}}</h3></td>
         </tr>
       </table>
     
@@ -274,22 +274,22 @@
       <table mat-table [dataSource]="dataSettlement" class="mat-elevation-z8">
         <ng-container matColumnDef="Securities">
           <th mat-header-cell *matHeaderCellDef> Securities </th>
-          <td mat-cell *matCellDef="let element"> {{element.Securities}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.securities}} </td>
           <td mat-footer-cell *matFooterCellDef>Total</td>
         </ng-container>
         <ng-container matColumnDef="Shares">
           <th mat-header-cell *matHeaderCellDef> Shares </th>
-          <td mat-cell *matCellDef="let element"> {{element.Shares}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.shares}} </td>
           <td mat-footer-cell *matFooterCellDef>  </td>
         </ng-container>
         <ng-container matColumnDef="Rate">
-          <th mat-header-cell *matHeaderCellDef> Rate </th>
-          <td mat-cell *matCellDef="let element"> {{element.Rate}} </td>
+          <th mat-header-cell *matHeaderCellDef> Price per Share </th>
+          <td mat-cell *matCellDef="let element"> {{element.pricePerShare}} </td>
           <td mat-footer-cell *matFooterCellDef>  </td>
         </ng-container>
         <ng-container matColumnDef="Cost">
           <th mat-header-cell *matHeaderCellDef> Cost </th>
-          <td mat-cell *matCellDef="let element"> {{element.Cost}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.cost}} </td>
           <td mat-footer-cell *matFooterCellDef> {{getTotalCost()}} </td>
         </ng-container>    
         <tr mat-header-row *matHeaderRowDef="displayedColumnsSettlement"></tr>

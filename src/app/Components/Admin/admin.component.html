@@ -13,7 +13,7 @@
     table {
    width: 100%;
    align-content: center;
-   padding-left: 150px;
+   padding-left: 50px;
  }
  
  .toggle {
@@ -24,7 +24,7 @@
    padding-left: 160px;
  }
 
- button {
+ .addTradesButton {
   width: 50%;
   background-color: #4CAF50;
   color: white;
@@ -34,7 +34,7 @@
   border-radius: 4px;
   cursor: pointer;
 }
-button hover {
+.addTradesButton hover {
   background-color: #45a042;
 }
 div {
@@ -106,7 +106,7 @@ input[type=text], select {
  <br><br>
 
 
-<button (click)="addTrade()">Add Trade</button>
+<button class="addTradesButton" (click)="addTrade()">Add Trade</button>
 <br><br>
 </div>
 
@@ -127,42 +127,48 @@ input[type=text], select {
 
 
 
-<br><br><br><br>
+<div >
+  <button mat-raised-button color="accent" style="margin-left: 150px;" (click)="generateTrades()" [disabled]="clickGenerateTrade">Generate trades</button>
 
+  <button mat-raised-button color="accent" style="margin-left: 50px;" (click)="settleUp()" [disabled]="clickSettleUp">Settle Up</button>
+  <button mat-raised-button color="accent" style="margin-left: 50px;" (click)="applyCorpActions()" [disabled]="clickCorpAction">Apply Corporate Actions</button>
+
+</div>
+<br>
 <mat-tab-group mat-align-tabs="center">
     <mat-tab label="Trades"> 
-        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <table mat-table [dataSource]="TradesDataSource" class="mat-elevation-z8">
             <ng-container matColumnDef="BuyerCM">
               <th mat-header-cell *matHeaderCellDef> Buyer CM </th>
-              <td mat-cell *matCellDef="let element"> {{element.BuyerCM}} </td>
+              <td mat-cell *matCellDef="let element"> {{element.buyerCM}} </td>
             </ng-container>
           
             <!-- Name Column -->
             <ng-container matColumnDef="SellerCM">
               <th mat-header-cell *matHeaderCellDef> Seller CM </th>
-              <td mat-cell *matCellDef="let element"> {{element.SellerCM}} </td>
+              <td mat-cell *matCellDef="let element"> {{element.sellerCM}} </td>
             </ng-container>
           
             <!-- Weight Column -->
             <ng-container matColumnDef="ES">
               <th mat-header-cell *matHeaderCellDef> ES </th>
-              <td mat-cell *matCellDef="let element"> {{element.ES}} </td>
+              <td mat-cell *matCellDef="let element"> {{element.es}} </td>
             </ng-container>
           
             <!-- Symbol Column -->
             <ng-container matColumnDef="Qty">
               <th mat-header-cell *matHeaderCellDef> Quantity </th>
-              <td mat-cell *matCellDef="let element"> {{element.Qty}} </td>
+              <td mat-cell *matCellDef="let element"> {{element.qty}} </td>
             </ng-container>
       
             <ng-container matColumnDef="Price">
               <th mat-header-cell *matHeaderCellDef> Price </th>
-              <td mat-cell *matCellDef="let element"> {{element.Price}} </td>
+              <td mat-cell *matCellDef="let element"> {{element.price}} </td>
             </ng-container>
       
             <ng-container matColumnDef="TradeValue">
               <th mat-header-cell *matHeaderCellDef> Trade Value </th>
-              <td mat-cell *matCellDef="let element"> {{element.TradeValue}} </td>
+              <td mat-cell *matCellDef="let element"> {{element.transactionAmt}} </td>
             </ng-container>
           
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -172,7 +178,7 @@ input[type=text], select {
 
 
     
-    <mat-tab label="Corporate Actions"> 
+    <!-- <mat-tab label="Corporate Actions"> 
 
       <mat-accordion>
        <table class="corpactiontab">
@@ -209,17 +215,17 @@ input[type=text], select {
       </table>
       </mat-accordion>
      
-    </mat-tab>
+    </mat-tab> -->
 
 
-    <mat-tab label="Obligation Report"> 
+    <!-- <mat-tab label="Obligation Report"> 
       <table mat-table [dataSource]="cm_list" class="mat-elevation-z8">
         <ng-container matColumnDef="CM">
           <th mat-header-cell *matHeaderCellDef> Clearing Member</th>
           <td mat-cell *matCellDef="let element"> {{element.CM}} </td>
         </ng-container>
       
-        <!-- Name Column -->
+
         <ng-container matColumnDef="Cost">
           <th mat-header-cell *matHeaderCellDef> Obligation Funds</th>
           <td mat-cell *matCellDef="let element"> {{element.Obliged_funds}} </td>
@@ -232,18 +238,18 @@ input[type=text], select {
     
     </table>
 
-    </mat-tab>
+    </mat-tab> -->
 
 
 
-    <mat-tab label="Cost of Settlement"> 
+    <!-- <mat-tab label="Cost of Settlement"> 
         <table mat-table [dataSource]="costOfSettlementValueList" class="mat-elevation-z8">
             <ng-container matColumnDef="CM">
               <th mat-header-cell *matHeaderCellDef> Clearing Member</th>
               <td mat-cell *matCellDef="let element"> {{element.CM}} </td>
             </ng-container>
           
-            <!-- Name Column -->
+           
             <ng-container matColumnDef="Cost">
               <th mat-header-cell *matHeaderCellDef> Cost </th>
               <td mat-cell *matCellDef="let element"> {{element.Cost}} </td>
@@ -253,6 +259,6 @@ input[type=text], select {
         
         </table>
     
-    </mat-tab>
+    </mat-tab> -->
 </mat-tab-group>
 

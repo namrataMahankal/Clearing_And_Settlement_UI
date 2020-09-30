@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {DataServiceService, Order} from 'src/app/Components/Service/data-service.service'
+import {TradesDataService} from 'src/app/Service/trades-data.service';
 @Component({
   selector: 'clearing-house',
   templateUrl: './clearinghouse.component.html',
@@ -10,17 +10,25 @@ import {DataServiceService, Order} from 'src/app/Components/Service/data-service
 })
 export class ClearingHouseComponent {
 
-   constructor(private serv:DataServiceService){
-
+   constructor(private serv:TradesDataService){
+       console.log("In constr.......");
+    this.serv.getAllTrades().subscribe(
+        data=>{
+            this.TradesDataSource=data;
+            console.log(this.TradesDataSource);
+        }
+    ); 
    }
   title = 'Clearing-And-Settlement-UI';
+  click:boolean=false;
   dataSourceCorpActions=CorpActions_list;
   displayedColumnsCorpActions: string[] = ['CM','Initial_shares','Current_shares'];
   dataSource = Trade_list;
   displayedColumns: string[] = ['BuyerCM', 'SellerCM', 'ES', 'Qty','Price','TradeValue'];
   str;
-  costOfSettlementValueList=CostOfSettlementValueList;
-  displayedColumnCost=['CM','Cost'];
+
+//costOfSettlementValueList=CostOfSettlementValueList;
+  
 
   panelOpenState = false;
   // obligation report panel
@@ -34,26 +42,43 @@ export class ClearingHouseComponent {
   obligationMatrixFundsData: ObligationMatrixFunds[] = ObligationMatrixFundsData;
   obligationMatrixFundsColumns: string[] = ['CM', 'Net Fund'];
 
-  sampleData:Array<any>;
-   test(){
-       console.log("in test");
-    //    this.serv.getStr().subscribe(
-    //        response=>this.printStm(response)
-    //    );
-    //   console.log("done");
-       this.serv.getData().subscribe(
-           data=>{
-               this.sampleData=data;
-               console.log(data);
-           }
-       );   
-   }
 
-   printStm(response){
-    console.log(response);
-   }
+  TradesDataSource:Trade[];
+ 
+
+  
+//    test(){
+//        console.log("in test");
+//     //    this.serv.getStr().subscribe(
+//     //        response=>this.printStm(response)
+//     //    );
+//     //   console.log("done");
+//        this.serv.getData().subscribe(
+//            data=>{
+//                this.TradesDataSource=data;
+//                console.log(this.TradesDataSource);
+//            }
+//        );   
+//    }
+
+//    printStm(response){
+//     console.log(response);
+//    }
    
-}
+
+
+
+   cosPanelColumns:string[]=['Securities', 'Shares', 'Rate', 'Cost'];
+   costOfSettlementPanelDataConst=CostOfSettlementPanelDataConst;
+
+
+   sampleData:Trade[];
+//    test(){}
+ 
+    
+ }
+ 
+
 
 export interface TradeListElement {
     BuyerCM: string;
@@ -64,6 +89,13 @@ export interface TradeListElement {
     TradeValue:number;
   }
 
+export class Trade{
+    buyerCM:string;
+    es:string;
+    price:number;
+    qty:number;
+    transactionAmt:number
+}
 
 const Trade_list: TradeListElement[] = [
   {BuyerCM: "UBS", SellerCM: 'Wells Fargo', ES: 'Apple', Qty: 100,Price: 12,TradeValue:100 },
@@ -116,11 +148,36 @@ export interface FundsObligation {
   Price: number;
   Balance: number;
 }
+
 export interface ObligationReport {
   CM: string;
   Shares: SharesObligation[];
   Funds: FundsObligation[];
 }
+
+
+
+
+export interface SettlementElement {
+  Securities: string;
+  Shares: number;
+  Rate: number;
+  Cost: number;
+}
+
+export interface CostOfSettlementReport2{
+  CM: string;
+  Report:SettlementElement[];
+}
+
+const CostOfSettlementPanelDataConst: CostOfSettlementReport2[]=[
+{CM:'Citi',Report:[{ Securities: 'Apple', Shares: 100, Rate: 1.23, Cost: 1234 },{ Securities: 'Apple', Shares: 100, Rate: 1.23, Cost: 1234 }]},
+{CM:'The Bank of New York Mellon Corporation',Report:[{ Securities: 'Amazon', Shares: 	100, Rate: 1.23, Cost: 1234 },{ Securities: 'Apple', Shares: 100, Rate: 1.23, Cost: 1234 }]}
+
+];
+
+
+
 
 const ObligationPanelData: ObligationReport[] = [
     {CM: 'Citi', 
