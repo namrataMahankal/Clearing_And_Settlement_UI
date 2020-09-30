@@ -19,12 +19,15 @@ export class NewTradeService {
     let httpHeaders=new HttpHeaders().set('allow-origin-access-control','*').set('Content-type','application/json;charset=utf-8');
     return this.http.post(this.baseUrl ,JSON.stringify(newtrade),{headers:httpHeaders});
     }
-  
-  // createTrade(newtrade: Newtrade): Observable<any> {  
-  //   console.log("Enters Create Tarde");
-  //   console.log(newtrade);
-  //    return this.http.post(`${this.baseUrl}`, newtrade);  
-  // }      
+    returnCmListservice():Observable<any>{
+      console.log("inNewtrade Service");
+      return this.http.get<any>("http://localhost:8080/clearing-and-settlement/clearing-members");
+    }
+
+    returnSecuritiesListservice():Observable<any>{
+      return this.http.get<any>("http://localhost:8080/clearing-and-settlement/securities");
+    }
+     
 }  
 
 

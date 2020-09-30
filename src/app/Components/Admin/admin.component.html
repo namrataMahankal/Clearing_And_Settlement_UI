@@ -66,10 +66,10 @@ input[type=text], select {
  
     
 
-
+<br><br>
 
 <div style="float:left; width:25%">
- <h2 align="center">Add new trade</h2>
+ <h2 align="center" >Add new trade</h2>
  <div align="center" style="border:2px solid black;">
     
     <br><br>
@@ -77,17 +77,23 @@ input[type=text], select {
 
    <label>
      Buyer CM:
-     <input type="text" formControlName="BuyerCM">
+     <select formControlName="BuyerCM" class="form-control"> 
+      <option *ngFor="let element of CMDataSource">{{element}}</option>
+  </select>
    </label>
    <br><br>
    <label>
      Seller CM:
-     <input type="text" formControlName="SellerCM">
+     <select formControlName="SellerCM" class="form-control"> 
+      <option *ngFor="let element of CMDataSource">{{element}}</option>
+  </select>
    </label>
  <br><br>
  <label>
    Equity   :
-   <input type="text" formControlName="ES" >
+   <select formControlName="ES" class="form-control"> 
+    <option *ngFor="let element of SecuritiesDataSource">{{element}}</option>
+</select>
  </label>
 
 <br><br>
@@ -100,11 +106,11 @@ input[type=text], select {
    Price:
    <input type="text" formControlName="Price">
  </label>
- <button (click)="savetrade(savetrade)">Add Trade</button>
- <!-- <button type="submit" class="btn btn-success">Add Trade</button> -->
+ <br><br>
+ <button class="addTradesButton" (click)="savetrade(savetrade)">Add Trade</button>
 </form>
 
- <br><br>
+
 
 
 <!-- <button type="submit" class="btn btn-success">Add Trade</button> -->
@@ -114,21 +120,6 @@ input[type=text], select {
 </div>
 
 </div>
-
-
-<br><br><br><br>
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 <div >
@@ -178,6 +169,7 @@ input[type=text], select {
             <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
           </table> 
+
     </mat-tab>
 
 

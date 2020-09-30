@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit, ViewChild} from '@angular/core';
 import {  FormGroup,FormControl } from '@angular/forms';
 import { FloatLabelType } from '@angular/material/form-field';
 import { NewTradeService } from 'src/app/Service/newtrade.service';
@@ -16,19 +16,26 @@ import {TradesDataService} from 'src/app/Service/trades-data.service';
 
   export class AdminComponent  implements OnInit{
   // export class AdminComponent {
-    private newtradeservice:NewTradeService
-    constructor(private serv:TradesDataService){
+    // constructor(private newtradeservice:NewTradeService) { }
+
+    // private newtradeservice:NewTradeService
+    
+    constructor(private serv:TradesDataService,private newtradeservice:NewTradeService){
       console.log("In constr of admincomponent");
    this.serv.getAllTrades().subscribe(
        data=>{
            this.TradesDataSource=data;
-           console.log(this.TradesDataSource);
+          //  console.log(this.TradesDataSource);
        }
-   ); 
+   );
+   
   }
 
     title = 'Clearing-And-Settlement-UI';
+    CMDataSource: string[];
+    SecuritiesDataSource: string[];
     TradesDataSource:Trade[];
+    // TradesDataSource=new MatTableDataSource<Trade[]>(ELEMENT_DATA);
     clickGenerateTrade:boolean=false;
     clickSettleUp:boolean=false;
     clickCorpAction:boolean=false;
@@ -41,6 +48,20 @@ import {TradesDataService} from 'src/app/Service/trades-data.service';
             console.log(this.TradesDataSource);
         }
     ); 
+
+    this.newtradeservice.returnCmListservice().subscribe(
+      data=>{
+          this.CMDataSource=data;
+          console.log("-------");
+          console.log(this.CMDataSource);
+      }
+  );
+
+  this.newtradeservice.returnSecuritiesListservice().subscribe(
+    data=>{
+        this.SecuritiesDataSource=data;
+    }
+);
   }
     applyCorpActions(){
       this.clickCorpAction=!this.clickCorpAction;
@@ -75,7 +96,7 @@ import {TradesDataService} from 'src/app/Service/trades-data.service';
 
     cm_list=Obligation_list_example;                     //4. For Obligation Report
     displayedColumnsObligReport=["CM","Funds ", "Securities"];
-
+    // buyerCmList=CMList;
 
     // constructor(private newtradeservice:NewTradeService) { }
 
@@ -115,32 +136,28 @@ import {TradesDataService} from 'src/app/Service/trades-data.service';
           .subscribe();
         // this.newtrade = new Newtrade();
       }
-      
+
+      returnCmList(){  
+      this.newtradeservice.returnCmListservice().subscribe(
+          data=>{
+              this.CMDataSource=data;
+              console.log("-------");
+              console.log(this.CMDataSource);
+          }
+      ); 
+    }
       addTradeForm(){
         this.submitted=false;
         this.profileForm.reset();
       }
-    // onSubmit() {
-    //     // TODO: Use EventEmitter with form value
-    //     console.warn(this.profileForm.value);
-    //     this.profileForm.reset();
-    // }
-      // addTrade(){
-        
-      //   this.newTradeToDB.BuyerCM=this.profileForm.get('buyerCM').value;
-      //   this.newTradeToDB.SellerCM=this.profileForm.get('sellerCM').value;
-      //   this.newTradeToDB.ES=this.profileForm.get('ES').value;
-      //   this.newTradeToDB.Qty=this.profileForm.get('Qty').value;
-      //   this.newTradeToDB.Price=this.profileForm.get('Price').value;
-      //   this.newTradeToDB.TradeValue=0;
-      //   this.profileForm.reset();
-        
-      // }
+  //     @ViewChild(MatPaginator) paginator: MatPaginator;
 
+  // ngAfterViewInit() {
+  //   this.TradesDataSource.paginator = this.paginator;
+  // }
+  // }
 
-  }
-
-  
+}
 export interface TradeListElement {
     BuyerCM: string;
     SellerCM: string;
@@ -149,14 +166,6 @@ export interface TradeListElement {
     Price: number;
     TradeValue:number;
   }
-// class newTrade {
-//     BuyerCM: string;
-//     SellerCM: string;
-//     ES: string;
-//     Qty: number;
-//     Price: number;
-//     TradeValue:number;
-// }
 
 const Trade_list: TradeListElement[] = [
     {BuyerCM: "UBS", SellerCM: 'Wells Fargo', ES: 'Apple', Qty: 100,Price: 12,TradeValue:100 },
