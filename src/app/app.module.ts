@@ -20,7 +20,9 @@ import {MatBadgeModule} from '@angular/material/badge';
 import {MatButtonModule} from '@angular/material/button';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { HttpClientModule} from '@angular/common/http';
-
+import { AuthGaurdService } from './Service/auth-guard.service';
+import { AuthenticationService } from './Service/authentication.service';
+import { FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,9 +47,10 @@ import { HttpClientModule} from '@angular/common/http';
     MatBadgeModule,
     MatButtonModule,
     MatGridListModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule 
   ],
-  providers: [],
+  providers: [AuthGaurdService,AuthenticationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

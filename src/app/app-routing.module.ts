@@ -4,13 +4,14 @@ import { ClearingMemberComponent } from './Components/ClearingMember/clearingmem
 import { ClearingHouseComponent } from './Components/ClearingHouse/clearinghouse.component';
 import { LoginComponent } from './Components/Login/login.component';
 import { AdminComponent } from './Components/Admin/admin.component';
+import { AuthGaurdService } from  './Service/auth-guard.service';
 
 
 const routes: Routes = [
-  {path: 'clearing-member',component: ClearingMemberComponent},
+  {path: 'clearing-member',component: ClearingMemberComponent,canActivate:[AuthGaurdService]},
   {path: 'login',component: LoginComponent},
-  {path: 'admin',component: AdminComponent},
-  {path: 'clearing-house',component: ClearingHouseComponent},
+  {path: 'admin',component: AdminComponent,canActivate:[AuthGaurdService]},
+  {path: 'clearing-house',component: ClearingHouseComponent,canActivate:[AuthGaurdService]},
   {path:'',redirectTo:'/login',pathMatch: 'full'}
 ];
 

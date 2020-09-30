@@ -1,34 +1,33 @@
-import { Component} from '@angular/core';
+import { Component,OnInit } from '@angular/core';
 import {  FormGroup,FormControl } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthenticationService } from '../../Service/authentication.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
-    selector: 'login',
-    templateUrl: './login.component.html'
-  })
+  selector: 'login',
+  templateUrl: './login.component.html',
+  //styleUrls: ['./login.component.css']
+})
+export class LoginComponent implements OnInit {
 
-export class LoginComponent {
-title = 'Clearing-And-Settlement-UI';
+  username = 'javainuse'
+  password = '1234'
+  invalidLogin = false
 
-newCredentials= new Credentials();
-profileForm = new FormGroup({
-    username: new FormControl(''),
-    password: new FormControl(''),
-  });
+  constructor(private router: Router,
+    private loginservice: AuthenticationService) { }
 
+  ngOnInit() {
+  }
 
-onSubmit() {
-    // TODO: Use EventEmitter with form value
-    console.warn(this.profileForm.value);
-     this.profileForm.reset();
+  checkLogin() {
+    if (this.loginservice.authenticate(this.username, this.password)
+    ) {
+      //this.router.navigate(['admin']);
+      this.invalidLogin = false
+    } else
+      this.invalidLogin = true
+  }
+
 }
-checkCredentials(){
-    this.newCredentials.username=this.profileForm.get('username').value;
-    this.newCredentials.password=this.profileForm.get('password').value;
-    this.profileForm.reset();
-}
-}
-class Credentials {
-    username: String;
-    password: number;
-}
-
