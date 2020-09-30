@@ -73,16 +73,16 @@ input[type=text], select {
  <div align="center" style="border:2px solid black;">
     
     <br><br>
-<form [formGroup]="profileForm" (ngSubmit)="onSubmit()" >
+<form [formGroup]="profileForm" >
 
    <label>
      Buyer CM:
-     <input type="text" formControlName="buyerCM">
+     <input type="text" formControlName="BuyerCM">
    </label>
    <br><br>
    <label>
      Seller CM:
-     <input type="text" formControlName="sellerCM">
+     <input type="text" formControlName="SellerCM">
    </label>
  <br><br>
  <label>
@@ -100,31 +100,19 @@ input[type=text], select {
    Price:
    <input type="text" formControlName="Price">
  </label>
- 
+ <button (click)="savetrade(savetrade)">Add Trade</button>
+ <!-- <button type="submit" class="btn btn-success">Add Trade</button> -->
 </form>
 
  <br><br>
 
 
-<button (click)="addTrade()">Add Trade</button>
+<!-- <button type="submit" class="btn btn-success">Add Trade</button> -->
+
 <br><br>
 </div>
 
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 <br><br><br><br>

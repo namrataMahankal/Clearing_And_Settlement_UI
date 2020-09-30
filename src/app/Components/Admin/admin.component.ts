@@ -1,6 +1,8 @@
-import { Component} from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import {  FormGroup,FormControl } from '@angular/forms';
 import { FloatLabelType } from '@angular/material/form-field';
+import { NewTradeService } from 'src/app/Service/newtrade.service';
+import {Newtrade} from 'src/app/newtrade';
 //import { TradeService } from '../trade.service';
 @Component({
     selector: 'admin',
@@ -8,7 +10,7 @@ import { FloatLabelType } from '@angular/material/form-field';
    // styleUrls: ['./admin.component.css']
   })
 
-  export class AdminComponent {
+  export class AdminComponent  implements OnInit{
     title = 'Clearing-And-Settlement-UI';
     
     
@@ -24,40 +26,69 @@ import { FloatLabelType } from '@angular/material/form-field';
     cm_list=Obligation_list_example;                     //4. For Obligation Report
     displayedColumnsObligReport=["CM","Funds ", "Securities"];
 
-    newTradeToDB= new newTrade();
+
+    constructor(private newtradeservice:NewTradeService) { }
+
+  // newtrade : Newtrade=new Newtrade();
+  newtrade:Newtrade;
+  submitted = false;
+  ngOnInit() {
+    this.submitted=false;
+  }
+    // newTradeToDB= new newTrade();
 
     profileForm = new FormGroup({
-        buyerCM: new FormControl(''),
-        sellerCM: new FormControl(''),
+        BuyerCM: new FormControl(''),
+        SellerCM: new FormControl(''),
         ES: new FormControl(''),
         Qty: new FormControl(''),
         Price: new FormControl(''),
     
       });
-    onSubmit() {
-        // TODO: Use EventEmitter with form value
-        console.warn(this.profileForm.value);
-        
-        this.profileForm.reset();
-    }
-      addTrade(){
-        this.newTradeToDB.BuyerCM=this.profileForm.get('buyerCM').value;
-        this.newTradeToDB.SellerCM=this.profileForm.get('sellerCM').value;
-        this.newTradeToDB.ES=this.profileForm.get('ES').value;
-        this.newTradeToDB.Qty=this.profileForm.get('Qty').value;
-        this.newTradeToDB.Price=this.profileForm.get('Price').value;
-        this.newTradeToDB.TradeValue=0;
-        this.profileForm.reset();
-        
+
+      savetrade(savetrade){
+        this.newtrade=new Newtrade();   
+        this.newtrade.buyerCM=this.profileForm.get('BuyerCM').value;
+        this.newtrade.sellerCM=this.profileForm.get('SellerCM').value;
+        this.newtrade.eS=this.profileForm.get('ES').value;
+        this.newtrade.qty=this.profileForm.get('Qty').value;
+        this.newtrade.price=this.profileForm.get('Price').value;
+        this.newtrade.transactionAmt=null;
+        this.submitted = true;
+        this.save();
+        this.addTradeForm();
+        //create toast
       }
 
-
-
-
+      save() {
+        this.newtradeservice.createTrade(this.newtrade)
+          .subscribe();
+        // this.newtrade = new Newtrade();
+      }
+      
+      addTradeForm(){
+        this.submitted=false;
+        this.profileForm.reset();
+      }
+    // onSubmit() {
+    //     // TODO: Use EventEmitter with form value
+    //     console.warn(this.profileForm.value);
+    //     this.profileForm.reset();
+    // }
+      // addTrade(){
+        
+      //   this.newTradeToDB.BuyerCM=this.profileForm.get('buyerCM').value;
+      //   this.newTradeToDB.SellerCM=this.profileForm.get('sellerCM').value;
+      //   this.newTradeToDB.ES=this.profileForm.get('ES').value;
+      //   this.newTradeToDB.Qty=this.profileForm.get('Qty').value;
+      //   this.newTradeToDB.Price=this.profileForm.get('Price').value;
+      //   this.newTradeToDB.TradeValue=0;
+      //   this.profileForm.reset();
+        
+      // }
 
 
   }
-
 
   
 export interface TradeListElement {
@@ -68,14 +99,14 @@ export interface TradeListElement {
     Price: number;
     TradeValue:number;
   }
-class newTrade implements TradeListElement{
-    BuyerCM: string;
-    SellerCM: string;
-    ES: string;
-    Qty: number;
-    Price: number;
-    TradeValue:number;
-}
+// class newTrade {
+//     BuyerCM: string;
+//     SellerCM: string;
+//     ES: string;
+//     Qty: number;
+//     Price: number;
+//     TradeValue:number;
+// }
 
 const Trade_list: TradeListElement[] = [
     {BuyerCM: "UBS", SellerCM: 'Wells Fargo', ES: 'Apple', Qty: 100,Price: 12,TradeValue:100 },
