@@ -1,3 +1,8 @@
+
+<body class='mat-app-background'>
+
+
+
 <mat-toolbar [class.mat-elevation-z6]=true color="primary">
     
     <span>Citi</span>
@@ -9,10 +14,11 @@
   <br>
 
  <style>
+   
    table {
   width: 100%;
   align-content: center;
-  padding-left: 90px;
+/*padding-left:90px*/
 }
 
 .toggle {
@@ -53,11 +59,12 @@
     </table>
   </mat-tab>
     
-  <mat-tab label="Trades" >  
+  <mat-tab label="Trades">  
     <br>
-    <div style="float:left; width:50%"><h2 align="center">Buy Trades</h2></div>
+    <div style="float:left; width:50%;"><h2 align="center">Buy Trades</h2></div>
     <div style="float:right; width:50%"><h2 align="center">Sell Trades</h2></div>
-    <div style="float:left; width:50%">
+<!-- <section style="background:#424242;"> -->
+    <div style="float:left; width:50%;">
   <table mat-table [dataSource]="buyTrades" >
       
         <!-- Weight Column -->
@@ -119,6 +126,7 @@
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
     </div>
+
     
     </mat-tab>
 
@@ -300,6 +308,5 @@
   
 </mat-tab-group>
 
- 
-  
+</body>
   
