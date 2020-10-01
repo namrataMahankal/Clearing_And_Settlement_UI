@@ -13,6 +13,10 @@
           <mat-icon>dialpad</mat-icon>
           <span>Generate Trades</span>
         </button>
+        <button mat-menu-item (click)=onSave() [disabled]="!settleClick">
+          <mat-icon>add</mat-icon>
+          <span>Add Trade</span>
+        </button>
         <button mat-menu-item (click)=settleUp() [disabled]="settleClick">
           <mat-icon>voicemail</mat-icon>
           <span>Settle Up</span>

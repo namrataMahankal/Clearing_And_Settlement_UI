@@ -1,5 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {TradesDataService} from 'src/app/Service/trades-data.service';
+import { MatDialog , MatDialogRef, MatDialogConfig} from '@angular/material/dialog'
+import {AddStockComponent} from './add-stock/add-stock.component'
+import {NewTradeService} from 'src/app/Service/newtrade.service';
 @Component({
   selector: 'clearing-house',
   templateUrl: './clearinghouse.component.html',
@@ -8,10 +11,11 @@ import {TradesDataService} from 'src/app/Service/trades-data.service';
 
   // styleUrls: './clearinghouse.component.css'
 })
-export class ClearingHouseComponent {
+export class ClearingHouseComponent implements OnInit {
 
-  
-   constructor(private serv:TradesDataService){
+  CMDataSource: string[];
+  SecuritiesDataSource: string[];
+   constructor(private serv:TradesDataService,private newtradeservice:NewTradeService,private dialog: MatDialog,private dialogRef:MatDialogRef<AddStockComponent>){
        console.log("In constr.......");
     this.serv.getAllTrades().subscribe(
         data=>{
@@ -56,7 +60,20 @@ export class ClearingHouseComponent {
     );
 
    }
-
+   ngOnInit() {
+    this.newtradeservice.returnCmListservice().subscribe(
+      data=>{
+          this.CMDataSource=data;
+          console.log("-------");
+          console.log(this.CMDataSource);
+      }
+  );
+   this.newtradeservice.returnSecuritiesListservice().subscribe(
+    data=>{
+        this.SecuritiesDataSource=data;
+    }
+);
+  }
    
   title = 'Clearing-And-Settlement-UI';
   click:boolean=false;
@@ -117,10 +134,17 @@ settleUp(){
               
         
           }
-      ); 
-      
-     
+      );   
 
+}
+onSave() {
+  this.dialog.open(AddStockComponent, {
+    data: { securities:this.SecuritiesDataSource, clearingMembers:this.CMDataSource }
+  });
+  this.serv.getAllTrades().subscribe(
+    data=>{
+      this.TradesDataSource=data;
+  })
 }
 
 updateReports()
