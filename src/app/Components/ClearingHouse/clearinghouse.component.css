@@ -39,3 +39,8 @@ mat-dialog-container {
     color: #fff;
     padding:0px important;
 }
+.mat-footer-cell{
+    font-size: 20px;
+    font-weight: 700;
+    color: #ffff;
+}
