@@ -12,9 +12,14 @@ import {NewTradeService} from 'src/app/Service/newtrade.service';
   // styleUrls: './clearinghouse.component.css'
 })
 export class ClearingHouseComponent implements OnInit {
-
+ totalCost:number=0;
   CMDataSource: string[];
   SecuritiesDataSource: string[];
+
+  calculate(){
+    return this.obligationMatrixFundsData.map(t => t.fundObligation).reduce((acc, value) => acc + value, 0);
+  }
+ 
    constructor(private serv:TradesDataService,private newtradeservice:NewTradeService,private dialog: MatDialog,private dialogRef:MatDialogRef<AddStockComponent>){
        console.log("In constr.......");
     this.serv.getAllTrades().subscribe(
@@ -108,7 +113,7 @@ obMatrixData:Array<any>;
 {CM:"The Bank of New York Mellon Corporation",Cost:500}]
 
  tradeClick:boolean=false;
- settleClick:boolean=true;
+ settleClick:boolean=false;
  corpClick:boolean=true;
  addTrade:boolean = true;
 generateTrades(){
@@ -137,6 +142,7 @@ settleUp(){
           }
       );   
       this.addTrade = false;
+      this.tradeClick=true;
 }
 onSave() {
   let dialogRef = this.dialog.open(AddStockComponent, {
