@@ -1,7 +1,7 @@
 table {
     width: 100%;
     align-content: center;
-    padding-left: 90px;
+   
     }
 
 .toggle {
@@ -23,4 +23,13 @@ padding-left: 160px;
 }
 .corpactiontab{
     padding-right: 150px;
+}
+
+#matmenu{
+    font-size: 100px;
+    widows: 100%;
+}
+#contenttab{
+    padding-left: 100px;
+    padding-right: 100px;
 }
