@@ -1,4 +1,4 @@
-import { Component, ChangeDetectorRef } from '@angular/core';
+import { Component, ChangeDetectorRef, OnInit } from '@angular/core';
 import {TradesDataService} from 'src/app/Service/trades-data.service';
 import { CostOfSettlementValue } from '../ClearingHouse/clearinghouse.component';
 
@@ -8,77 +8,142 @@ import { CostOfSettlementValue } from '../ClearingHouse/clearinghouse.component'
   templateUrl:  './clearingmember.component.html',
   styleUrls: ['./clearingmember.component.css']
 })
-export class ClearingMemberComponent {
+export class ClearingMemberComponent implements OnInit{
   
   ngAfterViewChecked(){
     //your code to update the model
     this.cdr.detectChanges();
  }
-  constructor(private serv:TradesDataService,private cdr: ChangeDetectorRef){
-   // console.log("In constr of *.......");
-    this.serv.getOpeningFundBalance().subscribe(
-      data=>{
-          this.openingFundBalance=data;
-          //console.log(this.openingFundBalance);
-      }
-  ); 
 
-  this.serv.getFundsObliged().subscribe(
-    data=>{
-        this.fundsObliged=data.fundObligation;
-        //console.log(this.openingFundBalance);
-    }
-  );
+ ngOnInit(){
 
-  //console.log("opening share..........");
-  this.serv.getOpeningShareBalance().subscribe(
+  this.serv.getOpeningFundBalance().subscribe(
     data=>{
-        this.openingShares=data;
-        //console.log(this.openingShares);
+        this.openingFundBalance=data;
+       
     }
 ); 
 
-this.serv.getOBShares().subscribe(
+this.serv.getFundsObliged().subscribe(
   data=>{
-      this.obShares=data;
-      //console.log(this.openingFundBalance);
+      this.fundsObliged=data.fundObligation;
+      
   }
 );
 
-    this.serv.getTradesByBuyerCM().subscribe(
-      data=>{
-          this.buyTrades=data;
-         // console.log(this.buyTrades);
-      }
-  ); 
-    this.serv.getTradesBySellerCM().subscribe(
-        data=>{
-            this.sellTrades=data;
-            //console.log(this.sellTrades);
-        }
-    ); 
 
-    this.serv.getCostOfSettlementFunds().subscribe(
-      data=>{
-          this.costOfSettlementFunds=data;
-          //console.log("cost!!!!!!!!!!!!");
-          //console.log(this.costOfSettlementFunds);
-      }
-  ); 
+this.serv.getOpeningShareBalance().subscribe(
+  data=>{
+      this.openingShares=data;
+      
+  }
+); 
 
-  this.serv.getCostOfSettlementShares().subscribe(
+this.serv.getOBShares().subscribe(
+data=>{
+    this.obShares=data;
+   
+}
+);
+
+  this.serv.getTradesByBuyerCM().subscribe(
     data=>{
-        this.dataSettlement=data;
-       // console.log(this.dataSettlement);
+        this.buyTrades=data;
+      
+    }
+); 
+  this.serv.getTradesBySellerCM().subscribe(
+      data=>{
+          this.sellTrades=data;
+         
+      }
+  ); 
+
+  this.serv.getCostOfSettlementFunds().subscribe(
+    data=>{
+        this.costOfSettlementFunds=data;
+    
     }
 ); 
 
-this.serv.getCorpActions().subscribe(
+this.serv.getCostOfSettlementShares().subscribe(
   data=>{
-      this.corpActions=data.actionList;
-      console.log(this.corpActions);
+      this.dataSettlement=data;
+   
   }
 ); 
+
+this.serv.getCorpActions().subscribe(
+data=>{
+    this.corpActions=data.actionList;
+    console.log(this.corpActions);
+}
+); 
+
+ }
+  constructor(private serv:TradesDataService,private cdr: ChangeDetectorRef){
+//     this.serv.getOpeningFundBalance().subscribe(
+//       data=>{
+//           this.openingFundBalance=data;
+         
+//       }
+//   ); 
+
+//   this.serv.getFundsObliged().subscribe(
+//     data=>{
+//         this.fundsObliged=data.fundObligation;
+        
+//     }
+//   );
+
+
+//   this.serv.getOpeningShareBalance().subscribe(
+//     data=>{
+//         this.openingShares=data;
+        
+//     }
+// ); 
+
+// this.serv.getOBShares().subscribe(
+//   data=>{
+//       this.obShares=data;
+     
+//   }
+// );
+
+//     this.serv.getTradesByBuyerCM().subscribe(
+//       data=>{
+//           this.buyTrades=data;
+        
+//       }
+//   ); 
+//     this.serv.getTradesBySellerCM().subscribe(
+//         data=>{
+//             this.sellTrades=data;
+           
+//         }
+//     ); 
+
+//     this.serv.getCostOfSettlementFunds().subscribe(
+//       data=>{
+//           this.costOfSettlementFunds=data;
+      
+//       }
+//   ); 
+
+//   this.serv.getCostOfSettlementShares().subscribe(
+//     data=>{
+//         this.dataSettlement=data;
+     
+//     }
+// ); 
+
+// this.serv.getCorpActions().subscribe(
+//   data=>{
+//       this.corpActions=data.actionList;
+//       console.log(this.corpActions);
+//   }
+// ); 
 
 console.log("bbbbb");
 console.log(this.openingFundBalance+this.fundsObliged);

@@ -1,3 +1,7 @@
+<body class='mat-app-background'>
+
+
+
 <mat-toolbar [class.mat-elevation-z6]=true color="primary">
     
     <span>Clearing House</span>
@@ -78,17 +82,17 @@
             <!-- Symbol Column -->
             <ng-container matColumnDef="Qty">
               <th mat-header-cell *matHeaderCellDef> Quantity </th>
-              <td mat-cell *matCellDef="let element"> {{element.qty}} </td>
+              <td mat-cell *matCellDef="let element"> {{element.qty | number:'1.0-2':'en-US'}} </td>
             </ng-container>
       
             <ng-container matColumnDef="Price">
               <th mat-header-cell *matHeaderCellDef> Price </th>
-              <td mat-cell *matCellDef="let element"> {{element.price}} </td>
+              <td mat-cell *matCellDef="let element"> {{element.price | number:'1.0-2':'en-US'}} </td>
             </ng-container>
       
             <ng-container matColumnDef="TradeValue">
               <th mat-header-cell *matHeaderCellDef> Trade Value </th>
-              <td mat-cell *matCellDef="let element"> {{element.transactionAmt}} </td>
+              <td mat-cell *matCellDef="let element"> {{element.transactionAmt | number:'1.0-2':'en-US'}} </td>
             </ng-container>
           
             <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></tr>
@@ -121,11 +125,11 @@
             </ng-container>
             <ng-container matColumnDef="Initial_shares">
               <th mat-header-cell *matHeaderCellDef> Initial shares </th>
-              <td mat-cell *matCellDef="let element"> {{element.initialShares}} </td>
+              <td mat-cell *matCellDef="let element"> {{element.initialShares | number:'1.0-2':'en-US'}} </td>
             </ng-container>
             <ng-container matColumnDef="Current_shares">
               <th mat-header-cell *matHeaderCellDef> Current shares </th>
-              <td mat-cell *matCellDef="let element"> {{element.currentShares}} </td>
+              <td mat-cell *matCellDef="let element"> {{element.currentShares | number:'1.0-2':'en-US'}} </td>
             </ng-container>
             <tr mat-header-row *matHeaderRowDef="displayedColumnsCorpActions"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumnsCorpActions;"></tr>
@@ -152,7 +156,7 @@
           </mat-expansion-panel-header>
 
           <h2> Funds Obligation Report </h2>
-           <h3>Funds Obliged:{{CMElement.fundsObligation}}</h3>
+           <h3>Funds Obliged:{{CMElement.fundsObligation | number:'1.0-2':'en-US'}}</h3>
           <!-- <table mat-table [dataSource]="CMElement.Funds" class="mat-elevation-z8">
             <ng-container *ngFor="let FundsElement of obPanelFundsColumns"  matColumnDef={{FundsElement}}>
               <th mat-header-cell *matHeaderCellDef> {{FundsElement}} </th>
@@ -173,15 +177,15 @@
               </ng-container>
               <ng-container matColumnDef="Opening Balance">
                 <th mat-header-cell *matHeaderCellDef> Opening share balance </th>
-                <td mat-cell *matCellDef="let element"> {{element.openingShareBalance}} </td>
+                <td mat-cell *matCellDef="let element"> {{element.openingShareBalance | number:'1.0-2':'en-US'}} </td>
               </ng-container>
               <ng-container matColumnDef="Security Obligation">
                 <th mat-header-cell *matHeaderCellDef> Security obligation </th>
-                <td mat-cell *matCellDef="let element"> {{element.securityObligation}} </td>
+                <td mat-cell *matCellDef="let element"> {{element.securityObligation | number:'1.0-2':'en-US'}} </td>
               </ng-container>
               <ng-container matColumnDef="Status">
                 <th mat-header-cell *matHeaderCellDef> Status </th>
-                <td mat-cell *matCellDef="let element"> {{isLess(element.openingShareBalance,element.securityObligation)}} </td>
+                <td mat-cell *matCellDef="let element"> {{isLess(element.openingShareBalance,element.securityObligation) | number:'1.0-2':'en-US'}} </td>
               </ng-container>
             <tr mat-header-row *matHeaderRowDef="obPanelSharesColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: obPanelSharesColumns;"></tr>
@@ -214,7 +218,7 @@
               </ng-container>
               <ng-container matColumnDef="Net Fund">
                 <th mat-header-cell *matHeaderCellDef> Funds obliged </th>
-                <td mat-cell *matCellDef="let element"> {{element.fundObligation}} </td>
+                <td mat-cell *matCellDef="let element"> {{element.fundObligation | number:'1.0-2':'en-US'}} </td>
               </ng-container>
             <tr mat-header-row *matHeaderRowDef="obligationMatrixFundsColumns"></tr>
             <tr mat-row *matRowDef="let row; columns: obligationMatrixFundsColumns;"></tr>
@@ -334,9 +338,9 @@
         
               <table>
                 <tr>
-                  <td><h3>Funds to be borrowed: {{a.costFunds.fundsToBeBorrowed}}</h3></td>
-                  <td><h3>Borrowing Rate: {{a.costFunds.borrowingRate}}%</h3></td>
-                  <td><h3>Cost incurred: ${{a.costFunds.costIncurred}}</h3></td>
+                  <td><h3>Funds to be borrowed: {{a.costFunds.fundsToBeBorrowed | number:'1.0-2':'en-US'}}</h3></td>
+                  <td><h3>Borrowing Rate: {{a.costFunds.borrowingRate | number:'1.0-2':'en-US'}}%</h3></td>
+                  <td><h3>Cost incurred: ${{a.costFunds.costIncurred | number:'1.0-2':'en-US'}}</h3></td>
                 </tr>
               </table>
             
@@ -358,11 +362,11 @@
               </ng-container>
               <ng-container matColumnDef="Price Per Share">
                 <th mat-header-cell *matHeaderCellDef> Price Per Share </th>
-                <td mat-cell *matCellDef="let element"> {{element.pricePerShare}} </td>
+                <td mat-cell *matCellDef="let element"> {{element.pricePerShare | number:'1.0-2':'en-US'}} </td>
               </ng-container>
               <ng-container matColumnDef="Cost">
                 <th mat-header-cell *matHeaderCellDef> Cost </th>
-                <td mat-cell *matCellDef="let element"> {{element.cost}} </td>
+                <td mat-cell *matCellDef="let element"> {{element.cost | number:'1.0-2':'en-US'}} </td>
               </ng-container>
               <!-- <ng-container matColumnDef="Net Fund">
                 <th mat-header-cell *matHeaderCellDef> Funds obliged </th>
@@ -391,4 +395,4 @@
     </mat-tab>
 
 </mat-tab-group>
-
+</body>
