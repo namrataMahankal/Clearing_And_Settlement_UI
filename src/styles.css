@@ -4,3 +4,8 @@ html, body { height: 100%;  }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 /*Violet  #45056e*/
 /* Shady #543864*/
+.mat-header-cell{
+    font-size: 20px;
+    font-weight: 700;
+    color: #ffff;
+  }
