@@ -4,6 +4,9 @@
 <mat-toolbar [class.mat-elevation-z6]=true color="primary">
     
     <span>Admin</span>
+    <span class ="flexExpand"></span>
+    <button class="logOutButton" (click)="admin_logOut()" style="float:right;width:7%" >Logout</button>
+ 
     <!-- <span class="example-spacer"></span> -->
     <!-- <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
       <mat-icon>favorite</mat-icon>
@@ -18,7 +21,9 @@
    align-content: center;
    padding-left: 50px;
  }
- 
+ .flexExpand {
+    flex: 1 1 auto;
+  }
  .toggle {
     float: right;
     padding-right: 200px;
@@ -30,6 +35,16 @@
  .addTradesButton {
   width: 50%;
   background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.logOutButton {
+  width: 50%;
+  background-color: #FF6347;
   color: white;
   padding: 14px 20px;
   margin: 8px 0;
@@ -67,10 +82,9 @@ input[type=text], select {
 }
   </style>
  
-    
+ 
 
 <br><br>
-
 <div style="float:left; width:25%">
  <h2 align="center" >Add new trade</h2>
  <div align="center" style="border:2px solid black;">
@@ -119,6 +133,7 @@ input[type=text], select {
 <!-- <button type="submit" class="btn btn-success">Add Trade</button> -->
 
 <!-- <button class="addTradesButton" (click)="addTrade()">Add Trade</button> -->
+
 <br><br>
 </div>
 

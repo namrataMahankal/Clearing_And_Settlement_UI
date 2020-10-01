@@ -3,6 +3,8 @@ import {TradesDataService} from 'src/app/Service/trades-data.service';
 import { MatDialog , MatDialogRef, MatDialogConfig} from '@angular/material/dialog'
 import {AddStockComponent} from './add-stock/add-stock.component'
 import {NewTradeService} from 'src/app/Service/newtrade.service';
+import { AuthenticationService } from '../../Service/authentication.service';
+import {  Router } from '@angular/router';
 @Component({
   selector: 'clearing-house',
   templateUrl: './clearinghouse.component.html',
@@ -15,8 +17,11 @@ export class ClearingHouseComponent implements OnInit {
 
   CMDataSource: string[];
   SecuritiesDataSource: string[];
-   constructor(private serv:TradesDataService,private newtradeservice:NewTradeService,private dialog: MatDialog,private dialogRef:MatDialogRef<AddStockComponent>){
+   constructor(private serv:TradesDataService,private newtradeservice:NewTradeService,private dialog: MatDialog,private dialogRef:MatDialogRef<AddStockComponent>,
+      private router: Router,
+      private authService: AuthenticationService){
        console.log("In constr.......");
+    
     this.serv.getAllTrades().subscribe(
         data=>{
             this.TradesDataSource=data;
@@ -73,7 +78,9 @@ export class ClearingHouseComponent implements OnInit {
         this.SecuritiesDataSource=data;
     }
 );
+    
   }
+
    
   title = 'Clearing-And-Settlement-UI';
   click:boolean=false;
@@ -198,6 +205,13 @@ applyCorpActions(){
     }
 ); 
 }
+
+ch_logOut(){
+  this.authService.logOut();
+  window.alert('You are Logged Out');
+  this.router.navigate(['login']);
+}
+
   
 //    test(){
 //        console.log("in test");

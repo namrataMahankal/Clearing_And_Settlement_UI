@@ -39,3 +39,28 @@ mat-dialog-container {
     color: #fff;
     padding:0px important;
 }
+.addTradesButton {
+    width: 50%;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .flexExpand {
+    flex: 1 1 auto;
+  }
+  
+  .logOutButton {
+    width: 50%;
+    background-color: #FF6347;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  

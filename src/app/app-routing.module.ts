@@ -27,7 +27,6 @@ import { ClearingMemberComponent } from './Components/ClearingMember/clearingmem
 import { ClearingHouseComponent } from './Components/ClearingHouse/clearinghouse.component';
 import { LoginComponent } from './Components/Login/login.component';
 import { AdminComponent } from './Components/Admin/admin.component';
-import { AuthGaurdService } from  './Service/auth-guard.service';
 import { AuthGaurdServiceCM,AuthGaurdServiceCH,AuthGaurdServiceAdmin  } from  './Service/auth-guard.service';
 
 const routes: Routes = [

@@ -1,7 +1,8 @@
 import { Component, ChangeDetectorRef, OnInit } from '@angular/core';
 import {TradesDataService} from 'src/app/Service/trades-data.service';
 import { CostOfSettlementValue } from '../ClearingHouse/clearinghouse.component';
-
+import { AuthenticationService } from '../../Service/authentication.service';
+import {  Router } from '@angular/router';
 
 @Component({
   selector: 'clearing-member',
@@ -14,6 +15,14 @@ export class ClearingMemberComponent implements OnInit{
     //your code to update the model
     this.cdr.detectChanges();
  }
+
+ cm_logOut(){
+  this.authService.logOut();
+  window.alert('You are Logged Out');
+ this.router.navigate([""]);
+  }
+
+
 
  ngOnInit(){
 
@@ -81,7 +90,9 @@ data=>{
 ); 
 
  }
-  constructor(private serv:TradesDataService,private cdr: ChangeDetectorRef){
+  constructor(private serv:TradesDataService,private cdr: ChangeDetectorRef,
+    private router: Router,
+    private authService: AuthenticationService){
 //     this.serv.getOpeningFundBalance().subscribe(
 //       data=>{
 //           this.openingFundBalance=data;
