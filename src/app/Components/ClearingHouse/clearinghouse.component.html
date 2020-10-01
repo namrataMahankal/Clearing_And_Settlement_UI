@@ -1,9 +1,22 @@
-<body class='mat-app-background' style="height:auto"git >
-  
+<head>
+  <title>Font Awesome Icons</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+<body class='mat-app-background' style="height:auto" >
+
+
+
 <mat-toolbar [class.mat-elevation-z6]=true color="primary">
   <img src="assets/logo_small.jpg" alt="logo" style="float: left;" >
   &nbsp;&nbsp;&nbsp;&nbsp;
-    <span>Clearing House</span>
+    <span>Clearing House</span> 
+
+
+    <span class ="flexExpand"></span>
+    <button class="logOutButton" (click)="ch_logOut()" style="float:right;width:7%" >Logout</button>
+
+
     <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
         <mat-icon>more_vert</mat-icon>
       </button>

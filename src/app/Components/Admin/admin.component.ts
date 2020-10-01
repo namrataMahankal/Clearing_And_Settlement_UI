@@ -6,7 +6,8 @@ import {Newtrade} from 'src/app/newtrade';
 //import { TradeService } from '../trade.service';
 import {Trade} from 'src/app/Components/ClearingHouse/clearinghouse.component';
 import {TradesDataService} from 'src/app/Service/trades-data.service';
-
+import { AuthenticationService } from '../../Service/authentication.service';
+import {  Router } from '@angular/router';
 
 @Component({
     selector: 'admin',
@@ -14,7 +15,10 @@ import {TradesDataService} from 'src/app/Service/trades-data.service';
   })
 
   export class AdminComponent  implements OnInit{
-    constructor(private serv:TradesDataService,private newtradeservice:NewTradeService){
+    constructor(private serv:TradesDataService,private newtradeservice:NewTradeService,
+      private router: Router,
+      private authService: AuthenticationService
+      ){
       console.log("In constr of admincomponent");
    this.serv.getAllTrades().subscribe(
        data=>{
@@ -32,7 +36,15 @@ import {TradesDataService} from 'src/app/Service/trades-data.service';
     clickSettleUp:boolean=false;
     clickCorpAction:boolean=false;
     
-    
+    admin_logOut(){
+      this.authService.logOut();
+      window.alert('You are Logged Out');
+      this.router.navigate(['login']);
+    }
+
+
+
+
     generateTrades(){
       this.clickGenerateTrade=!this.clickGenerateTrade;
     this.serv.generateTradesServ().subscribe(

@@ -3,6 +3,7 @@ import {TradesDataService} from 'src/app/Service/trades-data.service';
 import { CostOfSettlementValue } from '../ClearingHouse/clearinghouse.component';
 import{AuthenticationDataService} from 'src/app/Service/authentication-data.service';
 import{AuthenticationService} from 'src/app/Service/authentication.service';
+import {  Router } from '@angular/router';
 
 
 @Component({
@@ -91,7 +92,9 @@ export class ClearingMemberComponent implements OnInit{
 // ); 
 
  }
-  constructor(private AuthSer:AuthenticationDataService ,private serv:TradesDataService,private cdr: ChangeDetectorRef){
+  constructor(private AuthSer:AuthenticationDataService ,private serv:TradesDataService,private cdr: ChangeDetectorRef,
+    private router: Router,
+      private authService: AuthenticationService){
 
     //     this.serv.getOpeningFundBalance().subscribe(
 //       data=>{
@@ -282,6 +285,12 @@ sampleData:Array<any>;
      this.sharesCost=this.dataSettlement.map(t => t.cost).reduce((acc, value) => acc + value, 0);
      this.totalCost=this.sharesCost+this.costOfSettlementFunds.costIncurred;
      return this.sharesCost;
+  }
+  
+	cm_logOut(){
+    this.authService.logOut();
+    window.alert('You are Logged Out');
+    this.router.navigate([""]);
   }
 
   
