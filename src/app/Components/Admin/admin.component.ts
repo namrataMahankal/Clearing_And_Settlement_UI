@@ -6,7 +6,10 @@ import {Newtrade} from 'src/app/newtrade';
 //import { TradeService } from '../trade.service';
 import {Trade} from 'src/app/Components/ClearingHouse/clearinghouse.component';
 import {TradesDataService} from 'src/app/Service/trades-data.service';
-
+import {MatPaginator} from '@angular/material/paginator';
+import {MatTableDataSource} from '@angular/material/table';
+import { ChangeDetectorRef } from '@angular/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @Component({
     selector: 'admin',
@@ -14,11 +17,14 @@ import {TradesDataService} from 'src/app/Service/trades-data.service';
   })
 
   export class AdminComponent  implements OnInit{
-    constructor(private serv:TradesDataService,private newtradeservice:NewTradeService){
+    constructor(private serv:TradesDataService,private newtradeservice:NewTradeService,private cdr: ChangeDetectorRef){
       console.log("In constr of admincomponent");
+
    this.serv.getAllTrades().subscribe(
        data=>{
-           this.TradesDataSource=data;
+           this.TradesDataSource=new MatTableDataSource(data);
+           this.cdr.detectChanges();
+           this.TradesDataSource.paginator = this.paginator;
        }
    );
    
@@ -27,7 +33,7 @@ import {TradesDataService} from 'src/app/Service/trades-data.service';
     title = 'Clearing-And-Settlement-UI';
     CMDataSource: string[];
     SecuritiesDataSource: string[];
-    TradesDataSource:Trade[];
+    TradesDataSource= new MatTableDataSource<TradeListElement>();
     clickGenerateTrade:boolean=false;
     clickSettleUp:boolean=false;
     clickCorpAction:boolean=false;
@@ -38,6 +44,7 @@ import {TradesDataService} from 'src/app/Service/trades-data.service';
     this.serv.generateTradesServ().subscribe(
         data=>{
             this.TradesDataSource=data;
+            this.TradesDataSource.paginator = this.paginator;
             console.log("trades generated");
             console.log(this.TradesDataSource);
         }
@@ -45,6 +52,11 @@ import {TradesDataService} from 'src/app/Service/trades-data.service';
 
  
   }
+
+  public doFilter = (value: string) => {
+    this.TradesDataSource.filter = value.trim().toLocaleLowerCase();
+  }
+
     applyCorpActions(){
       this.clickCorpAction=!this.clickCorpAction;
       this.serv.applyCorpActions().subscribe(
@@ -75,6 +87,8 @@ import {TradesDataService} from 'src/app/Service/trades-data.service';
     cm_list=Obligation_list_example;                     //4. For Obligation Report
     displayedColumnsObligReport=["CM","Funds ", "Securities"];
 
+    @ViewChild(MatPaginator) paginator: MatPaginator;
+
 
   newtrade:Newtrade;
   submitted = false;
@@ -91,8 +105,12 @@ import {TradesDataService} from 'src/app/Service/trades-data.service';
     data=>{
         this.SecuritiesDataSource=data;
     }
-);
+  );
   }
+
+  // ngAfterViewInit(){
+  //   setTimeout(() => this.TradesDataSource.paginator = this.paginator);
+  // }
 
 
     profileForm = new FormGroup({

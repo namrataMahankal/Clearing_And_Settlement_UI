@@ -30,12 +30,13 @@
     <mat-list class="list1" role="list" >
       <br>
       <br>
-      <mat-list-item role="listitem"><h2>Opening Fund Balance : ${{openingFundBalance}}</h2></mat-list-item>
+      <mat-list-item role="listitem"><h2>Opening Fund Balance : ${{openingFundBalance | number:'1.0-2':'en-US'}}</h2></mat-list-item>
      </mat-list>
     <br>
     <mat-list class="list1" role="list" >
       <mat-list-item role="listitem"><h2>Shares:</h2></mat-list-item>
     </mat-list>
+    <div class="mat-elevation-z8">
     <table mat-table [dataSource]="openingShares" class="mat-elevation-z8" style='padding-left: 150px;'>
         <ng-container matColumnDef="Securities">
           <th mat-header-cell *matHeaderCellDef> Securities </th>
@@ -45,12 +46,14 @@
         <!-- Name Column -->
         <ng-container matColumnDef="Shares">
           <th mat-header-cell *matHeaderCellDef> Shares </th>
-          <td mat-cell *matCellDef="let element"> {{element.sharesBalance}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.sharesBalance | number:'1.0-2':'en-US'}} </td>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumnsProfile"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumnsProfile;"></tr>
     </table>
+    <mat-paginator #paginator0="matPaginator" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+    </div>
   </mat-tab>
     
   <mat-tab label="Trades" >  
@@ -69,22 +72,23 @@
         <!-- Symbol Column -->
         <ng-container matColumnDef="Qty">
           <th mat-header-cell *matHeaderCellDef> Quantity </th>
-          <td mat-cell *matCellDef="let element"> {{element.qty}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.qty | number:'1.0-2':'en-US'}} </td>
         </ng-container>
   
         <ng-container matColumnDef="Price">
           <th mat-header-cell *matHeaderCellDef> Price </th>
-          <td mat-cell *matCellDef="let element"> {{element.price}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.price | number:'1.0-2':'en-US'}} </td>
         </ng-container>
   
         <ng-container matColumnDef="TradeValue">
           <th mat-header-cell *matHeaderCellDef> Trade Value </th>
-          <td mat-cell *matCellDef="let element"> {{element.transactionAmt}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.transactionAmt | number:'1.0-2':'en-US'}} </td>
         </ng-container>
       
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
+      <mat-paginator #paginator1="matPaginator" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
     </div>
     
     <div style="float:right; width:50%;">
@@ -102,22 +106,23 @@
         <!-- Symbol Column -->
         <ng-container matColumnDef="Qty">
           <th mat-header-cell *matHeaderCellDef> Quantity </th>
-          <td mat-cell *matCellDef="let element"> {{element.qty}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.qty | number:'1.0-2':'en-US'}} </td>
         </ng-container>
   
         <ng-container matColumnDef="Price">
           <th mat-header-cell *matHeaderCellDef> Price </th>
-          <td mat-cell *matCellDef="let element"> {{element.price}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.price | number:'1.0-2':'en-US'}} </td>
         </ng-container>
   
         <ng-container matColumnDef="TradeValue">
           <th mat-header-cell *matHeaderCellDef> Trade Value </th>
-          <td mat-cell *matCellDef="let element"> {{element.transactionAmt}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.transactionAmt | number:'1.0-2':'en-US'}} </td>
         </ng-container>
       
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
+      <mat-paginator #paginator2="matPaginator" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
     </div>
     
     </mat-tab>
@@ -146,23 +151,24 @@
         <!-- Symbol Column -->
         <ng-container matColumnDef="Initial share balance">
           <th mat-header-cell *matHeaderCellDef> Initial share balance </th>
-          <td mat-cell *matCellDef="let element"> {{element.initialShareBalance}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.initialShareBalance | number:'1.0-2':'en-US'}} </td>
         </ng-container>
 
         <ng-container matColumnDef="Corp Action effect">
           <th mat-header-cell *matHeaderCellDef> Corp Action effect </th>
-          <td mat-cell *matCellDef="let element"> {{element.initialShareBalance - element.finalShareBalance}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.initialShareBalance - element.finalShareBalance | number:'1.0-2':'en-US'}} </td>
         </ng-container>
   
   
         <ng-container matColumnDef="Current share balance">
           <th mat-header-cell *matHeaderCellDef> Current share balance </th>
-          <td mat-cell *matCellDef="let element"> {{element.finalShareBalance}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.finalShareBalance | number:'1.0-2':'en-US'}} </td>
         </ng-container>
       
         <tr mat-header-row *matHeaderRowDef="displayedColumnsCorpActions"></tr>
         <tr mat-row *matRowDef="let row; columns:displayedColumnsCorpActions;"></tr>
       </table>
+      <mat-paginator #paginator3="matPaginator" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
 
     </mat-tab>
 
@@ -173,8 +179,8 @@
       <mat-list class="list1" role="list" >
         
          <mat-list-item role="listitem"><h2>Funds</h2></mat-list-item>
-         <mat-list-item role="listitem"><h3>Opening Balance: ${{openingFundBalance}}</h3></mat-list-item>
-         <mat-list-item role="listitem"><h3>Funds Obliged: ${{fundsObliged}}</h3></mat-list-item>
+         <mat-list-item role="listitem"><h3>Opening Balance: ${{openingFundBalance | number:'1.0-2':'en-US'}}</h3></mat-list-item>
+         <mat-list-item role="listitem"><h3>Funds Obliged: ${{fundsObliged | number:'1.0-2':'en-US'}}</h3></mat-list-item>
          
       </mat-list>                                  
     <!-- <table mat-table [dataSource]="dataSourceFunds" class="mat-elevation-z8">
@@ -220,7 +226,7 @@
         <!-- Name Column -->
         <ng-container matColumnDef="Opening_Balance">
           <th mat-header-cell *matHeaderCellDef> Opening_Balance </th>
-          <td mat-cell *matCellDef="let element"> {{element.openingShareBalance}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.openingShareBalance | number:'1.0-2':'en-US'}} </td>
         </ng-container>
         <!-- <ng-container matColumnDef="Closing_Balance">
           <th mat-header-cell *matHeaderCellDef> Closing_Balance </th>
@@ -229,7 +235,7 @@
       
         <ng-container matColumnDef="Shares_Obliged">
           <th mat-header-cell *matHeaderCellDef> Buy_Sell_Quantity </th>
-          <td mat-cell *matCellDef="let element"> {{element.securityObligation}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.securityObligation | number:'1.0-2':'en-US'}} </td>
         </ng-container>
       
         <ng-container matColumnDef="Status">
@@ -240,13 +246,13 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns1"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns1;"></tr>
       </table>
-      
+      <mat-paginator #paginator4="matPaginator" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
     </mat-tab>
     
     <mat-tab label="Cost of Settlement"> 
       <br>
       <div style="text-align: center;">
-        <h2>Total Cost : ${{totalCost}}</h2>
+        <h2>Total Cost : ${{totalCost | number:'1.0-2':'en-US'}}</h2>
       </div>
       <mat-list class="list1" role="list">
         <mat-list-item role="listitem">
@@ -258,9 +264,9 @@
 
       <table>
         <tr>
-          <td><h3>Funds to be borrowed: {{costOfSettlementFunds.fundsToBeBorrowed}}</h3></td>
-          <td><h3>Borrowing Rate: {{costOfSettlementFunds.borrowingRate}}%</h3></td>
-          <td><h3>Cost incurred: ${{costOfSettlementFunds.costIncurred}}</h3></td>
+          <td><h3>Funds to be borrowed: {{costOfSettlementFunds.fundsToBeBorrowed | number:'1.0-2':'en-US'}}</h3></td>
+          <td><h3>Borrowing Rate: {{costOfSettlementFunds.borrowingRate | number:'1.0-2':'en-US'}}%</h3></td>
+          <td><h3>Cost incurred: ${{costOfSettlementFunds.costIncurred | number:'1.0-2':'en-US'}}</h3></td>
         </tr>
       </table>
     
@@ -279,23 +285,24 @@
         </ng-container>
         <ng-container matColumnDef="Shares">
           <th mat-header-cell *matHeaderCellDef> Shares </th>
-          <td mat-cell *matCellDef="let element"> {{element.shares}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.shares | number:'1.0-2':'en-US'}} </td>
           <td mat-footer-cell *matFooterCellDef>  </td>
         </ng-container>
         <ng-container matColumnDef="Rate">
           <th mat-header-cell *matHeaderCellDef> Price per Share </th>
-          <td mat-cell *matCellDef="let element"> {{element.pricePerShare}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.pricePerShare | number:'1.0-2':'en-US'}} </td>
           <td mat-footer-cell *matFooterCellDef>  </td>
         </ng-container>
         <ng-container matColumnDef="Cost">
           <th mat-header-cell *matHeaderCellDef> Cost </th>
-          <td mat-cell *matCellDef="let element"> {{element.cost}} </td>
-          <td mat-footer-cell *matFooterCellDef> {{getTotalCost()}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.cost | number:'1.0-2':'en-US'}} </td>
+          <td mat-footer-cell *matFooterCellDef> {{getTotalCost() | number:'1.0-2':'en-US'}} </td>
         </ng-container>    
         <tr mat-header-row *matHeaderRowDef="displayedColumnsSettlement"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumnsSettlement;"></tr>
         <tr mat-footer-row *matFooterRowDef="displayedColumnsSettlement"></tr>
       </table>
+      <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
     </mat-tab>
   
 </mat-tab-group>

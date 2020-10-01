@@ -23,6 +23,10 @@ import { HttpClientModule} from '@angular/common/http';
 import { AuthGaurdService } from './Service/auth-guard.service';
 import { AuthenticationService } from './Service/authentication.service';
 import { FormsModule } from '@angular/forms';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { ChangeDetectorRef } from '@angular/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -49,7 +53,13 @@ import { FormsModule } from '@angular/forms';
     MatButtonModule,
     MatGridListModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    MatPaginatorModule,
+    MatFormFieldModule,
+    FlexLayoutModule
+  ],
+  exports: [
+    MatPaginatorModule
   ],
   providers: [AuthGaurdService,AuthenticationService],
   bootstrap: [AppComponent]
