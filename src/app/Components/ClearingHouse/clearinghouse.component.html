@@ -1,4 +1,4 @@
-<body class='mat-app-background' >
+<body class='mat-app-background' style="height:auto" >
 
 
 
@@ -12,6 +12,10 @@
         <button mat-menu-item (click)=generateTrades() [disabled]="tradeClick">
           <mat-icon>dialpad</mat-icon>
           <span>Generate Trades</span>
+        </button>
+        <button mat-menu-item (click)=onSave() [disabled]="!settleClick">
+          <mat-icon>add</mat-icon>
+          <span>Add Trade</span>
         </button>
         <button mat-menu-item (click)=settleUp() [disabled]="settleClick">
           <mat-icon>voicemail</mat-icon>
@@ -30,7 +34,7 @@
 
 
 
-<mat-tab-group mat-align-tabs="center">
+<mat-tab-group mat-align-tabs="center"  style="height: 100vh">
 
     <mat-tab label="Trades"> 
         <!-- <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
@@ -258,64 +262,44 @@
                 <td mat-cell *matCellDef="let element"> {{element['CM']}} </td>
               </ng-container>
               <ng-container matColumnDef="1">
-                <th mat-header-cell *matHeaderCellDef> AT&T inc </th>
-                <td mat-cell *matCellDef="let element"> {{element['AT&T inc']}} </td>
+                <th mat-header-cell *matHeaderCellDef> Google </th>
+                <td mat-cell *matCellDef="let element"> {{element['Google'] | number:'1.0-2':'en-US'}} </td>
               </ng-container>
               <ng-container matColumnDef="2">
-                <th mat-header-cell *matHeaderCellDef> WALMART INC </th>
-                <td mat-cell *matCellDef="let element"> {{element['WALMART INC']}} </td>
+                <th mat-header-cell *matHeaderCellDef> Apple </th>
+                <td mat-cell *matCellDef="let element"> {{element['Apple'] | number:'1.0-2':'en-US'}} </td>
               </ng-container>
               <ng-container matColumnDef="3">
-                <th mat-header-cell *matHeaderCellDef> TEXAS INSTRUMENTS INC </th>
-                <td mat-cell *matCellDef="let element"> {{element['TEXAS INSTRUMENTS INC']}} </td>
+                <th mat-header-cell *matHeaderCellDef> NVIDIA </th>
+                <td mat-cell *matCellDef="let element"> {{element['NVIDIA'] | number:'1.0-2':'en-US'}} </td>
               </ng-container>
               <ng-container matColumnDef="4">
-                <th mat-header-cell *matHeaderCellDef> Anheuser Busch Inbev NV </th>
-                <td mat-cell *matCellDef="let element"> {{element['Anheuser Busch Inbev NV']}} </td>
+                <th mat-header-cell *matHeaderCellDef> Tesla </th>
+                <td mat-cell *matCellDef="let element"> {{element['Tesla'] | number:'1.0-2':'en-US'}} </td>
               </ng-container>
               <ng-container matColumnDef="5">
-                <th mat-header-cell *matHeaderCellDef> Apple </th>
-                <td mat-cell *matCellDef="let element"> {{element['Apple']}} </td>
+                <th mat-header-cell *matHeaderCellDef> Texas </th>
+                <td mat-cell *matCellDef="let element"> {{element['TEXAS'] | number:'1.0-2':'en-US'}} </td>
               </ng-container>
+              <!-- <ng-container matColumnDef="6">
+                <th mat-header-cell *matHeaderCellDef>Micro </th>
+                <td mat-cell *matCellDef="let element"> {{element['Micro'] | number:'1.0-2':'en-US'}} </td>
+              </ng-container> -->
               <ng-container matColumnDef="6">
-                <th mat-header-cell *matHeaderCellDef>Alphabet Inc. </th>
-                <td mat-cell *matCellDef="let element"> {{element['Alphabet Inc.']}} </td>
+                <th mat-header-cell *matHeaderCellDef> Ford </th>
+                <td mat-cell *matCellDef="let element"> {{element['FORD'] | number:'1.0-2':'en-US'}} </td>
               </ng-container>
               <ng-container matColumnDef="7">
-                <th mat-header-cell *matHeaderCellDef> Tesla Inc. </th>
-                <td mat-cell *matCellDef="let element"> {{element['Tesla Inc.']}} </td>
+                <th mat-header-cell *matHeaderCellDef> Amazon </th>
+                <td mat-cell *matCellDef="let element"> {{element['Amazon'] | number:'1.0-2':'en-US'}} </td>
               </ng-container>
               <ng-container matColumnDef="8">
-                <th mat-header-cell *matHeaderCellDef> QUALCOMM Inc. </th>
-                <td mat-cell *matCellDef="let element"> {{element['QUALCOMM Inc.']}} </td>
+                <th mat-header-cell *matHeaderCellDef> Uber </th>
+                <td mat-cell *matCellDef="let element"> {{element['UBER'] | number:'1.0-2':'en-US'}} </td>
               </ng-container>
               <ng-container matColumnDef="9">
-                <th mat-header-cell *matHeaderCellDef> Intercontinental Exchange </th>
-                <td mat-cell *matCellDef="let element"> {{element['Intercontinental Exchange']}} </td>
-              </ng-container>
-              <ng-container matColumnDef="10">
-                <th mat-header-cell *matHeaderCellDef> STARBUCKS CORP </th>
-                <td mat-cell *matCellDef="let element"> {{element['STARBUCKS CORP']}} </td>
-              </ng-container>
-              <ng-container matColumnDef="11">
-                <th mat-header-cell *matHeaderCellDef> NVIDIA Corporation </th>
-                <td mat-cell *matCellDef="let element"> {{element['NVIDIA Corporation']}} </td>
-              </ng-container>
-              <ng-container matColumnDef="12">
-                <th mat-header-cell *matHeaderCellDef> Microsoft </th>
-                <td mat-cell *matCellDef="let element"> {{element['Microsoft']}} </td>
-              </ng-container>
-              <ng-container matColumnDef="13">
-                <th mat-header-cell *matHeaderCellDef> Amazon </th>
-                <td mat-cell *matCellDef="let element"> {{element['Amazon']}} </td>
-              </ng-container>
-              <ng-container matColumnDef="14">
-                <th mat-header-cell *matHeaderCellDef> FORD Motor Company </th>
-                <td mat-cell *matCellDef="let element"> {{element['FORD Motor Company']}} </td>
-              </ng-container>
-              <ng-container matColumnDef="15">
-                <th mat-header-cell *matHeaderCellDef> UBER </th>
-                <td mat-cell *matCellDef="let element"> {{element['UBER']}} </td>
+                <th mat-header-cell *matHeaderCellDef> AT&T </th>
+                <td mat-cell *matCellDef="let element"> {{element['AT&T'] | number:'1.0-2':'en-US'}} </td>
               </ng-container>
 
             <tr mat-header-row *matHeaderRowDef="obCols"></tr>
