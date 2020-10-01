@@ -110,6 +110,7 @@ obMatrixData:Array<any>;
  tradeClick:boolean=false;
  settleClick:boolean=true;
  corpClick:boolean=true;
+ addTrade:boolean = true;
 generateTrades(){
     console.log("generated trades");
     this.tradeClick=true;
@@ -135,16 +136,19 @@ settleUp(){
         
           }
       );   
-
+      this.addTrade = false;
 }
 onSave() {
-  this.dialog.open(AddStockComponent, {
+  let dialogRef = this.dialog.open(AddStockComponent, {
     data: { securities:this.SecuritiesDataSource, clearingMembers:this.CMDataSource }
   });
-  this.serv.getAllTrades().subscribe(
-    data=>{
-      this.TradesDataSource=data;
-  })
+  dialogRef.afterClosed().subscribe(result => {
+    this.serv.getAllTrades().subscribe(
+      data=>{
+        this.TradesDataSource=data;
+    })
+  });
+  
 }
 
 updateReports()

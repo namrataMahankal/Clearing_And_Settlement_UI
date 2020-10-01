@@ -4,6 +4,7 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { NewTradeService } from 'src/app/Service/newtrade.service';
 import { Newtrade } from 'src/app/newtrade';
 import {  FormGroup,FormControl, Validators } from '@angular/forms';
+import { Trade } from '../clearinghouse.component';
 
 @Component({
   selector: 'app-add-stock',
@@ -45,6 +46,7 @@ export class AddStockComponent implements OnInit {
           this.success = true;
           this.fadeOutSuccess();
           this.profileForm.reset();
+          this.newtrade=new Newtrade();
         }
         else {
           this.error = true;
