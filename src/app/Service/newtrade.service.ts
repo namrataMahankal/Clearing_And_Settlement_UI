@@ -17,7 +17,7 @@ export class NewTradeService {
     console.log("in create");
     console.log(newtrade);
     let httpHeaders=new HttpHeaders().set('allow-origin-access-control','*').set('Content-type','application/json;charset=utf-8');
-    return this.http.post(this.baseUrl ,JSON.stringify(newtrade),{headers:httpHeaders});
+    return this.http.post<boolean>(this.baseUrl ,JSON.stringify(newtrade),{headers:httpHeaders});
     }
     returnCmListservice():Observable<any>{
       console.log("inNewtrade Service");
