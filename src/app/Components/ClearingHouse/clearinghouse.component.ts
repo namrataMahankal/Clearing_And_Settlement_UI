@@ -142,6 +142,7 @@ settleUp(){
           }
       );   
       this.addTrade = false;
+      this.tradeClick=true;
 }
 onSave() {
   let dialogRef = this.dialog.open(AddStockComponent, {
