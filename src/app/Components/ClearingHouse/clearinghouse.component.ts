@@ -10,6 +10,7 @@ import {TradesDataService} from 'src/app/Service/trades-data.service';
 })
 export class ClearingHouseComponent {
 
+  
    constructor(private serv:TradesDataService){
        console.log("In constr.......");
     this.serv.getAllTrades().subscribe(
@@ -89,8 +90,86 @@ obMatrixData:Array<any>;
 {CM:"Credit Suisse",Cost:500},
 {CM:"The Bank of New York Mellon Corporation",Cost:500}]
 
- 
+ tradeClick:boolean=false;
+ settleClick:boolean=true;
+ corpClick:boolean=true;
+generateTrades(){
+    console.log("generated trades");
+    this.tradeClick=true;
+    this.serv.generateTradesServ().subscribe(
+        data=>{
+            this.TradesDataSource=data;
+            console.log("trades generated");
+            console.log(this.TradesDataSource);
+        }
+    ); 
+    this.settleClick=false;
+    this.corpClick=false;
+}
 
+settleUp(){
+    this.settleClick=true;
+        this.serv.settleUpService().subscribe(
+          data=>{
+              console.log("settle up stuff");
+
+              this.updateReports();
+              
+        
+          }
+      ); 
+      
+     
+
+}
+
+updateReports()
+{
+  this.serv.getOBReport().subscribe(
+    data=>{
+        this.OBReport=data;
+        console.log("len");
+        console.log(this.OBReport.length);
+    }
+); 
+this.serv.getOBMatrixFunds().subscribe(
+  data=>{
+      this.obligationMatrixFundsData=data;
+      console.log(this.obligationMatrixFundsData);
+  }
+);
+
+this.serv.getCostOfSettlement().subscribe(
+  data=>{
+      this.costData=data;
+      console.log(this.costData);
+  }
+);
+
+this.serv.getObMatrix().subscribe(
+  data=>{
+     // this.oBMatrixData=data;
+      this.obMatrixData=data;
+      console.log(this.obMatrixData);
+  }
+);
+}
+
+applyCorpActions(){
+  this.corpClick=true;
+  this.serv.applyCorpActions().subscribe(
+    data=>{
+        console.log("apply corp actions");
+
+        this.serv.getCorpActionsSummary().subscribe(
+          data=>{
+              this.corpActionsSummary=data;
+              console.log(this.corpActionsSummary);
+          }
+      ); 
+    }
+); 
+}
   
 //    test(){
 //        console.log("in test");
