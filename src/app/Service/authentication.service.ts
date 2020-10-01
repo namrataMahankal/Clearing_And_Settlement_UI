@@ -10,11 +10,16 @@ export class AuthenticationService {
 
   constructor(private router: Router, private authenticationDataService: AuthenticationDataService) { }
 
+  cmname:string;
   public authenticate(userNameAndPassword: UserNameAndPassword) {
     this.authenticationDataService.getAuthenticationDetails(userNameAndPassword).subscribe(data => {
       if (data != null) {
         sessionStorage.setItem('username', userNameAndPassword.userName);
         sessionStorage.setItem('type',data.type);
+        sessionStorage.setItem('clearingMemberName',data.clearingMemberName);
+        this.cmname=sessionStorage.getItem('clearingMemberName');
+        console.log("when??");
+        console.log(this.cmname);
         //this.loggedAccount = data;
         return data;
       }
@@ -23,6 +28,8 @@ export class AuthenticationService {
 
 
   }
+
+  
 
 
   /*if (username === "admin" && password === "admin") {

@@ -1,8 +1,10 @@
 import { Component, ChangeDetectorRef, OnInit } from '@angular/core';
 import {TradesDataService} from 'src/app/Service/trades-data.service';
 import { CostOfSettlementValue } from '../ClearingHouse/clearinghouse.component';
-import { AuthenticationService } from '../../Service/authentication.service';
+import{AuthenticationDataService} from 'src/app/Service/authentication-data.service';
+import{AuthenticationService} from 'src/app/Service/authentication.service';
 import {  Router } from '@angular/router';
+
 
 @Component({
   selector: 'clearing-member',
@@ -10,90 +12,91 @@ import {  Router } from '@angular/router';
   styleUrls: ['./clearingmember.component.css']
 })
 export class ClearingMemberComponent implements OnInit{
-  
+ 
+  a:number;
+  CMName:string;
   ngAfterViewChecked(){
     //your code to update the model
     this.cdr.detectChanges();
  }
 
- cm_logOut(){
-  this.authService.logOut();
-  window.alert('You are Logged Out');
- this.router.navigate([""]);
-  }
-
-
+//  test(){
+//    this.AuthSer.messageSubject.subscribe((message)=>{console.log(message)});
+//  }
 
  ngOnInit(){
 
-  this.serv.getOpeningFundBalance().subscribe(
-    data=>{
-        this.openingFundBalance=data;
+ 
+
+//   this.serv.getOpeningFundBalance().subscribe(
+//     data=>{
+//         this.openingFundBalance=data;
        
-    }
-); 
+//     }
+// ); 
 
-this.serv.getFundsObliged().subscribe(
-  data=>{
-      this.fundsObliged=data.fundObligation;
+// this.serv.getFundsObliged().subscribe(
+//   data=>{
+//       this.fundsObliged=data.fundObligation;
       
-  }
-);
+//   }
+// );
 
 
-this.serv.getOpeningShareBalance().subscribe(
-  data=>{
-      this.openingShares=data;
+// this.serv.getOpeningShareBalance().subscribe(
+//   data=>{
+//       this.openingShares=data;
       
-  }
-); 
+//   }
+// ); 
 
-this.serv.getOBShares().subscribe(
-data=>{
-    this.obShares=data;
+// this.serv.getOBShares().subscribe(
+// data=>{
+//     this.obShares=data;
    
-}
-);
+// }
+// );
 
-  this.serv.getTradesByBuyerCM().subscribe(
-    data=>{
-        this.buyTrades=data;
+//   this.serv.getTradesByBuyerCM().subscribe(
+//     data=>{
+//         this.buyTrades=data;
       
-    }
-); 
-  this.serv.getTradesBySellerCM().subscribe(
-      data=>{
-          this.sellTrades=data;
+//     }
+// ); 
+//   this.serv.getTradesBySellerCM().subscribe(
+//       data=>{
+//           this.sellTrades=data;
          
-      }
-  ); 
+//       }
+//   ); 
 
-  this.serv.getCostOfSettlementFunds().subscribe(
-    data=>{
-        this.costOfSettlementFunds=data;
+//   this.serv.getCostOfSettlementFunds().subscribe(
+//     data=>{
+//         this.costOfSettlementFunds=data;
     
-    }
-); 
+//     }
+// ); 
 
-this.serv.getCostOfSettlementShares().subscribe(
-  data=>{
-      this.dataSettlement=data;
+// this.serv.getCostOfSettlementShares().subscribe(
+//   data=>{
+//       this.dataSettlement=data;
    
-  }
-); 
+//   }
+// ); 
 
-this.serv.getCorpActions().subscribe(
-data=>{
-    this.corpActions=data.actionList;
-    console.log(this.corpActions);
-}
-); 
+// this.serv.getCorpActions().subscribe(
+// data=>{
+//     this.corpActions=data.actionList;
+//     console.log(this.corpActions);
+// }
+// ); 
 
  }
-  constructor(private serv:TradesDataService,private cdr: ChangeDetectorRef,
+  constructor(private AuthSer:AuthenticationDataService ,private serv:TradesDataService,private cdr: ChangeDetectorRef,
     private router: Router,
-    private authService: AuthenticationService){
-//     this.serv.getOpeningFundBalance().subscribe(
+      private authService: AuthenticationService){
+
+    //     this.serv.getOpeningFundBalance().subscribe(
 //       data=>{
 //           this.openingFundBalance=data;
          
@@ -155,13 +158,85 @@ data=>{
 //       console.log(this.corpActions);
 //   }
 // ); 
-
-console.log("bbbbb");
-console.log(this.openingFundBalance+this.fundsObliged);
+this.CMName=this.AuthSer.getCMName();
+// console.log("****8*88");
+// console.log(this.CMName);
+this.updateClearingMemberData();
+// console.log("bbbbb");
+// console.log(this.openingFundBalance+this.fundsObliged);
 }
+
+
+updateClearingMemberData(){
 
   
 
+  this.serv.getOpeningFundBalance(this.CMName).subscribe(
+    data=>{
+      console.log("in component cm this.CM=>...",this.CMName);
+        this.openingFundBalance=data;
+       
+    }
+); 
+
+this.serv.getFundsObliged(this.CMName).subscribe(
+  data=>{
+      this.fundsObliged=data.fundObligation;
+      
+  }
+);
+
+
+this.serv.getOpeningShareBalance(this.CMName).subscribe(
+  
+  data=>{
+      this.openingShares=data;
+      
+  }
+); 
+
+this.serv.getOBShares(this.CMName).subscribe(
+data=>{
+    this.obShares=data;
+   
+}
+);
+
+  this.serv.getTradesByBuyerCM(this.CMName).subscribe(
+    data=>{
+        this.buyTrades=data;
+      
+    }
+); 
+  this.serv.getTradesBySellerCM(this.CMName).subscribe(
+      data=>{
+          this.sellTrades=data;
+         
+      }
+  ); 
+
+  this.serv.getCostOfSettlementFunds(this.CMName).subscribe(
+    data=>{
+        this.costOfSettlementFunds=data;
+    
+    }
+); 
+
+this.serv.getCostOfSettlementShares(this.CMName).subscribe(
+  data=>{
+      this.dataSettlement=data;
+   
+  }
+); 
+
+this.serv.getCorpActions(this.CMName).subscribe(
+data=>{
+    this.corpActions=data.actionList;
+    console.log(this.corpActions);
+}
+); 
+  
+}
 
 costOfSettlementFunds:CostOfSettlement={
   fundsToBeBorrowed:0,
@@ -180,7 +255,7 @@ openingFundBalance:number;
 sampleData:Array<any>;
   hiddenValue:Boolean=false;
   shortage:Boolean=true;
-  obCnt=5;
+  obCnt:number=1;
   title = 'Clearing-And-Settlement-UI';
   displayedColumns: string[] = ['ES', 'Qty','Price','TradeValue'];
   displayedColumns1: string[] = ['Securities','Opening_Balance','Shares_Obliged','Status'];
@@ -211,11 +286,20 @@ sampleData:Array<any>;
      this.totalCost=this.sharesCost+this.costOfSettlementFunds.costIncurred;
      return this.sharesCost;
   }
+  
+	cm_logOut(){
+    this.authService.logOut();
+    window.alert('You are Logged Out');
+    this.router.navigate([""]);
+  }
 
+  
   isLess(a:number,b:number)
   {
     if(a+b<0)
-    {return "Shortage";}
+    {
+      return "Shortage";
+    }
     else
     {return "No shortage";}
   }

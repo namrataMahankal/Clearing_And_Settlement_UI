@@ -1,17 +1,25 @@
 import { Injectable } from '@angular/core';
 import {HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable,Subject } from 'rxjs';
 import {map} from 'rxjs/operators';
 import {DBAccountReciever} from 'src/app/Components/Login/login.component';
 import {LoginComponent} from 'src/app/Components/Login/login.component';
 import {UserNameAndPassword} from 'src/app/Components/Login/login.component';
+// import {TradesDataService } from 'src/app/Service/trades-data.service';
+//import {ClearingMemberComponent} from 'src/app/Components/ClearingMember/clearingmember.component';
 @Injectable({
     providedIn: 'root'
   })
   export class AuthenticationDataService {
 
+   messageSubject=new Subject();
+   dummy(){
+     this.messageSubject.next('hello from service');
+   }
+
     baseUrl="http://localhost:8080/clearing-and-settlement/login";
-    CM="Citi";
+    CM:string;
+    clearM="";
     constructor(private httpClient: HttpClient) { }
   
     getAuthenticationDetails(userNameAndPassword:UserNameAndPassword):Observable<DBAccountReciever>{
@@ -19,15 +27,31 @@ import {UserNameAndPassword} from 'src/app/Components/Login/login.component';
     return this.httpClient.post<DBAccountReciever>(this.baseUrl,userNameAndPassword).pipe(map(data => {
         if (data != null) {
           sessionStorage.setItem('username', userNameAndPassword.userName);
+          sessionStorage.setItem('clearingMemberName',data.clearingMemberName);
+          this.CM=sessionStorage.getItem('clearingMemberName');
+          console.log("when??");
+          console.log(this.CM);
           //this.loggedAccount = data;
           console.log("Auth data");
           console.log(data);
+          this.clearM=data.clearingMemberName;
+          // this.tradeService.setCM(this.CM);
+          console.log("setCM called");
+          console.log(this.clearM);
+          this.CM=data.clearingMemberName;
+          console.log("In auth service: this.CM=>",this.CM);
+          console.log("calling dummy");
+          this.dummy();
+          //this.cm.updateClearingMemberData();
           return data;
         }
       }
       ))
     }
   
+    getCMName(){
+      return sessionStorage.getItem('clearingMemberName');
+    }
     getTradesBySellerCM():Observable<any>{
       return this.httpClient.get<any>("http://localhost:8080/trades/clearing-member/"+this.CM+"/seller");
     }

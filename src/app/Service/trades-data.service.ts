@@ -11,10 +11,18 @@ import {CMTrades} from 'src/app/Components/Clearingmember/clearingmember.compone
 export class TradesDataService {
 
   baseUrl="http://localhost:8080/clearing-and-settlement/trade";
-  CM="Citi";
+  CM="";
   constructor(private httpClient: HttpClient) { }
 
+  setCM(clearM:string){
+    this.CM=clearM;
+    console.log("this.CM=",this.CM);
+  }
+
+
   getObMatrix():Observable<any>{
+    console.log("In ...");
+    console.log(this.CM);
     return this.httpClient.get<any>("http://localhost:8080/clearing-and-settlement/clearing-house/equity-obligations");
   }
 
@@ -36,27 +44,27 @@ export class TradesDataService {
     return this.httpClient.get<any>("http://localhost:8080/clearing-and-settlement/clearing-house/obligation-report");
   }
 
-  getFundsObliged():Observable<any>{
-    return this.httpClient.get<any>("http://localhost:8080/clearing-and-settlement/clearing-member/fund-obligations/"+this.CM);
+  getFundsObliged(cmname):Observable<any>{
+    return this.httpClient.get<any>("http://localhost:8080/clearing-and-settlement/clearing-member/fund-obligations/"+cmname);
   }
 
-  getOBShares():Observable<any>{
-    return this.httpClient.get<any>("http://localhost:8080/clearing-and-settlement/clearing-member/equity-obligations/"+this.CM);
+  getOBShares(cmname):Observable<any>{
+    return this.httpClient.get<any>("http://localhost:8080/clearing-and-settlement/clearing-member/equity-obligations/"+cmname);
   }
-  getCorpActions():Observable<any>{
-    return this.httpClient.get<any>("http://localhost:8080/clearing-and-settlement/corporate-actions/cm/"+this.CM);
+  getCorpActions(cmname):Observable<any>{
+    return this.httpClient.get<any>("http://localhost:8080/clearing-and-settlement/corporate-actions/cm/"+cmname);
   }
 
   applyCorpActions():Observable<any>{
     return this.httpClient.get<any>("http://localhost:8080/clearing-and-settlement/corporate-actions/apply");
   }
 
-  getCostOfSettlementFunds():Observable<any>{
-    return this.httpClient.get<any>("http://localhost:8080/clearing-and-settlement/clearing-member/"+this.CM+"/cost-of-settlement/funds");
+  getCostOfSettlementFunds(cmname):Observable<any>{
+    return this.httpClient.get<any>("http://localhost:8080/clearing-and-settlement/clearing-member/"+cmname+"/cost-of-settlement/funds");
   }
 
-  getCostOfSettlementShares():Observable<any>{
-    return this.httpClient.get<any>("http://localhost:8080/clearing-and-settlement/clearing-member/"+this.CM+"/cost-of-settlement/shares");
+  getCostOfSettlementShares(cmname):Observable<any>{
+    return this.httpClient.get<any>("http://localhost:8080/clearing-and-settlement/clearing-member/"+cmname+"/cost-of-settlement/shares");
   }
 
   generateTradesServ():Observable<any>{
@@ -71,20 +79,20 @@ export class TradesDataService {
     return this.httpClient.get<Trade[]>(`${this.baseUrl}`);
   }
 
-  getOpeningFundBalance():Observable<any>{
-    return this.httpClient.get<any>("http://localhost:8080/clearing-and-settlement/clearing-member/"+this.CM+"/opening-fund-balance");
+  getOpeningFundBalance(cmname:string):Observable<any>{
+    return this.httpClient.get<any>("http://localhost:8080/clearing-and-settlement/clearing-member/"+cmname+"/opening-fund-balance");
   }
 
-  getOpeningShareBalance():Observable<any>{
-    return this.httpClient.get<any>("http://localhost:8080/clearing-and-settlement/clearing-member/"+this.CM+"/opening-share-balance");
+  getOpeningShareBalance(cmname):Observable<any>{
+    return this.httpClient.get<any>("http://localhost:8080/clearing-and-settlement/clearing-member/"+cmname+"/opening-share-balance");
   }
 
-  getTradesBySellerCM():Observable<any>{
-    return this.httpClient.get<CMTrades[]>("http://localhost:8080/clearing-and-settlement/clearing-member/"+this.CM+"/seller");
+  getTradesBySellerCM(cmname):Observable<any>{
+    return this.httpClient.get<CMTrades[]>("http://localhost:8080/clearing-and-settlement/clearing-member/"+cmname+"/seller");
   }
 
-  getTradesByBuyerCM():Observable<any>{
-    return this.httpClient.get<CMTrades[]>("http://localhost:8080/clearing-and-settlement/clearing-member/"+this.CM+"/buyer");
+  getTradesByBuyerCM(cmname):Observable<any>{
+    return this.httpClient.get<CMTrades[]>("http://localhost:8080/clearing-and-settlement/clearing-member/"+cmname+"/buyer");
   }
 
 
