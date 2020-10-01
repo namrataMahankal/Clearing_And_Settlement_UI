@@ -26,6 +26,8 @@ import { FormsModule } from '@angular/forms';
 import { AuthGaurdServiceCM,AuthGaurdServiceCH,AuthGaurdServiceAdmin } from  './Service/auth-guard.service';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatIconModule} from '@angular/material/icon';
+import { AddStockComponent } from './Components/ClearingHouse/add-stock/add-stock.component';
+import { MatDialogModule, MAT_DIALOG_DATA,MatDialogRef } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,8 @@ import {MatIconModule} from '@angular/material/icon';
     ClearingMemberComponent,
     ClearingHouseComponent,
     AdminComponent,
-    LoginComponent
+    LoginComponent,
+    AddStockComponent
   ],
   imports: [
     BrowserModule,
@@ -54,9 +57,12 @@ import {MatIconModule} from '@angular/material/icon';
     HttpClientModule,
     FormsModule,
     MatMenuModule,
-    MatIconModule
+    MatIconModule,
+    MatDialogModule
   ],
-  providers: [AuthGaurdService,AuthenticationService,AuthGaurdServiceCM ,AuthGaurdServiceCH,AuthGaurdServiceAdmin],
-  bootstrap: [AppComponent]
+  providers: [{ provide: MatDialogRef, useValue: {} },
+    { provide: MAT_DIALOG_DATA, useValue: []}, AuthGaurdService,AuthenticationService,AuthGaurdServiceCM ,AuthGaurdServiceCH,AuthGaurdServiceAdmin],
+  bootstrap: [AppComponent],
+  entryComponents: [AddStockComponent]
 })
 export class AppModule { }
