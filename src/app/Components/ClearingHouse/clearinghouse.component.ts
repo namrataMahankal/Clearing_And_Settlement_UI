@@ -153,7 +153,7 @@ settleUp(){
 }
 onSave() {
   let dialogRef = this.dialog.open(AddStockComponent, {
-    data: { securities:this.SecuritiesDataSource, clearingMembers:this.CMDataSource }
+    data: { securities:this.SecuritiesDataSource, clearingMembers:this.CMDataSource, disableClose: true}
   });
   dialogRef.afterClosed().subscribe(result => {
     this.serv.getAllTrades().subscribe(

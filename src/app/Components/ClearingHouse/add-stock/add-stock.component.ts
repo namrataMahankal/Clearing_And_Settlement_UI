@@ -27,7 +27,9 @@ export class AddStockComponent implements OnInit {
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
     private newTradeService: NewTradeService,
     public dialogRef: MatDialogRef<AddStockComponent>,
-    private dialog: MatDialog) { }
+    private dialog: MatDialog) {
+      dialogRef.disableClose = true;
+     }
 
   ngOnInit() {
   }
@@ -69,6 +71,11 @@ export class AddStockComponent implements OnInit {
   calculateTransactionAmount() {
     if (this.profileForm.get("Price").valid && this.profileForm.get("Qty").valid)
       this.newtrade.transactionAmt = this.profileForm.get("Price").value * this.profileForm.get("Qty").value
+  }
+
+  onClose()
+  {
+    this.dialogRef.close();
   }
 
 }

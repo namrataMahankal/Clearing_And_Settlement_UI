@@ -51,7 +51,7 @@ span.select-group-addon i {
 
 .tooltip .right {
     min-width:200px;
-    max-width:400px;
+    max-width:450px;
     top:50%;
     left:100%;
     margin-left:20px;
@@ -109,13 +109,28 @@ span.select-group-addon i {
 
 .alert-font{
     font-size: 14px !important;
+    align-content: center;
     margin-left: auto !important;
     margin-right: auto !important;
-    min-width: 320px!important;
+    min-width: 37px!important;
 }
 input.ng-invalid, select.ng-invalid{
     border-left: 3px solid #8B0000 !important;
 }
 input.ng-valid, select.ng-valid{
     border-left: 3px solid #32CD32 !important;
+}
+.button-cancel{
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+.button-add{
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+button:focus{
+    border-color: white !important;
+}
+.fa-user:before {
+    content: "" important;
 }

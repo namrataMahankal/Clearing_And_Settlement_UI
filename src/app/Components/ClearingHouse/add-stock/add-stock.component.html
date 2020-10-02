@@ -14,7 +14,7 @@
                     <div class="form-group">
                         <label for="buyerCM">Buyer Clearing Member</label>
                         <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                            <span class="input-group-addon"><i aria-hidden="true"></i></span>
                             <select formControlName="BuyerCM" class="form-control">
                                 <option *ngFor="let element of data.clearingMembers" [disabled] = "element==  profileForm.get('SellerCM').value" [value]="element">{{element}}</option>
                             </select>
@@ -24,7 +24,7 @@
                     <div class="form-group">
                         <label for="sellerCM">Seller Clearing Member </label>
                         <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                            <span class="input-group-addon"><i  aria-hidden="true"></i></span>
                             <select  formControlName="SellerCM" class="form-control">
                                 <option *ngFor="let element of data.clearingMembers" [disabled] = "element== profileForm.get('BuyerCM').value" [ngValue]="element">{{element}}</option>
                             </select>
@@ -34,7 +34,7 @@
                     <div class="form-group">
                         <label for="Securities">Equity Share </label>
                         <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                            <span class="input-group-addon"><i  aria-hidden="true"></i></span>
                             <select formControlName="ES" class="form-control">
                                 <option *ngFor="let element of data.securities"[ngValue]="element">{{element}}</option>
                             </select>
@@ -44,37 +44,43 @@
                     <div class="form-group">
                         <label for="profit">Price (&#36;)</label>
                         <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                            <span class="input-group-addon"><i aria-hidden="true"></i></span>
                             <input type="number" formControlName="Price" class="form-control" name="price" autocomplete="off" (keyup)="calculateTransactionAmount()"  />
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="profit">Quantity</label>
                         <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                            <span class="input-group-addon"><i  aria-hidden="true"></i></span>
                             <input   formControlName="Qty" type="number" name  = "qty" class="form-control" name="price"   autocomplete="off" (keyup)="calculateTransactionAmount()"  />
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="buyInExchange">Transaction Amount (&#36;)</label>
                         <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                            <span class="input-group-addon"><i  aria-hidden="true"></i></span>
                             <input type="text" class="form-control" name="amt" [disabled] = "true" readonly value={{newtrade.transactionAmt}} />
                         </div>
                     </div>
-                    
-                    <button type="submit" [disabled] = "!profileForm.valid" class="btn btn-success" (click)="onSave()">ADD TRADE</button>
-                    <div class="form-alert">
+                    <div class = "row">
+                        <div class = "col" align = "center">
+                    <button type="submit" [disabled] = "!profileForm.valid" class="btn btn-success button-add" (click)="onSave()">ADD TRADE</button>
+                </div>
+                <div class = "col" align = "center">
+                    <button type="submit" class="btn btn-light button-cancel" (click)="onClose()">CANCEL</button>
+                </div></div>
+                <div class="form-alert">
                         <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                            <span class="input-group-addon"><i  aria-hidden="true"></i></span>
                             <div *ngIf = success class="alert alert-success alert-dismissible fade show alert-font" role="alert">
                                <strong>Success!</strong> Trade has been added
                               </div>
                         </div>
                     </div>
+                
                     <div class="form-alert">
                         <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-user fa" aria-hidden="true"></i></span>
+                            <span class="input-group-addon"><i aria-hidden="true"></i></span>
                             <div *ngIf = error class="alert alert-danger alert-dismissible fade show alert-font" role="alert">
                                <strong>Error!</strong> Trade not added
                               </div>
