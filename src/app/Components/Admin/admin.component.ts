@@ -8,6 +8,7 @@ import {Trade} from 'src/app/Components/ClearingHouse/clearinghouse.component';
 import {TradesDataService} from 'src/app/Service/trades-data.service';
 import { AuthenticationService } from '../../Service/authentication.service';
 import {  Router } from '@angular/router';
+import { ExcelServicesService } from '../../Service/excel.service';  
 
 @Component({
     selector: 'admin',
@@ -17,7 +18,8 @@ import {  Router } from '@angular/router';
   export class AdminComponent  implements OnInit{
     constructor(private serv:TradesDataService,private newtradeservice:NewTradeService,
       private router: Router,
-      private authService: AuthenticationService
+      private authService: AuthenticationService,
+      private excelService:ExcelServicesService
       ){
       console.log("In constr of admincomponent");
    this.serv.getAllTrades().subscribe(
@@ -35,7 +37,8 @@ import {  Router } from '@angular/router';
     clickGenerateTrade:boolean=false;
     clickSettleUp:boolean=false;
     clickCorpAction:boolean=false;
-    
+    excel=["Try Again"];
+
     admin_logOut(){
       this.authService.logOut();
       window.alert('You are Logged Out');
@@ -44,6 +47,11 @@ import {  Router } from '@angular/router';
 
 
 
+
+    exportAsXLSX():void {  
+      
+      this.excelService.exportAsExcelFile(this.TradesDataSource, 'trades');  
+   }  
 
     generateTrades(){
       this.clickGenerateTrade=!this.clickGenerateTrade;

@@ -41,6 +41,18 @@
   border: none;
   border-radius: 4px;
   cursor: pointer;
+  
+}
+.printTrades{
+  width: 20%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  align-content: center;
 }
 .logOutButton {
   width: 50%;
@@ -148,6 +160,8 @@ input[type=text], select {
 
 </div>
 <br>
+<span class ="flexExpand"></span> 
+<button (click)="exportAsXLSX()" class="printTrades"  style="float:right;width:7%" >Download</button>
 <mat-tab-group mat-align-tabs="center">
     <mat-tab label="Trades"> 
         <table mat-table [dataSource]="TradesDataSource" class="mat-elevation-z8">
