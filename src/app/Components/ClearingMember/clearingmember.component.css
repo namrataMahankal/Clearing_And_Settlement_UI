@@ -23,3 +23,8 @@ tr.mat-footer-row {
 .flexExpand {
   flex: 1 1 auto;
 }
+tr.mat-footer-row{
+  font-weight: bolder;
+  font-size: 20px;
+}
+

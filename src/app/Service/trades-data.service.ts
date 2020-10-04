@@ -20,6 +20,9 @@ export class TradesDataService {
     console.log("this.CM=",this.CM);
   }
 
+  refreshData():Observable<any>{
+    return this.httpClient.delete<any>(environment.baseUrl+"/clearing-and-settlement/refresh/all");
+  }
 
   getObMatrix():Observable<any>{
     console.log("In ...");

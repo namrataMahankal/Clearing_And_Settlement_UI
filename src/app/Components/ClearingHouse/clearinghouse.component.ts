@@ -169,6 +169,60 @@ onSave() {
   
 }
 
+refreshAll()
+{
+  this.serv.refreshData().subscribe(
+    data=>{
+      this.serv.getAllTrades().subscribe(
+        data=>{
+            this.TradesDataSource=data;
+            console.log(this.TradesDataSource);
+        }
+    ); 
+    this.serv.getCorpActionsSummary().subscribe(
+        data=>{
+            this.corpActionsSummary=data;
+            console.log(this.corpActionsSummary);
+        }
+    ); 
+
+    this.serv.getOBReport().subscribe(
+        data=>{
+            this.OBReport=data;
+            console.log(this.OBReport);
+        }
+    ); 
+
+    this.serv.getOBMatrixFunds().subscribe(
+        data=>{
+            this.obligationMatrixFundsData=data;
+            console.log(this.obligationMatrixFundsData);
+        }
+    );
+    
+    this.serv.getCostOfSettlement().subscribe(
+        data=>{
+            this.costData=data;
+            console.log(this.costData);
+        }
+    );
+
+    this.serv.getObMatrix().subscribe(
+        data=>{
+           // this.oBMatrixData=data;
+            this.obMatrixData=data;
+            console.log(this.obMatrixData);
+        }
+    );
+    this.tradeClick=false;
+    this.settleClick=false;
+    this.addTrade=true;
+    this.obligationMatrixFundsData=[];
+    }
+  ); 
+  console.log("refreshed");
+  
+}
 updateReports()
 {
   this.serv.getOBReport().subscribe(

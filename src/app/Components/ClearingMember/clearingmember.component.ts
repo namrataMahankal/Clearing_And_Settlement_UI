@@ -198,7 +198,7 @@ this.serv.getOpeningShareBalance(this.CMName).subscribe(
 this.serv.getOBShares(this.CMName).subscribe(
 data=>{
     this.obShares=data;
-   
+    
 }
 );
 
@@ -279,7 +279,7 @@ sampleData:Array<any>;
   //   { Securities: 'Google', Shares: 100, Rate: 1.23, Cost: 1234 },
   //   { Securities: 'Amazon', Shares: 100, Rate: 1.23, Cost: 1234 },
   // ];
-
+ 
   getTotalCost() {
     //return this.dataSettlement.length;
      this.sharesCost=this.dataSettlement.map(t => t.cost).reduce((acc, value) => acc + value, 0);

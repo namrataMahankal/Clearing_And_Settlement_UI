@@ -32,8 +32,12 @@
           <span>Settle Up</span>
         </button>
         <button mat-menu-item (click)=applyCorpActions()>
-          <mat-icon>notifications_off</mat-icon>
+          <mat-icon>account_balance</mat-icon>
           <span>Apply Corporate Actions</span>
+        </button>
+        <button mat-menu-item (click)=refreshAll()>
+          <mat-icon>restore</mat-icon>
+          <span>Simulate next day</span>
         </button>
       </mat-menu>
       <span class ="flexExpand"></span>
