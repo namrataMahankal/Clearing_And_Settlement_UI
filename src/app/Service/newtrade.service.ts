@@ -21,11 +21,11 @@ export class NewTradeService {
     }
     returnCmListservice():Observable<any>{
       console.log("inNewtrade Service");
-      return this.http.get<any>("http://localhost:8080/clearing-and-settlement/clearing-members");
+      return this.http.get<any>(environment.baseUrl+"/clearing-and-settlement/clearing-members");
     }
 
     returnSecuritiesListservice():Observable<any>{
-      return this.http.get<any>("http://localhost:8080/clearing-and-settlement/securities");
+      return this.http.get<any>(environment.baseUrl+"/clearing-and-settlement/securities");
     }
      
 }  

@@ -54,7 +54,7 @@ import { environment } from 'src/environments/environment';
       return sessionStorage.getItem('clearingMemberName');
     }
     getTradesBySellerCM():Observable<any>{
-      return this.httpClient.get<any>("http://localhost:8080/trades/clearing-member/"+this.CM+"/seller");
+      return this.httpClient.get<any>(environment.baseUrl+"/trades/clearing-member/"+this.CM+"/seller");
     }
     isUserLoggedIn() {
         let user = sessionStorage.getItem('username')
