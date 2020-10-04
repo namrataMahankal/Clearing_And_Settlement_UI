@@ -8,7 +8,7 @@
 
   &nbsp;&nbsp;&nbsp;&nbsp;
 
-    <span>Clearing Member</span>
+    <span>Clearing Member: {{CMName}}</span>
     <span class ="flexExpand"></span>
     <button mat-icon-button (click)="cm_logOut()" style="float:right;" ><mat-icon>logout</mat-icon></button>
   </mat-toolbar>
@@ -291,7 +291,7 @@
           <td mat-footer-cell *matFooterCellDef>  </td>
         </ng-container>
         <ng-container matColumnDef="Rate">
-          <th mat-header-cell *matHeaderCellDef> Price per Share </th>
+          <th mat-header-cell *matHeaderCellDef> Borrowing rate per Share </th>
           <td mat-cell *matCellDef="let element"> {{element.pricePerShare | number:'1.0-2':'en-US'}} </td>
           <td mat-footer-cell *matFooterCellDef>  </td>
         </ng-container>

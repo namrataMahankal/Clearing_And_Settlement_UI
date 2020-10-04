@@ -289,7 +289,7 @@ sampleData:Array<any>;
   
 	cm_logOut(){
     this.authService.logOut();
-    window.alert('You are Logged Out');
+    // window.alert('You are Logged Out');
     this.router.navigate([""]);
   }
 

@@ -277,7 +277,7 @@ exportAsXLSX():void {
 
 ch_logOut(){
   this.authService.logOut();
-  window.alert('You are Logged Out');
+  // window.alert('You are Logged Out');
   this.router.navigate(['login']);
 }
 
@@ -306,6 +306,16 @@ ch_logOut(){
    cosPanelColumns:string[]=['Securities', 'Shares', 'Rate', 'Cost'];
    costOfSettlementPanelDataConst=CostOfSettlementPanelDataConst;
    costData:CostOfSettlementData[]=[];
+
+   getAnalysis()
+   {
+     var i;
+     console.log("Analysis");
+     for(i=0;i<this.TradesDataSource.length;i++)
+     {
+       console.log(this.TradesDataSource[i]);
+     }
+   }
 
    sampleData:Trade[];
 //    test(){}
