@@ -37,12 +37,13 @@
         </button>
       </mat-menu>
       <span class ="flexExpand"></span>
-    <button class="logOutButton" (click)="ch_logOut()" style="float:right;width:7%" >Logout</button>
+     
+    <button mat-icon-button (click)="ch_logOut()" style="float:right;" > <mat-icon>logout</mat-icon></button>
 
 </mat-toolbar>
 
 <span class ="flexExpand"></span>
-<button (click)="exportAsXLSX()" class="printTrades" style="float:right;width:7%" >Download</button>
+<button mat-raised-button color="primary" (click)="exportAsXLSX()"  style="float:right;width:7%;margin-top:7px;margin-right: 5px;" >Download</button>
 
 <mat-tab-group mat-align-tabs="center" id="contenttab"  style="height: 100vh" >
   <br>
