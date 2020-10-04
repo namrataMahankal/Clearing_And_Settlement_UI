@@ -5,6 +5,7 @@ import {AddStockComponent} from './add-stock/add-stock.component'
 import {NewTradeService} from 'src/app/Service/newtrade.service';
 import { AuthenticationService } from '../../Service/authentication.service';
 import {  Router } from '@angular/router';
+import { ExcelServicesService } from '../../Service/excel.service'; 
 @Component({
   selector: 'clearing-house',
   templateUrl: './clearinghouse.component.html',
@@ -24,7 +25,8 @@ export class ClearingHouseComponent implements OnInit {
  
    constructor(private serv:TradesDataService,private newtradeservice:NewTradeService,private dialog: MatDialog,private dialogRef:MatDialogRef<AddStockComponent>,
       private router: Router,
-      private authService: AuthenticationService){
+      private authService: AuthenticationService,
+      private excelService:ExcelServicesService){
        console.log("In constr.......");
     
     this.serv.getAllTrades().subscribe(
@@ -211,6 +213,10 @@ applyCorpActions(){
     }
 ); 
 }
+exportAsXLSX():void {  
+      
+  this.excelService.exportAsExcelFile(this.TradesDataSource, 'trades');  
+}  
 
 ch_logOut(){
   this.authService.logOut();
