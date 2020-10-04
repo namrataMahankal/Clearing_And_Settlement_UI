@@ -20,6 +20,9 @@ export class ClearingHouseComponent implements OnInit {
   SecuritiesDataSource: string[];
 
   calculate(){
+    if (!this.obligationMatrixFundsData) {
+      return 0;
+    }
     return this.obligationMatrixFundsData.map(t => t.fundObligation).reduce((acc, value) => acc + value, 0);
   }
  
