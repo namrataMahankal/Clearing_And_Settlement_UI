@@ -7,6 +7,7 @@ import {LoginComponent} from 'src/app/Components/Login/login.component';
 import {UserNameAndPassword} from 'src/app/Components/Login/login.component';
 // import {TradesDataService } from 'src/app/Service/trades-data.service';
 //import {ClearingMemberComponent} from 'src/app/Components/ClearingMember/clearingmember.component';
+import { environment } from 'src/environments/environment';
 @Injectable({
     providedIn: 'root'
   })
@@ -17,7 +18,7 @@ import {UserNameAndPassword} from 'src/app/Components/Login/login.component';
      this.messageSubject.next('hello from service');
    }
 
-    baseUrl="http://localhost:8080/clearing-and-settlement/login";
+    baseUrl=  environment.baseUrl + "/clearing-and-settlement/login";
     CM:string;
     clearM="";
     constructor(private httpClient: HttpClient) { }

@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import {HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import {Trade} from 'src/app/Components/ClearingHouse/clearinghouse.component';
-import {CMTrades} from 'src/app/Components/Clearingmember/clearingmember.component';
+import {CMTrades} from 'src/app/Components/ClearingMember/clearingmember.component';
+import { environment } from 'src/environments/environment';
 
 
 @Injectable({
@@ -10,7 +11,7 @@ import {CMTrades} from 'src/app/Components/Clearingmember/clearingmember.compone
 })
 export class TradesDataService {
 
-  baseUrl="http://localhost:8080/clearing-and-settlement/trade";
+  baseUrl = environment.baseUrl + "/clearing-and-settlement/trade";
   CM="";
   constructor(private httpClient: HttpClient) { }
 

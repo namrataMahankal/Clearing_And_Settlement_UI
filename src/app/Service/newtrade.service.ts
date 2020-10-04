@@ -2,14 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';  
 import { Observable } from 'rxjs';  
 import { Newtrade } from '../newtrade';
-  
+import { environment } from 'src/environments/environment';
 @Injectable({  
   providedIn: 'root'  
 })  
   
 export class NewTradeService {  
   
-  private baseUrl = 'http://localhost:8080/clearing-and-settlement/trade/add';  
+  private baseUrl = environment.baseUrl+'/clearing-and-settlement/trade/add';  
   
   constructor(private http:HttpClient) { }  
 
